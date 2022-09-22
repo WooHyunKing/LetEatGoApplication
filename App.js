@@ -5,8 +5,13 @@
  * @format
  * @flow strict-local
  */
-
-import React from 'react';
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import React, {useState} from 'react';
+import Logout from './screens/Logout';
+import LoginScreen from './LoginScreen';
+import Main from './screens/Main';
 import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -55,6 +60,10 @@ const Section = ({children, title}): Node => {
 };
 
 const App: () => Node = () => {
+  const [login, setLogin] = useState(false);
+  const Stack = createStackNavigator();
+  //Screen과 Navigator의 속성을 포함하는 객체를 반환하는 함수
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -62,35 +71,12 @@ const App: () => Node = () => {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Hello Woohyun !!!">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next: Hi !
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Logout" component={Logout} />
+        <Stack.Screen name="Main" component={Main} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
