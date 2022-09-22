@@ -8,10 +8,14 @@
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React, {useState} from 'react';
+import Home from './screens/Home';
+import Cart from './screens/Cart';
+import Refrigerator from './screens/Refrigerator';
+import MyRecipe from './screens/MyRecipe';
 import Logout from './screens/Logout';
-import LoginScreen from './LoginScreen';
-import Main from './screens/Main';
+
 import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -62,6 +66,7 @@ const Section = ({children, title}): Node => {
 const App: () => Node = () => {
   const [login, setLogin] = useState(false);
   const Stack = createStackNavigator();
+  const Tab = createBottomTabNavigator();
   //Screen과 Navigator의 속성을 포함하는 객체를 반환하는 함수
 
   const isDarkMode = useColorScheme() === 'dark';
@@ -72,10 +77,16 @@ const App: () => Node = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      {/* <Stack.Navigator>
         <Stack.Screen name="Logout" component={Logout} />
         <Stack.Screen name="Main" component={Main} />
-      </Stack.Navigator>
+      </Stack.Navigator> */}
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Cart" component={Cart} />
+        <Tab.Screen name="Refrigerator" component={Refrigerator} />
+        <Tab.Screen name="MyRecipe" component={MyRecipe} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };

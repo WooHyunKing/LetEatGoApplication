@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-function Main() {
+function Home() {
   return (
     <View>
-      <Text>Main!</Text>
+      <Text>This is Home screen !</Text>
     </View>
   );
 }
 
-export default Main;
+export default Home;

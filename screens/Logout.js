@@ -4,8 +4,8 @@ import {View, Text, Button} from 'react-native';
 function Logout({navigation}) {
   return (
     <View>
-      <Text>Start!</Text>
-      <Button title="Go to main" onPress={() => navigation.navigate('Main')} />
+      <Text>This is Logout screen</Text>
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
     </View>
   );
 }
