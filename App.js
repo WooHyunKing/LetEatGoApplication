@@ -87,6 +87,7 @@ const App: () => Node = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
+
     // <NavigationContainer>
     //   <Tab.Navigator>
     //     <Tab.Screen name="Home" component={Home} />
