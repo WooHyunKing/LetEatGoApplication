@@ -14,7 +14,8 @@ import Home from './screens/Home';
 import Cart from './screens/Cart';
 import Refrigerator from './screens/Refrigerator';
 import MyRecipe from './screens/MyRecipe';
-import Logout from './screens/Logout';
+import Logout from './screens/SignIn';
+import SignIn from './screens/SignIn';
 
 import type {Node} from 'react';
 import {
@@ -34,6 +35,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {TextInput} from 'react-native-gesture-handler';
 
 /* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
  * LTI update could not be added via codemod */
@@ -77,17 +79,22 @@ const App: () => Node = () => {
 
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator>
-        <Stack.Screen name="Logout" component={Logout} />
-        <Stack.Screen name="Main" component={Main} />
-      </Stack.Navigator> */}
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Cart" component={Cart} />
-        <Tab.Screen name="Refrigerator" component={Refrigerator} />
-        <Tab.Screen name="MyRecipe" component={MyRecipe} />
-      </Tab.Navigator>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="SignIn"
+          component={SignIn}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
+    // <NavigationContainer>
+    //   <Tab.Navigator>
+    //     <Tab.Screen name="Home" component={Home} />
+    //     <Tab.Screen name="Cart" component={Cart} />
+    //     <Tab.Screen name="Refrigerator" component={Refrigerator} />
+    //     <Tab.Screen name="MyRecipe" component={MyRecipe} />
+    //   </Tab.Navigator>
+    // </NavigationContainer>
   );
 };
 
@@ -107,6 +114,10 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  input: {
+    width: '200px',
+    marginBottom: '25px',
   },
 });
 
