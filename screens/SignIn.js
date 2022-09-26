@@ -45,12 +45,16 @@ function SignIn({navigation}) {
           />
         </View>
         <View style={signin_styles.btnArea}>
-          <TouchableOpacity style={signin_styles.btnoutline}>
+          <TouchableOpacity
+            style={signin_styles.btnoutline}
+            onPress={() => navigation.navigate('Login')}>
             <Text style={{color: 'black'}}>LOGIN</Text>
           </TouchableOpacity>
         </View>
         <View style={signin_styles.btnArea}>
-          <TouchableOpacity style={signin_styles.btn}>
+          <TouchableOpacity
+            style={signin_styles.btn}
+            onPress={() => navigation.navigate('Register')}>
             <Text style={{color: 'white'}}>REGISTER</Text>
           </TouchableOpacity>
         </View>

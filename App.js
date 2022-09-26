@@ -16,6 +16,8 @@ import Refrigerator from './screens/Refrigerator';
 import MyRecipe from './screens/MyRecipe';
 import Logout from './screens/SignIn';
 import SignIn from './screens/SignIn';
+import Login from './screens/Login';
+import Register from './screens/Register';
 
 import type {Node} from 'react';
 import {
@@ -85,6 +87,8 @@ const App: () => Node = () => {
           component={SignIn}
           options={{headerShown: false}}
         />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>
     </NavigationContainer>
 
