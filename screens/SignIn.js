@@ -35,25 +35,25 @@ function SignIn({navigation}) {
     //     style={styles.input}
     //   />
     // </View>
-    <View style={signin_styles.container}>
+    <View style={styles.container}>
       <View style={{flex: 1.5}} />
       <View style={{flex: 2}}>
-        <View style={signin_styles.logoArea}>
+        <View style={styles.logoArea}>
           <Image
             source={require('../android/app/assets/imgs/Main_logo.png')}
             style={{width: wp(55), resizeMode: 'contain'}}
           />
         </View>
-        <View style={signin_styles.btnArea}>
+        <View style={styles.btnArea}>
           <TouchableOpacity
-            style={signin_styles.btnoutline}
+            style={styles.btnoutline}
             onPress={() => navigation.navigate('Login')}>
             <Text style={{color: 'black'}}>LOGIN</Text>
           </TouchableOpacity>
         </View>
-        <View style={signin_styles.btnArea}>
+        <View style={styles.btnArea}>
           <TouchableOpacity
-            style={signin_styles.btn}
+            style={styles.btn}
             onPress={() => navigation.navigate('Register')}>
             <Text style={{color: 'white'}}>REGISTER</Text>
           </TouchableOpacity>
@@ -64,7 +64,7 @@ function SignIn({navigation}) {
   );
 }
 
-const signin_styles = StyleSheet.create({
+const styles = StyleSheet.create({
   logoArea: {
     flex: 0.5,
     justifyContent: 'center',
