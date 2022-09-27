@@ -10,12 +10,13 @@ function Login() {
   return (
     <View style={styles.container}>
       <View style={styles.topArea}>
-        <View style={styles.titleArea}>
-          <Image
-            source={require('../android/app/assets/imgs/Login_logo.png')}
-            style={{width: wp(50), resizeMode: 'contain'}}
-          />
-        </View>
+        {/* <View style={styles.titleArea}>
+          
+        </View> */}
+        <Image
+          source={require('../android/app/assets/imgs/Login_logo.png')}
+          style={{width: wp(50), resizeMode: 'contain'}}
+        />
         {/* <View style={styles.textArea}>
           <Text style={styles.text}>이것은 로그인창입니다.</Text>
           <Text style={styles.text}>로그인을 해주세요.</Text>
@@ -48,8 +49,10 @@ const styles = StyleSheet.create({
   },
   topArea: {
     flex: 1,
-    paddingTop: wp(40),
+    marginTop: wp(40),
+    justifyContent: 'center',
     // backgroundColor: 'red',
+    marginBottom: wp(10),
   },
   titleArea: {
     flex: 1,
@@ -61,7 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: 'green',
     justifyContent: 'center',
-    paddingTop: 50,
+    paddingTop: wp(3),
   },
   text: {
     fontSize: wp('4%'),
@@ -69,7 +72,8 @@ const styles = StyleSheet.create({
   formArea: {
     flex: 1.5,
     justifyContent: 'center',
-    backgroundColor: 'red',
+    // backgroundColor: '',
+    marginBottom: 10,
   },
   textFormTop: {
     borderWidth: 2,
