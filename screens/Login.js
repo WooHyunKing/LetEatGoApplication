@@ -10,17 +10,10 @@ function Login() {
   return (
     <View style={styles.container}>
       <View style={styles.topArea}>
-        {/* <View style={styles.titleArea}>
-          
-        </View> */}
         <Image
           source={require('../android/app/assets/imgs/Login_logo.png')}
           style={{width: wp(50), resizeMode: 'contain'}}
         />
-        {/* <View style={styles.textArea}>
-          <Text style={styles.text}>이것은 로그인창입니다.</Text>
-          <Text style={styles.text}>로그인을 해주세요.</Text>
-        </View> */}
       </View>
 
       <View style={styles.formArea}>

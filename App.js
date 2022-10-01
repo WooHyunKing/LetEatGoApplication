@@ -18,6 +18,8 @@ import Logout from './screens/SignIn';
 import SignIn from './screens/SignIn';
 import Login from './screens/Login';
 import Register from './screens/Register';
+import Splash from './screens/Splash';
+import Drawer from './screens/Drawer';
 
 import type {Node} from 'react';
 import {
@@ -37,6 +39,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
 import {TextInput} from 'react-native-gesture-handler';
 
 /* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
@@ -67,6 +70,18 @@ const Section = ({children, title}): Node => {
   );
 };
 
+const Auth = () => {
+  <Stack.Navigator>
+    {/* <Stack.Screen
+      name="SignIn"
+      component={SignIn}
+      options={{headerShown: false}}
+    /> */}
+    <Stack.Screen name="Login" component={Login} options={{title: ''}} />
+    <Stack.Screen name="Register" component={Register} options={{title: ''}} />
+  </Stack.Navigator>;
+};
+
 const App: () => Node = () => {
   const [login, setLogin] = useState(false);
   const Stack = createStackNavigator();
@@ -81,14 +96,22 @@ const App: () => Node = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Splash">
         <Stack.Screen
-          name="SignIn"
-          component={SignIn}
+          name="Splash"
+          component={Splash}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen
+          name="Auth"
+          component={Auth}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Drawer"
+          component={Drawer}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
 
