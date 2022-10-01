@@ -5,7 +5,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-// import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Splash = ({navigation}) => {
   const [animating, setAnimating] = useState(true);
@@ -13,9 +13,9 @@ const Splash = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
       setAnimating(false);
-      AsyncStorage.getItem('user_id').then(value =>
-        navigation.replace(value === null ? 'Auth' : 'DrawerNavigationRoutes'),
-      );
+      //   AsyncStorage.getItem('user_id').then(value =>
+      //     navigation.replace(value === null ? 'Auth' : 'DrawerNavigationRoutes'),
+      //   );
     }, 3000);
   }, []);
 
@@ -25,7 +25,12 @@ const Splash = ({navigation}) => {
         source={require('../android/app/assets/imgs/Text_logo.png')}
         style={{width: wp(55), resizeMode: 'contain', margin: 30}}
       />
-      <ActivityIndicator animating={animating} color="#6990F7" size="large" />
+      <ActivityIndicator
+        animating={animating}
+        color="#6990F7"
+        size="large"
+        style={styles.ActivityIndicator}
+      />
     </View>
   );
 };

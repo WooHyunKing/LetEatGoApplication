@@ -12,7 +12,7 @@ function Login() {
       <View style={styles.topArea}>
         <Image
           source={require('../android/app/assets/imgs/Login_logo.png')}
-          style={{width: wp(50), resizeMode: 'contain'}}
+          style={{width: wp(25), resizeMode: 'contain'}}
         />
       </View>
 
