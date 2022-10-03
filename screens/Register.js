@@ -6,6 +6,7 @@ import {
 } from 'react-native-responsive-screen';
 
 import RNPickerSelect from 'react-native-picker-select';
+import LinearGradient from 'react-native-linear-gradient';
 
 import {
   StyleSheet,
@@ -22,7 +23,7 @@ import {
 
 function Register() {
   return (
-    <View style={styles.container}>
+    <LinearGradient colors={['#FFCDD2', '#FFAAB3']} style={styles.container}>
       <View style={styles.topArea}>
         <View style={styles.titleArea}>
           <Image
@@ -72,7 +73,7 @@ function Register() {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -82,9 +83,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'white',
     paddingLeft: wp(7),
     paddingRight: wp(7),
+    paddingTop: wp(10),
   },
   topArea: {
     flex: 0.3,
@@ -111,10 +112,11 @@ const styles = StyleSheet.create({
   formAreaTop: {
     borderWidth: 2,
     borderColor: 'black',
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
     borderBottomWidth: 1,
     paddingLeft: 10,
+    backgroundColor: 'white',
   },
   formAreaMiddle: {
     borderWidth: 2,
@@ -122,19 +124,22 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     paddingLeft: 10,
+    backgroundColor: 'white',
   },
   formAreaBottom: {
     borderWidth: 2,
     borderColor: 'black',
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5,
+    borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
     borderTopWidth: 1,
     paddingLeft: 10,
+    backgroundColor: 'white',
   },
   btnArea: {
     height: hp(8),
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 10,
   },
   btn: {
     flex: 1,

@@ -117,8 +117,16 @@ const App: () => Node = () => {
           component={SignIn}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{title: '', headerTransparent: true}}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{title: '', headerTransparent: true}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
 

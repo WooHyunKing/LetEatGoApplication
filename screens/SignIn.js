@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
+import LinearGradient from 'react-native-linear-gradient';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -35,13 +36,13 @@ function SignIn({navigation}) {
     //     style={styles.input}
     //   />
     // </View>
-    <View style={styles.container}>
+    <LinearGradient colors={['#FFCDD2', '#FFAAB3']} style={styles.container}>
       <View style={{flex: 1.5}} />
       <View style={{flex: 2}}>
         <View style={styles.logoArea}>
           <Image
             source={require('../android/app/assets/imgs/Main_logo.png')}
-            style={{width: wp(55), resizeMode: 'contain'}}
+            style={{width: wp(40), resizeMode: 'contain'}}
           />
         </View>
         <View style={styles.btnArea}>
@@ -60,7 +61,7 @@ function SignIn({navigation}) {
         </View>
       </View>
       <View style={{flex: 1}} />
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
   btn: {
     flex: 1,
     width: wp(75),
-    borderRadius: 5,
+    borderRadius: 7,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
   btnoutline: {
     flex: 1,
     width: wp(75),
-    borderRadius: 5,
+    borderRadius: 7,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',

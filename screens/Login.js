@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
+import LinearGradient from 'react-native-linear-gradient';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -8,7 +9,7 @@ import {
 
 function Login() {
   return (
-    <View style={styles.container}>
+    <LinearGradient colors={['#FFCDD2', '#FFAAB3']} style={styles.container}>
       <View style={styles.topArea}>
         <Image
           source={require('../android/app/assets/imgs/Login_logo.png')}
@@ -28,7 +29,7 @@ function Login() {
         </View>
       </View>
       <View style={{flex: 3}} />
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -72,23 +73,25 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderBottomWidth: 1,
     borderColor: 'black',
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
     width: '100%',
     height: hp(8),
     paddingLeft: 10,
     paddingRight: 10,
+    backgroundColor: 'white',
   },
   textFormBottom: {
     borderWidth: 2,
     borderTopWidth: 1,
     borderColor: 'black',
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5,
+    borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
     width: '100%',
     height: hp(8),
     paddingLeft: 10,
     paddingRight: 10,
+    backgroundColor: 'white',
   },
   btnArea: {
     justifyContent: 'center',
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
   btn: {
     flex: 1,
     width: '100%',
-    borderRadius: 5,
+    borderRadius: 7,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
