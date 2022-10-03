@@ -96,8 +96,8 @@ const App: () => Node = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash">
-        <Stack.Screen
+      <Stack.Navigator initialRouteName="Auth">
+        {/* <Stack.Screen
           name="Splash"
           component={Splash}
           options={{headerShown: false}}
@@ -111,7 +111,14 @@ const App: () => Node = () => {
           name="Drawer"
           component={Drawer}
           options={{headerShown: false}}
+        /> */}
+        <Stack.Screen
+          name="SignIn"
+          component={SignIn}
+          options={{headerShown: false}}
         />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>
     </NavigationContainer>
 
