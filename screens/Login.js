@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
@@ -7,7 +7,14 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-function Login() {
+import AsyncStorage from '@react-native-community/async-storage';
+import {useTheme} from '@react-navigation/native';
+
+function Login({navigation}) {
+  const [userId, setUserId] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errortext, setErrortext] = useState('');
   return (
     <LinearGradient colors={['#FFCDD2', '#FFAAB3']} style={styles.container}>
       <View style={styles.topArea}>
@@ -18,13 +25,31 @@ function Login() {
       </View>
 
       <View style={styles.formArea}>
-        <TextInput style={styles.textFormTop} placeholder="ID" />
-        <TextInput style={styles.textFormBottom} placeholder="PASSWORD" />
+        <TextInput
+          style={styles.textFormTop}
+          placeholder="ID"
+          onChangeText={userId => setUserId(userId)}
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.textFormBottom}
+          placeholder="PASSWORD"
+          onChangeText={userPassword => setUserPassword(userPassword)}
+          autoCapitalize="none"
+          secureTextEntry={true}
+        />
       </View>
       <View style={{flex: 0.75}}>
         <View style={styles.btnArea}>
           <TouchableOpacity style={styles.btn}>
             <Text style={{color: 'white'}}>로그인</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.btnArea}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => navigation.navigate('Register')}>
+            <Text style={{color: 'white'}}>회원가입</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -43,10 +68,10 @@ const styles = StyleSheet.create({
   },
   topArea: {
     flex: 1,
-    marginTop: wp(40),
+    marginTop: wp(30),
     justifyContent: 'center',
     // backgroundColor: 'red',
-    marginBottom: wp(10),
+    marginBottom: wp(7),
   },
   titleArea: {
     flex: 1,
@@ -64,10 +89,10 @@ const styles = StyleSheet.create({
     fontSize: wp('4%'),
   },
   formArea: {
-    flex: 1.5,
+    flex: 2,
     justifyContent: 'center',
     // backgroundColor: '',
-    marginBottom: 10,
+    marginBottom: 2,
   },
   textFormTop: {
     borderWidth: 2,
@@ -76,7 +101,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 7,
     borderTopRightRadius: 7,
     width: '100%',
-    height: hp(8),
+    height: hp(9),
     paddingLeft: 10,
     paddingRight: 10,
     backgroundColor: 'white',
@@ -88,7 +113,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 7,
     borderBottomRightRadius: 7,
     width: '100%',
-    height: hp(8),
+    height: hp(9),
     paddingLeft: 10,
     paddingRight: 10,
     backgroundColor: 'white',
@@ -97,7 +122,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: hp(8),
-    paddingBottom: hp(1.5),
+    paddingBottom: hp(0.5),
   },
   btn: {
     flex: 1,

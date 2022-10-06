@@ -13,17 +13,17 @@ const Splash = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
       setAnimating(false);
-      //   AsyncStorage.getItem('user_id').then(value =>
-      //     navigation.replace(value === null ? 'Auth' : 'DrawerNavigationRoutes'),
-      //   );
+      AsyncStorage.getItem('user_id').then(value =>
+        navigation.replace(value === null ? 'Auth' : 'Home'),
+      );
     }, 3000);
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Image
         source={require('../android/app/assets/imgs/Text_logo.png')}
-        style={{width: wp(55), resizeMode: 'contain', margin: 30}}
+        style={{width: wp(75), resizeMode: 'contain', margin: 30}}
       />
       <ActivityIndicator
         animating={animating}
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#FFAAB3',
   },
   ActivityIndicator: {
     alignItems: 'center',

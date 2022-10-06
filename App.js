@@ -21,6 +21,9 @@ import Register from './screens/Register';
 import Splash from './screens/Splash';
 import Drawer from './screens/Drawer';
 
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
 import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -42,50 +45,27 @@ import {
 
 import {TextInput} from 'react-native-gesture-handler';
 
-/* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
- * LTI update could not be added via codemod */
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
+// Stack Navigator for Login and Register and Logout Screen
 const Auth = () => {
-  <Stack.Navigator>
-    {/* <Stack.Screen
-      name="SignIn"
-      component={SignIn}
-      options={{headerShown: false}}
-    /> */}
-    <Stack.Screen name="Login" component={Login} options={{title: ''}} />
-    <Stack.Screen name="Register" component={Register} options={{title: ''}} />
-  </Stack.Navigator>;
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{title: '', headerTransparent: true}}
+      />
+      <Stack.Screen
+        name="Register"
+        component={Register}
+        options={{title: '', headerTransparent: true}}
+      />
+    </Stack.Navigator>
+  );
 };
 
 const App: () => Node = () => {
   const [login, setLogin] = useState(false);
-  const Stack = createStackNavigator();
-  const Tab = createBottomTabNavigator();
+
   //Screen과 Navigator의 속성을 포함하는 객체를 반환하는 함수
 
   const isDarkMode = useColorScheme() === 'dark';
@@ -96,8 +76,8 @@ const App: () => Node = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Auth">
-        {/* <Stack.Screen
+      <Stack.Navigator initialRouteName="Splash">
+        <Stack.Screen
           name="Splash"
           component={Splash}
           options={{headerShown: false}}
@@ -105,27 +85,12 @@ const App: () => Node = () => {
         <Stack.Screen
           name="Auth"
           component={Auth}
-          options={{headerShown: false}}
+          options={{title: '', headerShown: false}}
         />
         <Stack.Screen
-          name="Drawer"
-          component={Drawer}
+          name="Home"
+          component={Home}
           options={{headerShown: false}}
-        /> */}
-        <Stack.Screen
-          name="SignIn"
-          component={SignIn}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{title: '', headerTransparent: true}}
-        />
-        <Stack.Screen
-          name="Register"
-          component={Register}
-          options={{title: '', headerTransparent: true}}
         />
       </Stack.Navigator>
     </NavigationContainer>
