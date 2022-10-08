@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {
   widthPercentageToDP as wp,
@@ -22,6 +22,12 @@ import {
 } from 'react-native';
 
 function Register() {
+  const [userId, setUserId] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [sex, setSex] = useState('');
+  const [contact, setContact] = useState(0);
+
   return (
     <LinearGradient colors={['#FFCDD2', '#FFAAB3']} style={styles.container}>
       <View style={styles.topArea}>
@@ -63,6 +69,7 @@ function Register() {
             {label: '여', value: 2},
           ]}
         /> */}
+
         <TextInput placeholder="성별" style={styles.formAreaMiddle} />
         <TextInput placeholder="연락처" style={styles.formAreaBottom} />
       </View>
