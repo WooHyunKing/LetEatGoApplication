@@ -22,12 +22,15 @@ function Home({navigation, route}) {
         <View style={styles.StatusBarIcon}>
           <TouchableOpacity
             style={{marginRight: Width * 0.015, marginTop: Width * 0.005}}
-            activeOpacity={0.7}>
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate('Search')}>
             <Image
               source={require('../../android/app/assets/icons/Search.png')}
             />
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.7}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate('Notice')}>
             <Image
               source={require('../../android/app/assets/icons/Notice.png')}
             />
