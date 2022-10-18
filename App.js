@@ -57,15 +57,31 @@ const HomeStackScreen = ({navigation, route}) => {
         component={Home}
         options={{headerShown: false}}
       />
-      <HomeStack.Screen name="Search" component={Search} />
-      <HomeStack.Screen name="Notice" component={Notice} />
+      <HomeStack.Screen
+        name="Search"
+        component={Search}
+        options={{headerShown: false}}
+      />
+      <HomeStack.Screen
+        name="Notice"
+        component={Notice}
+        options={{headerShown: false}}
+      />
       <HomeStack.Screen
         name="Recipe"
         component={Recipe}
         options={{headerShown: false}}
       />
-      <HomeStack.Screen name="Survey" component={Survey} />
-      <HomeStack.Screen name="MBTI" component={Mbti} />
+      <HomeStack.Screen
+        name="Survey"
+        component={Survey}
+        options={{headerShown: false}}
+      />
+      <HomeStack.Screen
+        name="MBTI"
+        component={Mbti}
+        options={{headerShown: false}}
+      />
     </HomeStack.Navigator>
   );
 };

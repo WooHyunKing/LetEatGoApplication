@@ -19,26 +19,6 @@ const Width = Dimensions.get('window').width;
 function Home({navigation, route}) {
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      {/* <View style={styles.block}>
-        <Text style={styles.text}>입맛춤</Text>
-        <View style={styles.StatusBarIcon}>
-          <TouchableOpacity
-            style={{marginRight: Width * 0.015, marginTop: Width * 0.005}}
-            activeOpacity={0.7}
-            onPress={() => navigation.navigate('Search')}>
-            <Image
-              source={require('../../android/app/assets/icons/Search.png')}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => navigation.navigate('Notice')}>
-            <Image
-              source={require('../../android/app/assets/icons/Notice.png')}
-            />
-          </TouchableOpacity>
-        </View>
-      </View> */}
       <Topbar navigation={navigation} />
       <View style={styles.box}>
         <Text style={styles.top5_text}>Top5 레시피</Text>

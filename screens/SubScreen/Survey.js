@@ -1,11 +1,12 @@
 import React from 'react';
 import {View, Text, Button} from 'react-native';
+import Topbar from '../Bar/Topbar';
 
 function Survey({navigation}) {
   return (
     <View>
+      <Topbar navigation={navigation} />
       <Text>This is Survey screen !</Text>
-      {/* <Button title="로그아웃" onPress={() => navigation.replace("Auth")} /> */}
     </View>
   );
 }
