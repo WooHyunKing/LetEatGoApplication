@@ -1,11 +1,12 @@
 import React from 'react';
 import {View, Text, Button} from 'react-native';
 
+import Topbar from '../Bar/Topbar';
+
 function Recipe({navigation}) {
   return (
     <View>
-      <Text>This is Recipe screen !</Text>
-      {/* <Button title="로그아웃" onPress={() => navigation.replace("Auth")} /> */}
+      <Topbar navigation={navigation} />
     </View>
   );
 }

@@ -11,13 +11,15 @@ import {
   ScrollView,
 } from 'react-native';
 
+import Topbar from '../Bar/Topbar';
+
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
 function Home({navigation, route}) {
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={styles.block}>
+      {/* <View style={styles.block}>
         <Text style={styles.text}>입맛춤</Text>
         <View style={styles.StatusBarIcon}>
           <TouchableOpacity
@@ -36,7 +38,8 @@ function Home({navigation, route}) {
             />
           </TouchableOpacity>
         </View>
-      </View>
+      </View> */}
+      <Topbar navigation={navigation} />
       <View style={styles.box}>
         <Text style={styles.top5_text}>Top5 레시피</Text>
         <ScrollView

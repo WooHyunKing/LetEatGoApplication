@@ -59,7 +59,11 @@ const HomeStackScreen = ({navigation, route}) => {
       />
       <HomeStack.Screen name="Search" component={Search} />
       <HomeStack.Screen name="Notice" component={Notice} />
-      <HomeStack.Screen name="Recipe" component={Recipe} />
+      <HomeStack.Screen
+        name="Recipe"
+        component={Recipe}
+        options={{headerShown: false}}
+      />
       <HomeStack.Screen name="Survey" component={Survey} />
       <HomeStack.Screen name="MBTI" component={Mbti} />
     </HomeStack.Navigator>
