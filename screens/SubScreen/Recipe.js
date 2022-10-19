@@ -16,8 +16,32 @@ function Recipe({navigation}) {
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Topbar navigation={navigation} />
       <View style={{flex: 0.55}}>
-        <View style={{flex: 0.6, backgroundColor: 'red'}}></View>
-        <View style={{flex: 0.15, backgroundColor: 'black'}}></View>
+        <View style={{flex: 0.6}}>
+          <Image
+            source={require('../../android/app/assets/imgs/recipeImage.jpeg')}
+            style={{width: '100%', height: '100%'}}
+          />
+        </View>
+        <View style={{flex: 0.15, padding: 5, flexDirection: 'row'}}>
+          <TouchableOpacity style={styles.topButton}>
+            <Text style={styles.topButtonText}>인트로</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.topButton}>
+            <Text style={styles.topButtonText}>1</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.topButton}>
+            <Text style={styles.topButtonText}>2</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.topButton}>
+            <Text style={styles.topButtonText}>3</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.topButton}>
+            <Text style={styles.topButtonText}>4</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.topButton}>
+            <Text style={styles.topButtonText}>5</Text>
+          </TouchableOpacity>
+        </View>
         <View style={{flex: 0.35}}>
           <Text style={styles.text}>
             [ASMR MUKBANG] 직접 만든 떡볶이 불닭볶음면 양념 치킨먹방! & 레시피
@@ -53,12 +77,23 @@ function Recipe({navigation}) {
           </View>
         </View>
       </View>
-      <View style={{flex: 0.45, backgroundColor: 'blue'}}></View>
+      <View style={{flex: 0.45}}></View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  topButton: {
+    height: Height * 0.05,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    borderRadius: 20,
+    width: Width * 0.15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: Width * 0.01,
+    elevation: 1,
+  },
   bottomButton: {
     height: Height * 0.05,
     backgroundColor: 'white',
@@ -68,6 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: Width * 0.01,
+    elevation: 1,
   },
   bottomButtonText: {
     fontSize: 19,
@@ -86,7 +122,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 17,
     fontWeight: '900',
-    padding: 3,
+    padding: 5,
+  },
+  topButtonText: {
+    fontSize: 14,
+    backgroundColor: 'white',
+    marginLeft: 5,
   },
 });
 
