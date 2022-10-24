@@ -11,11 +11,12 @@ function Recipe({navigation}) {
   const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [madeCount, setMadeCount] = useState(0);
+  const [view, setView] = useState(174334);
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Topbar navigation={navigation} />
-      <View style={{flex: 0.55}}>
+      <View style={{flex: 0.55, padding: 5}}>
         <View style={{flex: 0.6}}>
           <Image
             source={require('../../android/app/assets/imgs/recipeImage.jpeg')}
@@ -73,11 +74,21 @@ function Recipe({navigation}) {
                 <Text style={styles.bottomButtonText2}>공유하기</Text>
               </TouchableOpacity>
             </View>
-            <Text>조회수 164,344회</Text>
+            <Text>조회수 {view}회</Text>
           </View>
         </View>
       </View>
-      <View style={{flex: 0.45}}></View>
+      <View style={{flex: 0.45}}>
+        <View style={{backgroundColor: 'red', flex: 0.3}}>
+          <Text>식재료</Text>
+        </View>
+        <View style={{backgroundColor: 'blue', flex: 0.3}}>
+          <Text>조미료</Text>
+        </View>
+        <View style={{backgroundColor: 'green', flex: 0.4}}>
+          <Text>레시피</Text>
+        </View>
+      </View>
     </View>
   );
 }
