@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, Button, Image, StyleSheet, Dimensions} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 
 import Topbar from '../Bar/Topbar';
 
@@ -74,20 +74,42 @@ function Recipe({navigation}) {
                 <Text style={styles.bottomButtonText2}>공유하기</Text>
               </TouchableOpacity>
             </View>
-            <Text>조회수 {view}회</Text>
+            <Text>
+              조회수{' '}
+              {view.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')}
+              회
+            </Text>
           </View>
         </View>
       </View>
       <View style={{flex: 0.45}}>
-        <View style={{backgroundColor: 'red', flex: 0.3}}>
-          <Text>식재료</Text>
-        </View>
-        <View style={{backgroundColor: 'blue', flex: 0.3}}>
-          <Text>조미료</Text>
-        </View>
-        <View style={{backgroundColor: 'green', flex: 0.4}}>
-          <Text>레시피</Text>
-        </View>
+        <ScrollView style={{padding: 10}}>
+          <View style={{flex: 0.45}}>
+            <Text>식재료</Text>
+            <View>
+              <Image
+                source={require('../../android/app/assets/Ingredient/chicken.png')}
+                style={styles.icon}
+              />
+            </View>
+          </View>
+          <View style={{flex: 1}}>
+            <Text>조미료</Text>
+            <View>
+              <Image
+                source={require('../../android/app/assets/Ingredient/sesame_oil.png')}
+                style={styles.icon}
+              />
+            </View>
+          </View>
+          <View style={{flex: 0.1}}>
+            <Text>레시피</Text>
+            <Image
+              source={require('../../android/app/assets/Ingredient/sesame_oil.png')}
+              style={styles.icon}
+            />
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
@@ -139,6 +161,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     backgroundColor: 'white',
     marginLeft: 5,
+  },
+  iconArea: {
+    backgroundColor: 'white',
+    height: Height * 0.12,
+    width: Width * 0.12,
+  },
+  icon: {
+    height: Height * 0.12,
+    width: Width * 0.12,
   },
 });
 
