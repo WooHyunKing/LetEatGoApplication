@@ -83,31 +83,75 @@ function Recipe({navigation}) {
         </View>
       </View>
       <View style={{flex: 0.45}}>
-        <ScrollView style={{padding: 10}}>
+        <ScrollView style={{padding: Width * 0.03}}>
           <View style={{flex: 0.45}}>
-            <Text>식재료</Text>
-            <View>
+            <Text style={{color: '#FFCDD2'}}>식재료</Text>
+            <View style={{flexDirection: 'row'}}>
               <Image
                 source={require('../../android/app/assets/Ingredient/chicken.png')}
+                style={styles.icon}
+              />
+              <Image
+                source={require('../../android/app/assets/Ingredient/sausage.png')}
+                style={styles.icon}
+              />
+
+              <Image
+                source={require('../../android/app/assets/Ingredient/meatball.png')}
+                style={styles.icon}
+              />
+              <Image
+                source={require('../../android/app/assets/Ingredient/ramen.png')}
                 style={styles.icon}
               />
             </View>
           </View>
           <View style={{flex: 1}}>
-            <Text>조미료</Text>
-            <View>
+            <Text style={{color: '#FFCDD2'}}>조미료</Text>
+            <View style={{flexDirection: 'row'}}>
               <Image
                 source={require('../../android/app/assets/Ingredient/sesame_oil.png')}
+                style={styles.icon}
+              />
+              <Image
+                source={require('../../android/app/assets/Ingredient/soy_sauce.png')}
                 style={styles.icon}
               />
             </View>
           </View>
           <View style={{flex: 0.1}}>
-            <Text>레시피</Text>
-            <Image
-              source={require('../../android/app/assets/Ingredient/sesame_oil.png')}
-              style={styles.icon}
-            />
+            <Text style={{color: '#FFCDD2'}}>레시피</Text>
+            <View style={{flexDirection: 'row'}}>
+              <Image
+                source={require('../../android/app/assets/icons/1.png')}
+                style={styles.texticon}
+              />
+              <Text style={{marginTop: Width * 0.04}}>
+                양파는 채썰고 슬라이스햄은 먹기 좋은 크기로 썰어줍니다.
+              </Text>
+            </View>
+
+            <View style={{flexDirection: 'row'}}>
+              <Image
+                source={require('../../android/app/assets/icons/2.png')}
+                style={styles.texticon}
+              />
+              <Text style={{marginTop: Width * 0.04}}>
+                끓는 물에 면을 먼저 데쳐줍니다. 이때 면은 완전히 삶는 것이 아닌
+                면이 살짝 풀어질 정도로만 데리고, 데친 면은 찬물에 담가 면이
+                불지 않도록 식혀주세요.
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Image
+                source={require('../../android/app/assets/icons/3.png')}
+                style={styles.texticon}
+              />
+              <Text style={{marginTop: Width * 0.04}}>
+                달궈진 팬에 오일을 두르고 슬라이스햄과 다진마늘, 채썬 양파를
+                약불에서 5분간 볶아주세요.
+              </Text>
+            </View>
           </View>
         </ScrollView>
       </View>
@@ -170,7 +214,14 @@ const styles = StyleSheet.create({
   icon: {
     height: Height * 0.12,
     width: Width * 0.12,
+    marginRight: Width * 0.07,
+  },
+  texticon: {
+    height: Height * 0.02,
+    width: Width * 0.02,
+    margin: Width * 0.04,
   },
 });
+``;
 
 export default Recipe;
