@@ -154,7 +154,7 @@ function Recipe({navigation}) {
         </View>
       </View>
       <View style={{flex: 0.5}}>
-        <ScrollView style={{padding: Width * 0.03}}>
+        <ScrollView style={{padding: Width * 0.03, flex: 1}}>
           <View style={{flex: 0.45}}>
             <Text style={{color: '#FFCDD2'}}>식재료</Text>
             <View style={{flexDirection: 'row'}}>
@@ -190,14 +190,17 @@ function Recipe({navigation}) {
               />
             </View>
           </View>
-          <View style={{flex: 0.1}}>
+          <View style={{flex: 0.1, marginBottom: Height * 0.05}}>
             <Text style={{color: '#FFCDD2'}}>레시피</Text>
-            <View style={{flexDirection: 'row'}}>
+            <View
+              style={{
+                flexDirection: 'row',
+              }}>
               <Image
                 source={require('../../android/app/assets/icons/1.png')}
                 style={styles.texticon}
               />
-              <Text style={{marginTop: Width * 0.04}}>
+              <Text style={{marginTop: Width * 0.04, flexShrink: 1}}>
                 양파는 채썰고 슬라이스햄은 먹기 좋은 크기로 썰어줍니다.
               </Text>
             </View>
@@ -207,7 +210,7 @@ function Recipe({navigation}) {
                 source={require('../../android/app/assets/icons/2.png')}
                 style={styles.texticon}
               />
-              <Text style={{marginTop: Width * 0.04}}>
+              <Text style={{marginTop: Width * 0.04, flexShrink: 1}}>
                 끓는 물에 면을 먼저 데쳐줍니다. 이때 면은 완전히 삶는 것이 아닌
                 면이 살짝 풀어질 정도로만 데리고, 데친 면은 찬물에 담가 면이
                 불지 않도록 식혀주세요.
@@ -218,7 +221,7 @@ function Recipe({navigation}) {
                 source={require('../../android/app/assets/icons/3.png')}
                 style={styles.texticon}
               />
-              <Text style={{marginTop: Width * 0.04}}>
+              <Text style={{marginTop: Width * 0.04, flexShrink: 1}}>
                 달궈진 팬에 오일을 두르고 슬라이스햄과 다진마늘, 채썬 양파를
                 약불에서 5분간 볶아주세요.
               </Text>
@@ -294,6 +297,5 @@ const styles = StyleSheet.create({
     margin: Width * 0.04,
   },
 });
-``;
 
 export default Recipe;
