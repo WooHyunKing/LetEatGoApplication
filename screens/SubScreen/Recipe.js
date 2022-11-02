@@ -52,12 +52,28 @@ function Recipe({navigation}) {
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
-              padding: 5,
+              paddㅞing: 5,
             }}>
             <View style={{flexDirection: 'row'}}>
-              <TouchableOpacity style={styles.bottomButton}>
+              <TouchableOpacity
+                style={styles.bottomButton}
+                onPress={
+                  like === false
+                    ? () => {
+                        setLike(true);
+                        setLikeCount(likeCount + 1);
+                      }
+                    : () => {
+                        setLike(false);
+                        setLikeCount(likeCount - 1);
+                      }
+                }>
                 <Image
-                  source={require('../../android/app/assets/icons/EmptyHeart.png')}
+                  source={
+                    like === true
+                      ? require('../../android/app/assets/icons/Heart.png')
+                      : require('../../android/app/assets/icons/EmptyHeart.png')
+                  }
                 />
                 <Text style={styles.bottomButtonText}>{likeCount}</Text>
               </TouchableOpacity>
