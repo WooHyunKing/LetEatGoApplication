@@ -1,5 +1,14 @@
+import {useScrollToTop} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {View, Text, Button, Image, StyleSheet, Dimensions} from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  Image,
+  StyleSheet,
+  Dimensions,
+  Share,
+} from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 
 import Topbar from '../Bar/Topbar';
@@ -10,20 +19,45 @@ const Width = Dimensions.get('window').width;
 function Recipe({navigation}) {
   const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
+  const [made, setMade] = useState(false);
   const [madeCount, setMadeCount] = useState(0);
   const [view, setView] = useState(174334);
+
+  const link =
+    'https://www.youtube.com/watch?v=oEWZ4DOgVK4&ab_channel=GONGSAMTABLE%EC%9D%B4%EA%B3%B5%EC%82%BC';
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: link,
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          console.log('activityType!');
+        } else {
+          console.log('Share!');
+        }
+      } else if (result.action === Share.dismissedAction) {
+        console.log('dismissed!');
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Topbar navigation={navigation} />
-      <View style={{flex: 0.55, padding: 5}}>
-        <View style={{flex: 0.6}}>
+      <View style={{flex: 0.5, padding: 5}}>
+        <View style={{flex: 0.65}}>
           <Image
             source={require('../../android/app/assets/imgs/recipeImage.jpeg')}
             style={{width: '100%', height: '100%'}}
+            resizeMode="stretch"
           />
         </View>
-        <View style={{flex: 0.15, padding: 5, flexDirection: 'row'}}>
+        {/* <View style={{flex: 0.15, padding: 5, flexDirection: 'row'}}>
           <TouchableOpacity style={styles.topButton}>
             <Text style={styles.topButtonText}>인트로</Text>
           </TouchableOpacity>
@@ -42,7 +76,7 @@ function Recipe({navigation}) {
           <TouchableOpacity style={styles.topButton}>
             <Text style={styles.topButtonText}>5</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View style={{flex: 0.35}}>
           <Text style={styles.text}>
             [ASMR MUKBANG] 직접 만든 떡볶이 불닭볶음면 양념 치킨먹방! & 레시피
@@ -52,7 +86,8 @@ function Recipe({navigation}) {
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
-              paddㅞing: 5,
+              padding: 5,
+              flex: 0.5,
             }}>
             <View style={{flexDirection: 'row'}}>
               <TouchableOpacity
@@ -77,9 +112,25 @@ function Recipe({navigation}) {
                 />
                 <Text style={styles.bottomButtonText}>{likeCount}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.bottomButton}>
+              <TouchableOpacity
+                style={styles.bottomButton}
+                onPress={
+                  made === false
+                    ? () => {
+                        setMade(true);
+                        setMadeCount(madeCount + 1);
+                      }
+                    : () => {
+                        setMade(false);
+                        setMadeCount(madeCount - 1);
+                      }
+                }>
                 <Image
-                  source={require('../../android/app/assets/icons/Checked.png')}
+                  source={
+                    made === true
+                      ? require('../../android/app/assets/icons/Checked.png')
+                      : require('../../android/app/assets/icons/Check.png')
+                  }
                 />
                 <Text style={styles.bottomButtonText}>{madeCount}</Text>
               </TouchableOpacity>
@@ -87,7 +138,11 @@ function Recipe({navigation}) {
                 <Image
                   source={require('../../android/app/assets/icons/Share.png')}
                 />
-                <Text style={styles.bottomButtonText2}>공유하기</Text>
+                <Text
+                  style={styles.bottomButtonText2}
+                  onPress={() => onShare()}>
+                  공유하기
+                </Text>
               </TouchableOpacity>
             </View>
             <Text>
@@ -98,7 +153,7 @@ function Recipe({navigation}) {
           </View>
         </View>
       </View>
-      <View style={{flex: 0.45}}>
+      <View style={{flex: 0.5}}>
         <ScrollView style={{padding: Width * 0.03}}>
           <View style={{flex: 0.45}}>
             <Text style={{color: '#FFCDD2'}}>식재료</Text>
@@ -216,6 +271,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '900',
     padding: 5,
+    flex: 0.5,
   },
   topButtonText: {
     fontSize: 14,
