@@ -49,7 +49,7 @@ function Recipe({navigation}) {
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Topbar navigation={navigation} />
-      <View style={{flex: 0.5, padding: 5}}>
+      <View style={{flex: 0.55, padding: 5}}>
         <View style={{flex: 0.65}}>
           <Image
             source={require('../../android/app/assets/imgs/recipeImage.jpeg')}
@@ -77,7 +77,7 @@ function Recipe({navigation}) {
             <Text style={styles.topButtonText}>5</Text>
           </TouchableOpacity>
         </View> */}
-        <View style={{flex: 0.35}}>
+        <View style={{flex: 0.35, marginTop: Height * 0.005}}>
           <Text style={styles.text}>
             [ASMR MUKBANG] 직접 만든 떡볶이 불닭볶음면 양념 치킨먹방! & 레시피
           </Text>
@@ -153,7 +153,7 @@ function Recipe({navigation}) {
           </View>
         </View>
       </View>
-      <View style={{flex: 0.5}}>
+      <View style={{flex: 0.45}}>
         <ScrollView style={{padding: Width * 0.03, flex: 1}}>
           <View style={{flex: 0.45}}>
             <Text style={{color: '#FFCDD2'}}>식재료</Text>
