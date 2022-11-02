@@ -154,7 +154,12 @@ function Recipe({navigation}) {
         </View>
       </View>
       <View style={{flex: 0.45}}>
-        <ScrollView style={{padding: Width * 0.03, flex: 1}}>
+        <ScrollView
+          style={{
+            paddingLeft: Width * 0.03,
+            paddingRight: Width * 0.03,
+            flex: 1,
+          }}>
           <View style={{flex: 0.45}}>
             <Text style={{color: '#FFCDD2'}}>식재료</Text>
             <View style={{flexDirection: 'row'}}>
