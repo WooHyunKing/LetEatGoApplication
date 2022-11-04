@@ -1,12 +1,12 @@
-import React, { useReducer, useState } from "react";
+import React, {useReducer, useState} from 'react';
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+} from 'react-native-responsive-screen';
 
-import RNPickerSelect from "react-native-picker-select";
-import LinearGradient from "react-native-linear-gradient";
+import RNPickerSelect from 'react-native-picker-select';
+import LinearGradient from 'react-native-linear-gradient';
 
 import {
   StyleSheet,
@@ -19,22 +19,71 @@ import {
   Modal,
   ScrollView,
   Platform,
-} from "react-native";
+} from 'react-native';
+import axios from 'axios';
 
-function Register() {
-  const [userId, setUserId] = useState("");
-  const [userPassword, setUserPassword] = useState("");
-  const [userPasswordCheck, setUserPasswordCheck] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [sex, setSex] = useState(false);
+function Register({navigation}) {
+  const [userId, setUserId] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [userPasswordCheck, setUserPasswordCheck] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [sex, setSex] = useState('');
   const [contact, setContact] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [errortext, setErrortext] = useState("");
+  const [errortext, setErrortext] = useState('');
 
   const placeholder = {
-    label: "성별을 선택해주세요",
+    label: '성별을 선택해주세요',
     value: null,
   };
+
+  async function postData(id, password, nickname, sex) {
+    setErrortext('');
+    if (!id) {
+      alert('아이디를 입력해주세요 .');
+      return;
+    }
+    if (!password) {
+      alert('비밀번호를 입력해주세요 .');
+      return;
+    }
+    if (!nickname) {
+      alert('닉네임를 입력해주세요 .');
+      return;
+    }
+    if (!sex) {
+      alert('성별을 입력해주세요 .');
+      return;
+    }
+    // if (!contact) {
+    //   alert('연락처를 입력해주세요 .');
+    //   return;
+    // }
+    setLoading(true);
+
+    try {
+      const response = await axios.post('http://10.0.2.2:8080/signup', {
+        id,
+        password,
+        nickname,
+        sex,
+      });
+
+      if (response.data.statusCode === 200) {
+        setLoading(false);
+        navigation.replace('Main');
+      } else if (response.data.msg === 'id that already exists') {
+        alert('동일한 아이디가 이미 존재합니다.');
+        setLoading(flase);
+      } else if (response.data.msg === 'nickname that already exists') {
+        alert('동일한 닉네임이 이미 존재합니다.');
+        setLoading(false);
+      }
+    } catch (e) {
+      setLoading(false);
+      console.log(e);
+    }
+  }
 
   async function handleSubmitButton(
     userId,
@@ -42,42 +91,41 @@ function Register() {
     userPasswordCheck,
     nickname,
     sex,
-    contact
   ) {
-    setErrortext("");
+    setErrortext('');
     if (!userId) {
-      alert("아이디를 입력해주세요 .");
+      alert('아이디를 입력해주세요 .');
       return;
     }
     if (!userPassword) {
-      alert("비밀번호를 입력해주세요 .");
+      alert('비밀번호를 입력해주세요 .');
       return;
     }
     if (!userPasswordCheck) {
-      alert("비밀번호 확인을 입력해주세요 .");
+      alert('비밀번호 확인을 입력해주세요 .');
       return;
     }
     if (!nickname) {
-      alert("닉네임을 입력해주세요 .");
+      alert('닉네임을 입력해주세요 .');
       return;
     }
     if (!sex) {
-      alert("성별을 입력해주세요 .");
+      alert('성별을 입력해주세요 .');
       return;
     }
-    if (!contact) {
-      alert("연락처를 입력해주세요 .");
-      return;
-    }
+    // if (!contact) {
+    //   alert('연락처를 입력해주세요 .');
+    //   return;
+    // }
   }
 
   return (
-    <LinearGradient colors={["#FFCDD2", "#FFAAB3"]} style={styles.container}>
+    <LinearGradient colors={['#FFCDD2', '#FFAAB3']} style={styles.container}>
       <View style={styles.topArea}>
         <View style={styles.titleArea}>
           <Image
-            source={require("../../android/app/assets/imgs/Register_logo.png")}
-            style={{ width: wp(30), resizeMode: "contain" }}
+            source={require('../../android/app/assets/imgs/Register_logo.png')}
+            style={{width: wp(30), resizeMode: 'contain'}}
           />
         </View>
         <View style={styles.textArea}>
@@ -89,21 +137,21 @@ function Register() {
         <TextInput
           placeholder="아이디(5자 이상, 영문, 숫자 포함)"
           style={styles.formAreaTop}
-          onChangeText={(userId) => setUserId(userId)}
+          onChangeText={userId => setUserId(userId)}
           autoCapitalize="none"
         />
         <TextInput
           placeholder="비밀번호(8자 이상)"
           secureTextEntry={true}
           style={styles.formAreaMiddle}
-          onChangeText={(userPassword) => setUserPassword(userPassword)}
+          onChangeText={userPassword => setUserPassword(userPassword)}
           autoCapitalize="none"
         />
         <TextInput
           placeholder="비밀번호 확인"
           secureTextEntry={true}
           style={styles.formAreaBottom}
-          onChangeText={(userPasswordCheck) =>
+          onChangeText={userPasswordCheck =>
             setUserPasswordCheck(userPasswordCheck)
           }
           autoCapitalize="none"
@@ -112,11 +160,10 @@ function Register() {
       <View
         style={{
           flex: 0.03,
-          justifyContent: "flex-start",
+          justifyContent: 'flex-start',
           // backgroundColor: "blue",
-          marginBottom: wp("2%"),
-        }}
-      >
+          marginBottom: wp('2%'),
+        }}>
         {userPassword !== userPasswordCheck ? (
           <Text style={styles.textValidation}>
             비밀번호가 일치하지 않습니다 .
@@ -128,33 +175,24 @@ function Register() {
         <TextInput
           placeholder="닉네임"
           style={styles.formAreaTop}
-          onChangeText={(nickname) => setNickname(nickname)}
+          onChangeText={nickname => setNickname(nickname)}
           autoCapitalize="none"
         />
-        {/* <RNPickerSelect
-          style={pickerSelectStyles}
-          fixAndroidTouchableBug={true}
-          useNativeAndroidPickerStyle={false}
-          items={[
-            { label: "남", value: 1 },
-            { label: "여", value: 2 },
-          ]}
-        /> */}
 
         <TextInput
           placeholder="성별"
           style={styles.formAreaMiddle}
-          onChangeText={(sex) => setSex(sex)}
+          onChangeText={sex => setSex(sex)}
           autoCapitalize="none"
         />
-        <TextInput
+        {/* <TextInput
           placeholder="연락처 ex)01012345678"
           style={styles.formAreaBottom}
-          onChangeText={(contact) => setContact(contact)}
+          onChangeText={contact => setContact(contact)}
           autoCapitalize="none"
-        />
+        /> */}
       </View>
-      <View style={{ flex: 0.2 }}>
+      <View style={{flex: 0.2}}>
         <View style={styles.btnArea}>
           <TouchableOpacity
             style={styles.btn}
@@ -165,11 +203,10 @@ function Register() {
                 userPasswordCheck,
                 nickname,
                 sex,
-                contact
+                contact,
               )
-            }
-          >
-            <Text style={{ color: "white", fontSize: wp(4) }}>회원가입</Text>
+            }>
+            <Text style={{color: 'white', fontSize: wp(4)}}>회원가입</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -182,7 +219,7 @@ export default Register;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
     paddingLeft: wp(7),
     paddingRight: wp(7),
     paddingTop: wp(10),
@@ -193,11 +230,11 @@ const styles = StyleSheet.create({
   },
   titleArea: {
     flex: 0.6,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   textArea: {
     flex: 0.4,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   Text: {
     fontSize: wp(4),
@@ -211,47 +248,47 @@ const styles = StyleSheet.create({
   },
   formAreaTop: {
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: 'black',
     borderTopLeftRadius: 7,
     borderTopRightRadius: 7,
     borderBottomWidth: 1,
     paddingLeft: 10,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   formAreaMiddle: {
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: 'black',
     borderTopWidth: 1,
     borderBottomWidth: 1,
     paddingLeft: 10,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   formAreaBottom: {
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: 'black',
     borderBottomLeftRadius: 7,
     borderBottomRightRadius: 7,
     borderTopWidth: 1,
     paddingLeft: 10,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   btnArea: {
     height: hp(8),
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 10,
   },
   btn: {
     flex: 1,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "black",
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'black',
     borderRadius: 5,
   },
   textValidation: {
-    fontSize: wp("4%"),
-    color: "red",
+    fontSize: wp('4%'),
+    color: 'red',
   },
 });
 
@@ -259,15 +296,15 @@ const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     borderWidth: 2,
     borderTopWidth: 1,
-    borderColor: "black",
-    width: "100%",
+    borderColor: 'black',
+    width: '100%',
     paddingLeft: 10,
   },
   inputAndroid: {
     borderWidth: 2,
     borderTopWidth: 1,
-    borderColor: "black",
-    width: "100%",
+    borderColor: 'black',
+    width: '100%',
     paddingLeft: 10,
   },
 });
