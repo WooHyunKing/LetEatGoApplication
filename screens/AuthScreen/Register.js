@@ -21,13 +21,14 @@ import {
   Platform,
 } from 'react-native';
 import axios from 'axios';
+import {post} from '../../../../backend/routes/user';
 
 function Register({navigation}) {
   const [userId, setUserId] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userPasswordCheck, setUserPasswordCheck] = useState('');
   const [nickname, setNickname] = useState('');
-  const [sex, setSex] = useState('');
+  const [sex, setSex] = useState(false);
   const [contact, setContact] = useState(0);
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
@@ -51,10 +52,10 @@ function Register({navigation}) {
       alert('닉네임를 입력해주세요 .');
       return;
     }
-    if (!sex) {
-      alert('성별을 입력해주세요 .');
-      return;
-    }
+    // if (!sex) {
+    //   alert('성별을 입력해주세요 .');
+    //   return;
+    // }
     // if (!contact) {
     //   alert('연락처를 입력해주세요 .');
     //   return;
@@ -62,7 +63,7 @@ function Register({navigation}) {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://10.0.2.2:8080/signup', {
+      const response = await axios.post('http://10.0.2.2:80/signup', {
         id,
         password,
         nickname,
@@ -71,7 +72,7 @@ function Register({navigation}) {
 
       if (response.data.statusCode === 200) {
         setLoading(false);
-        navigation.replace('Main');
+        navigation.replace('Login');
       } else if (response.data.msg === 'id that already exists') {
         alert('동일한 아이디가 이미 존재합니다.');
         setLoading(flase);
@@ -109,10 +110,10 @@ function Register({navigation}) {
       alert('닉네임을 입력해주세요 .');
       return;
     }
-    if (!sex) {
-      alert('성별을 입력해주세요 .');
-      return;
-    }
+    // if (!sex) {
+    //   alert('성별을 입력해주세요 .');
+    //   return;
+    // }
     // if (!contact) {
     //   alert('연락처를 입력해주세요 .');
     //   return;
@@ -182,7 +183,7 @@ function Register({navigation}) {
         <TextInput
           placeholder="성별"
           style={styles.formAreaMiddle}
-          onChangeText={sex => setSex(sex)}
+          // onChangeText={sex => setSex(sex)}
           autoCapitalize="none"
         />
         {/* <TextInput
@@ -196,16 +197,7 @@ function Register({navigation}) {
         <View style={styles.btnArea}>
           <TouchableOpacity
             style={styles.btn}
-            onPress={() =>
-              handleSubmitButton(
-                userId,
-                userPassword,
-                userPasswordCheck,
-                nickname,
-                sex,
-                contact,
-              )
-            }>
+            onPress={() => postData(userId, userPassword, nickname, sex)}>
             <Text style={{color: 'white', fontSize: wp(4)}}>회원가입</Text>
           </TouchableOpacity>
         </View>
