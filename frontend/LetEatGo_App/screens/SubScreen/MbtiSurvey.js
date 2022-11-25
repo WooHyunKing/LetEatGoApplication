@@ -13,6 +13,7 @@ import Topbar from '../Bar/Topbar';
 import MbtiSurveyComponent from './MbtiSurveyComponent';
 import {atom, useRecoilState} from 'recoil';
 import {
+  mbtiFinish,
   eCount,
   iCount,
   sCount,
@@ -25,6 +26,7 @@ import {
   pCount,
 } from '../../recoils/mbtiCount';
 import AsyncStorage from '@react-native-community/async-storage';
+import {CommonActions} from '@react-navigation/native';
 
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
@@ -143,21 +145,16 @@ function MbtiSurvey({navigation}) {
           source={require('../../android/app/assets/imgs/MbtiTop.png')}
           resizeMode="stretch"
         />
-        {/* <Text>E : {eTemp}</Text>
-        <Text>I : {iTemp}</Text>
-        <Text>S : {sTemp}</Text>
-        <Text>W : {wTemp}</Text>
-        <Text>U : {uTemp}</Text>
-        <Text>F : {fTemp}</Text> */}
         {questionList}
         <TouchableOpacity
           style={styles.submitButton}
           onPress={() => {
-            AsyncStorage.setItem('one', eTemp >= iTemp ? eTemp : iTemp);
-            AsyncStorage.setItem('two', sTemp >= wTemp ? sTemp : wTemp);
-            AsyncStorage.setItem('three', uTemp >= fTemp ? uTemp : fTemp);
-            AsyncStorage.setItem('four', rTemp >= vTemp ? rTemp : vTemp);
-            AsyncStorage.setItem('five', aTemp >= pTemp ? aTemp : pTemp);
+            AsyncStorage.setItem('one', eTemp >= iTemp ? 'E' : 'I');
+            AsyncStorage.setItem('two', sTemp >= wTemp ? 'S' : 'W');
+            AsyncStorage.setItem('three', uTemp >= fTemp ? 'U' : 'F');
+            AsyncStorage.setItem('four', rTemp >= vTemp ? 'R' : 'V');
+            AsyncStorage.setItem('five', aTemp >= pTemp ? 'A' : 'P');
+            navigation.dispatch(CommonActions.goBack());
           }}>
           <Text style={{color: '#706d6d'}}>제출</Text>
         </TouchableOpacity>

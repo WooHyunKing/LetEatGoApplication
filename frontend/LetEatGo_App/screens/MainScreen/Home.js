@@ -1,5 +1,5 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {atom, useRecoilState} from 'recoil';
 import {
   StyleSheet,
@@ -11,9 +11,23 @@ import {
   Dimensions,
   ScrollView,
 } from 'react-native';
-
+import {
+  eCount,
+  iCount,
+  sCount,
+  wCount,
+  uCount,
+  fCount,
+  rCount,
+  vCount,
+  aCount,
+  pCount,
+} from '../../recoils/mbtiCount';
 import Topbar from '../Bar/Topbar';
 import numState from '../../recoils/numState';
+import AsyncStorage from '@react-native-community/async-storage';
+import {FadingTransition} from 'react-native-reanimated';
+import {useIsFocused} from '@react-navigation/native';
 
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
@@ -21,6 +35,46 @@ const Width = Dimensions.get('window').width;
 function Home({navigation, route}) {
   const [num, setNum] = useRecoilState(numState);
   const [foodId, setFoodId] = useState(0);
+  const [finishMbti, setFinishMbti] = useState(false);
+  const [first, setFirst] = useState('');
+  const [second, setSecond] = useState('');
+  const [third, setThird] = useState('');
+  const [fourth, setFourth] = useState('');
+  const [fifth, setFifth] = useState('');
+
+  const [eTemp, setETemp] = useRecoilState(eCount);
+  const [iTemp, setITemp] = useRecoilState(iCount);
+  const [sTemp, setSTemp] = useRecoilState(sCount);
+  const [wTemp, setWTemp] = useRecoilState(wCount);
+  const [uTemp, setUTemp] = useRecoilState(uCount);
+  const [fTemp, setFTemp] = useRecoilState(fCount);
+  const [rTemp, setRTemp] = useRecoilState(rCount);
+  const [vTemp, setVTemp] = useRecoilState(vCount);
+  const [aTemp, setATemp] = useRecoilState(aCount);
+  const [pTemp, setPTemp] = useRecoilState(pCount);
+
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    AsyncStorage.getItem('one').then(value => {
+      value !== null ? setFinishMbti(true) : null;
+    });
+    AsyncStorage.getItem('one').then(value => {
+      setFirst(value);
+    });
+    AsyncStorage.getItem('two').then(value => {
+      setSecond(value);
+    });
+    AsyncStorage.getItem('three').then(value => {
+      setThird(value);
+    });
+    AsyncStorage.getItem('four').then(value => {
+      setFourth(value);
+    });
+    AsyncStorage.getItem('five').then(value => {
+      setFifth(value);
+    });
+  }, [isFocused]);
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
@@ -76,10 +130,46 @@ function Home({navigation, route}) {
         </TouchableOpacity>
       </View>
       <View style={{...styles.box, marginBottom: '5%'}}>
-        <Text style={styles.BeforeText}>나의 식습관 지표 MBTI</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('MbtiServey')}>
-          <Text style={styles.ButtonText}>알아보기</Text>
-        </TouchableOpacity>
+        {!finishMbti ? (
+          <View>
+            <Text style={styles.BeforeText}>나의 식습관 지표 MBTI</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('MbtiServey')}>
+              <Text style={styles.ButtonText}>알아보기</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View style={{alignItems: 'center'}}>
+            <Text style={{fontSize: 25}}>
+              나의 먹비티아이는 ? "{first}
+              {second}
+              {third}
+              {fourth}-{fifth}"
+            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                setETemp(0);
+                setITemp(0);
+                setSTemp(0);
+                setWTemp(0);
+                setUTemp(0);
+                setFTemp(0);
+                setRTemp(0);
+                setVTemp(0);
+                setATemp(0);
+                setPTemp(0);
+                navigation.navigate('MbtiServey');
+              }}>
+              <Text style={styles.ButtonText}>재검사 하기</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+        {/* <Text>{finishMbti ? 'true' : 'false'}</Text>
+        <Text>{first}</Text>
+        <Text>{second}</Text>
+        <Text>{third}</Text>
+        <Text>{fourth}</Text>
+        <Text>{fifth}</Text> */}
       </View>
     </View>
   );
