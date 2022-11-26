@@ -24,7 +24,6 @@ import {
   pCount,
 } from '../../recoils/mbtiCount';
 import Topbar from '../Bar/Topbar';
-import numState from '../../recoils/numState';
 import AsyncStorage from '@react-native-community/async-storage';
 import {FadingTransition} from 'react-native-reanimated';
 import {useIsFocused} from '@react-navigation/native';
@@ -33,7 +32,6 @@ const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
 function Home({navigation, route}) {
-  const [num, setNum] = useRecoilState(numState);
   const [foodId, setFoodId] = useState(0);
   const [finishMbti, setFinishMbti] = useState(false);
   const [first, setFirst] = useState('');
@@ -80,7 +78,7 @@ function Home({navigation, route}) {
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Topbar navigation={navigation} />
       <View style={styles.box}>
-        <Text style={styles.top5_text}>Top5 레시피{num}</Text>
+        <Text style={styles.top5_text}>Top5 레시피</Text>
         <ScrollView
           horizontal
           pagingEnabled
@@ -145,31 +143,32 @@ function Home({navigation, route}) {
               {third}
               {fourth}-{fifth}"
             </Text>
-            <TouchableOpacity
-              onPress={() => {
-                setETemp(0);
-                setITemp(0);
-                setSTemp(0);
-                setWTemp(0);
-                setUTemp(0);
-                setFTemp(0);
-                setRTemp(0);
-                setVTemp(0);
-                setATemp(0);
-                setPTemp(0);
-                navigation.navigate('MbtiServey');
-              }}>
-              <Text style={styles.ButtonText}>재검사 하기</Text>
-            </TouchableOpacity>
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                onPress={() => {
+                  setETemp(0);
+                  setITemp(0);
+                  setSTemp(0);
+                  setWTemp(0);
+                  setUTemp(0);
+                  setFTemp(0);
+                  setRTemp(0);
+                  setVTemp(0);
+                  setATemp(0);
+                  setPTemp(0);
+                  navigation.navigate('MbtiServey');
+                }}
+                style={{marginHorizontal: Width * 0.01}}>
+                <Text style={styles.ButtonText}>재검사 하기</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('MbtiResult')}
+                style={{marginHorizontal: Width * 0.01}}>
+                <Text style={styles.ButtonText}>검사결과 보기</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         )}
-
-        {/* <Text>{finishMbti ? 'true' : 'false'}</Text>
-        <Text>{first}</Text>
-        <Text>{second}</Text>
-        <Text>{third}</Text>
-        <Text>{fourth}</Text>
-        <Text>{fifth}</Text> */}
       </View>
     </View>
   );
@@ -193,7 +192,6 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     color: 'white',
     fontFamily: 'Happiness-Sans-Bold',
-    // paddingRight: Width * 0.226,
   },
   box: {
     flex: 1,

@@ -154,7 +154,7 @@ function MbtiSurvey({navigation}) {
             AsyncStorage.setItem('three', uTemp >= fTemp ? 'U' : 'F');
             AsyncStorage.setItem('four', rTemp >= vTemp ? 'R' : 'V');
             AsyncStorage.setItem('five', aTemp >= pTemp ? 'A' : 'P');
-            navigation.dispatch(CommonActions.goBack());
+            navigation.navigate('MbtiResult');
           }}>
           <Text style={{color: '#706d6d'}}>제출</Text>
         </TouchableOpacity>

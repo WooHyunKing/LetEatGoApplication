@@ -84,6 +84,11 @@ const HomeStackScreen = ({navigation, route}) => {
         component={MbtiSurvey}
         options={{headerShown: false}}
       />
+      <HomeStack.Screen
+        name="MbtiResult"
+        component={Mbti}
+        options={{headerShown: false}}
+      />
     </HomeStack.Navigator>
   );
 };
