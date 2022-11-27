@@ -193,8 +193,8 @@ function Mbti({navigation, route}) {
           style={{
             justifyContent: 'center',
             alignItems: 'center',
-            marginVertical: Height * 0.05,
-            backgroundColor: '#d8d8d8',
+            marginBottom: Height * 0.05,
+            backgroundColor: 'white',
             borderRadius: 10,
             height: Height * 0.1,
           }}
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   textArea: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: Height * 0.1,
+    marginBottom: Height * 0.15,
     // borderWidth: 1,
     height: Height * 0.15,
   },

@@ -24,6 +24,7 @@ import Recipe from './screens/SubScreen/Recipe';
 import Search from './screens/SubScreen/Search';
 import Survey from './screens/SubScreen/Survey';
 import MbtiSurvey from './screens/SubScreen/MbtiSurvey';
+import AfterSurvey from './screens/SubScreen/AfterSurvey';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -77,6 +78,11 @@ const HomeStackScreen = ({navigation, route}) => {
       <HomeStack.Screen
         name="Survey"
         component={Survey}
+        options={{headerShown: false}}
+      />
+      <HomeStack.Screen
+        name="AfterSurvey"
+        component={AfterSurvey}
         options={{headerShown: false}}
       />
       <HomeStack.Screen

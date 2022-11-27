@@ -79,9 +79,8 @@ function Login({navigation}) {
         <View style={styles.btnArea}>
           <TouchableOpacity
             style={styles.btn}
-            onPress={() => postData(userId, userPassword)}
-            // onPress={() => navigation.navigate('Main')}
-          >
+            // onPress={() => postData(userId, userPassword)}
+            onPress={() => navigation.navigate('Main')}>
             <Text style={{color: 'white'}}>로그인</Text>
           </TouchableOpacity>
         </View>

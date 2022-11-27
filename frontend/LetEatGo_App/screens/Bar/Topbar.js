@@ -24,7 +24,7 @@ function Topbar({navigation}) {
       <Text style={styles.text}>입맛춤</Text>
       <View style={styles.StatusBarIcon}>
         <TouchableOpacity
-          style={{marginRight: Width * 0.77, marginTop: Width * 0.005}}
+          style={{marginRight: Width * 0.78, marginTop: Width * 0.005}}
           activeOpacity={0.7}
           onPress={() => navigation.pop()}>
           <Image source={require('../../android/app/assets/icons/Back.png')} />
