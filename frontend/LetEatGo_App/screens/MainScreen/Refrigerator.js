@@ -68,11 +68,12 @@ function Refrigerator({navigation}) {
         style={{
           paddingLeft: 20,
           paddingVertical: 17,
-          fontSize: 16,
+          fontSize: 25,
           fontWeight: '800',
         }}>
-        나의 냉장고
+        나의 냉장고 🧊
       </Text>
+
       <View style={{flexDirection: 'row', flexWrap: 'wrap', marginLeft: 17}}>
         {selectedList ? (
           selectedList.map(key => (
