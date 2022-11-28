@@ -37,7 +37,7 @@ function SelectCount(Props) {
           Props.setDislike([]);
           Props.setCount(0);
 
-          navigation.navigate('AfterSurvey');
+          Props.navigation.navigate('AfterSurvey');
           Props.getFood();
         }}>
         <Image source={selectIcon[id].src}></Image>
@@ -184,8 +184,12 @@ function Survey({navigation}) {
         <Text style={styles.InfoText}>좋아하는 음식을 5개 이상 고르면</Text>
         <Text style={styles.InfoText}>취향에 맞는 레시피를 추천해드려요!</Text>
       </View>
-      <View style={{height: Height * 0.78, position: 'relative'}}>
-        {/* <SelectCount /> */}
+      <View
+        style={{
+          height: Height * 0.78,
+          position: 'relative',
+          paddingLeft: Width * 0.05,
+        }}>
         <ScrollView>
           <View
             style={{
@@ -218,7 +222,7 @@ function Survey({navigation}) {
             position: 'absolute',
             opacity: 1,
             zIndex: 100, // 우현아 안드로이드는 elevation이래..바꿔서 쓰렴
-            top: '90%',
+            top: Height * 0.65,
             width: Width,
             alignItems: 'center',
           }}
@@ -234,6 +238,7 @@ function Survey({navigation}) {
             setLike={setLike}
             dislike={dislike}
             setDislike={setDislike}
+            navigation={navigation}
           />
         </LinearGradient>
       </View>

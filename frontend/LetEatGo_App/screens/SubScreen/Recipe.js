@@ -39,10 +39,10 @@ function Recipe({navigation, route}) {
   async function getData(food_id) {
     try {
       const response = await axios.get(
-        `http://10.0.2.2:80/recipe?foodid=${food_id}`,
+        `http://10.0.2.2:80/recipe?foodid=${food_id}&userid=10`,
       );
-
-      console.log(response.data.recipe.general.foodname);
+      console.log('here');
+      console.log(response);
       setDetail(response.data.recipe.detail);
       setOrders(response.data.recipe.general.order);
       setFoodName(response.data.recipe.general.foodname);
