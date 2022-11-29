@@ -95,6 +95,11 @@ const HomeStackScreen = ({navigation, route}) => {
         component={Mbti}
         options={{headerShown: false}}
       />
+      <HomeStack.Screen
+        name="Refrigerator"
+        component={Refrigerator}
+        options={{headerShown: false}}
+      />
     </HomeStack.Navigator>
   );
 };

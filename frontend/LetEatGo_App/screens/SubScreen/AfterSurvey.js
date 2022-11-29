@@ -94,7 +94,7 @@ function AfterSurvey({navigation}) {
                 fontWeight: '500',
                 padding: 4,
               }}>
-              추가 조사해보기!
+              추가 조사해보기
             </Text>
           </View>
         </TouchableOpacity>

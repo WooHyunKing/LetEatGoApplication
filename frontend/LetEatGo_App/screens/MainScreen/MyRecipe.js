@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -12,13 +12,14 @@ import {
   Alert,
 } from 'react-native';
 import Topbar from '../Bar/Topbar';
+import axios from 'axios';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
-function RecipeComponent() {
+function RecipeComponent({url, foodname}) {
   const [like, setLike] = useState(false);
   const [check, setCheck] = useState(false);
 
@@ -28,13 +29,32 @@ function RecipeComponent() {
         ...styles.box,
         height: Height * 0.2,
       }}>
-      <View style={{flex: 0.9}}></View>
+      <View
+        style={{
+          flex: 0.9,
+          width: '100%',
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+        }}>
+        <Image
+          style={{
+            width: Width * 0.4,
+            height: Width * 0.32,
+            borderRadius: 5,
+            resizeMode: 'cover',
+          }}
+          source={{uri: url}}
+        />
+        <Text style={{fontSize: 18, marginLeft: Width * 0.03}}>{foodname}</Text>
+      </View>
       <View
         style={{
           flex: 0.1,
-          paddingBottom: Height * 0.04,
+          paddingRight: Width * 0.15,
+          paddingTop: Height * 0.12,
         }}>
-        <View style={{width: Width * 0.85, flexDirection: 'row-reverse'}}>
+        <View style={{width: Width * 0.2, flexDirection: 'row-reverse'}}>
           <TouchableOpacity onPress={() => setCheck(!check)}>
             <Image
               source={
@@ -65,6 +85,47 @@ function MyRecipe({navigation}) {
   const [active, setActive] = useState(true);
   const [userId, setUserId] = useState('yunmi123');
   const [nickname, setNickname] = useState('윰블리');
+  const [likelist, setLikelist] = useState([]);
+  const [checklist, setChecklist] = useState([]);
+
+  const likeInfo = likelist.map(info => (
+    <RecipeComponent url={info.Image} foodname={info.Name} />
+  ));
+
+  const checkInfo = checklist.map(info => (
+    <RecipeComponent url={info.Image} foodname={info.Name} />
+  ));
+
+  async function getLike(user_id) {
+    try {
+      const response = await axios.get(
+        `http://10.0.2.2:80/user/like?userid=${user_id}`,
+      );
+      console.log('here');
+      // console.log(response.data.result);
+      setLikelist(response.data.result);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function getCheck(user_id) {
+    try {
+      const response = await axios.get(
+        `http://10.0.2.2:80/user/made?userid=${user_id}`,
+      );
+      console.log('hi');
+      console.log(response.data.result);
+      setChecklist(response.data.result);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    getLike(97);
+    getCheck(97);
+  }, []);
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
@@ -131,9 +192,7 @@ function MyRecipe({navigation}) {
             </TouchableOpacity>
           </View>
           <ScrollView style={{flex: 0.9}}>
-            <RecipeComponent />
-            <RecipeComponent />
-            <RecipeComponent />
+            {active ? likeInfo : checkInfo}
           </ScrollView>
         </View>
       </View>
@@ -165,6 +224,7 @@ const styles = StyleSheet.create({
     // justifyContent: '',
     alignItems: 'center',
     paddingLeft: Width * 0.01,
+    flexDirection: 'row',
   },
   block: {
     backgroundColor: '#FFCDD2',
@@ -182,6 +242,7 @@ const styles = StyleSheet.create({
     color: '#FFCDD2',
     marginLeft: Width * 0.01,
     marginTop: Height * 0.003,
+    textDecorationLine: 'underline',
   },
   icon: {
     marginLeft: Width * 0.015,
