@@ -80,10 +80,6 @@ function Home({navigation, route}) {
         },
         {withCredentials: true},
       );
-
-      console.log('보유식자재');
-      console.log(response.data.data[1]);
-      console.log(response.data.data[0]);
       if (response.data) {
         setuserResult(response.data.data[0]);
         setIngreResult(response.data.data[1]);
@@ -95,6 +91,13 @@ function Home({navigation, route}) {
     }
   };
 
+  useEffect(() => {
+    setSurvey2(false);
+    getUserR();
+  }, []);
+  useEffect(() => {
+    getUserR();
+  }, [survey2]);
   useEffect(() => {
     AsyncStorage.getItem('one').then(value => {
       value !== null ? setFinishMbti(true) : null;
@@ -115,17 +118,6 @@ function Home({navigation, route}) {
       setFifth(value);
     });
   }, [isFocused]);
-
-  // useEffect(() => {
-  //   setSurvey2(false);
-  //   getUserR();
-  //   console.log('Hi');
-  //   console.log(survey2);
-  // }, []);
-
-  // useEffect(() => {
-  //   getUserR();
-  // }, [survey2]);
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
@@ -152,40 +144,39 @@ function Home({navigation, route}) {
           {userNickname}님에게 꼭 맞는 레시피를 추천해드릴게요 :)
         </Text>
       </View>
-      {/* {survey2 ? (
-        <IngreRecipe
-          text={'내가 지금 만들 수 있는 레시피에요!'}
-          data={ingreResult}
-          navigation={navigation}
-        />
-      ) : (
-        <BeforeRecommend
-          location={'Refrigerator'}
-          title={'나의 냉장고로 만들 수 있는 음식은?'}
-          button={'찾아보기'}
-          survey={survey2}
-          setSurvey={setSurvey2}
-          navigation={navigation}
-        />
-      )}
-      {survey ? (
-        <RecomRecipe
-          text={'나의 입맛에 쏙 맞게 추천된 레시피에요!'}
-          data={userResult}
-          navigation={navigation}
-        />
-      ) : (
-        <BeforeRecommend
-          location={'Survey'}
-          title={'내 취향에 맞는 레시피'}
-          button={'찾아보기'}
-          survey={survey}
-          setSurvey={setSurvey}
-          navigation={navigation}
-        />
-      )} */}
+
       <ScrollView>
-        <View style={styles.box}>
+        {survey ? (
+          <RecomRecipe
+            text={'나의 입맛에 쏙 맞게 추천된 레시피에요!'}
+            data={userResult}
+          />
+        ) : (
+          <View style={styles.box}>
+            <Text style={styles.BeforeText}>내 취향에 맞는 레시피</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Survey')}>
+              <Text style={styles.ButtonText}>찾아보기</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        {survey2 ? (
+          <IngreRecipe
+            text={'내가 지금 만들 수 있는 레시피에요!'}
+            data={ingreResult}
+          />
+        ) : (
+          <View style={styles.box}>
+            <Text style={styles.BeforeText}>
+              나의 냉장고로 만들 수 있는 음식은?
+            </Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Refrigerator')}>
+              <Text style={styles.ButtonText}>찾아보기</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+        {/* <View style={styles.box}>
           <Text style={styles.top5_text}>Top5 레시피</Text>
           <ScrollView
             horizontal
@@ -228,13 +219,8 @@ function Home({navigation, route}) {
               />
             </TouchableOpacity>
           </ScrollView>
-        </View>
-        <View style={styles.box}>
-          <Text style={styles.BeforeText}>내 취향에 맞는 레시피</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Survey')}>
-            <Text style={styles.ButtonText}>찾아보기</Text>
-          </TouchableOpacity>
-        </View>
+        </View> */}
+
         <View style={{...styles.box, marginBottom: '5%'}}>
           {!finishMbti ? (
             <View>
@@ -246,8 +232,10 @@ function Home({navigation, route}) {
             </View>
           ) : (
             <View style={{alignItems: 'center'}}>
-              <Text style={{fontSize: 25}}>
-                나의 먹비티아이는 ? "{first}
+              <Text style={{fontSize: 25}}>나의 먹비티아이는 ?</Text>
+              <Text
+                style={{fontSize: 30, color: '#FFAAB3', fontWeight: 'bold'}}>
+                "{first}
                 {second}
                 {third}
                 {fourth}-{fifth}"
@@ -304,7 +292,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Happiness-Sans-Bold',
   },
   box: {
-    height: Height * 0.25,
+    height: Height * 0.22,
     flex: 1,
     paddingHorizontal: Width * 0.013,
     marginTop: Height * 0.012,
