@@ -75,7 +75,7 @@ function Search({navigation}) {
       ...history,
       [Date.now()]: {text},
     };
-    // navigation.navigate('SearchResult');
+    navigation.navigate('SearchResult');
     setHistory(newHistory);
     await saveHistory(newHistory);
   };
