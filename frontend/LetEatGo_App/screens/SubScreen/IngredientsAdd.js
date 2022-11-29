@@ -23,7 +23,7 @@ function IngreCategory(Props) {
 
   async function postIngre(id, selectedList) {
     try {
-      const response = await axios.post('http://127.0.0.1:80/user/ingredient', {
+      const response = await axios.post('http://10.0.2.2:80/user/ingredient', {
         userid: 97,
         material: selectedList,
       });
@@ -36,7 +36,7 @@ function IngreCategory(Props) {
   async function getIngred() {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:80/user/ingredient?userid=97`,
+        `http://10.0.2.2:80/user/ingredient?userid=97`,
       );
 
       setSelectedList(response.data.result);

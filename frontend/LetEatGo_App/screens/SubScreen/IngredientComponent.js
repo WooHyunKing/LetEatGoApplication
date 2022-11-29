@@ -682,7 +682,7 @@ const icons = [
 function IngredientComponent({food_name}) {
   if (
     food_name !== '' &&
-    icons.find(element => element.foodname === food_name) === undefined
+    icons.find(element => food_name.includes(element.foodname)) === undefined
   ) {
     return (
       <View>
@@ -703,8 +703,8 @@ function IngredientComponent({food_name}) {
     );
   }
   const iconlist = icons.map(icon =>
-    food_name === icon.foodname ? (
-      <View key="{icon}">
+    food_name.includes(icon.foodname) ? (
+      <View key={icon.foodname}>
         <TouchableOpacity style={styles.iconButton}>
           <View style={{flexDirection: 'row'}}>
             <Image style={styles.icon} source={icon.src} />
@@ -714,7 +714,7 @@ function IngredientComponent({food_name}) {
             />
           </View>
 
-          <Text style={styles.iconText}>{icon.foodname}</Text>
+          <Text style={styles.iconText}>{food_name}</Text>
         </TouchableOpacity>
       </View>
     ) : null,

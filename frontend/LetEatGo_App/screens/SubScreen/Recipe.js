@@ -27,7 +27,7 @@ function Recipe({navigation, route}) {
   const [made, setMade] = useState(false);
   const [madeCount, setMadeCount] = useState(0);
   const [view, setView] = useState(174334);
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState({});
   const [detail, setDetail] = useState('');
   const [showDetail, setShowDetail] = useState(false);
   const [playing, setPlaying] = useState(true);
@@ -39,10 +39,10 @@ function Recipe({navigation, route}) {
   async function getData(food_id) {
     try {
       const response = await axios.get(
-        `http://10.0.2.2:80/recipe?foodid=${food_id}&userid=10`,
+        `http://10.0.2.2:80/recipe?foodid=${food_id}&userid=97`,
       );
       console.log('here');
-      console.log(response);
+      console.log(response.data.recipe.general.foodname);
       setDetail(response.data.recipe.detail);
       setOrders(response.data.recipe.general.order);
       setFoodName(response.data.recipe.general.foodname);
@@ -53,7 +53,7 @@ function Recipe({navigation, route}) {
   }
 
   const materialList = materials1.map(material => (
-    <IngredientComponent key={material} food_name={material} />
+    <IngredientComponent food_name={material} />
   ));
 
   useEffect(() => {
@@ -112,95 +112,132 @@ function Recipe({navigation, route}) {
               marginBottom: Height * 0.05,
             }}>
             <Text style={{color: '#FFCDD2'}}>레시피</Text>
-            <View
-              style={{
-                flexDirection: 'row',
-              }}>
-              <Image
-                source={require('../../android/app/assets/icons/1.png')}
-                style={styles.texticon}
-              />
-              <View style={{flexShrink: 1}}>
-                <Text style={{marginTop: Width * 0.04}}>
-                  {('' + orders.Order1).substring(2)}
-                </Text>
-                <Image
-                  style={{
-                    width: Width * 0.5,
-                    height: Height * 0.17,
-                    borderRadius: 12,
-                  }}
-                  source={{
-                    uri: orders.Order1_img,
-                  }}
-                />
+            {orders.order1 ? (
+              <View
+                style={{
+                  flexDirection: 'row',
+                }}>
+                <Text style={styles.indexText}>1</Text>
+                <View style={{flexShrink: 1}}>
+                  <Text style={{marginTop: Width * 0.04}}>
+                    {('' + orders.order1).substring(2)}
+                  </Text>
+                  <Image
+                    style={{
+                      width: Width * 0.5,
+                      height: Height * 0.17,
+                      borderRadius: 12,
+                    }}
+                    source={{
+                      uri: orders.order1_img,
+                    }}
+                  />
+                </View>
               </View>
-            </View>
+            ) : null}
 
-            <View style={{flexDirection: 'row'}}>
-              <Image
-                source={require('../../android/app/assets/icons/2.png')}
-                style={styles.texticon}
-              />
-              <View style={{flexShrink: 1}}>
-                <Text style={{marginTop: Width * 0.04, flexShrink: 1}}>
-                  {('' + orders.Order2).substring(2)}
-                </Text>
-                <Image
-                  style={{
-                    width: Width * 0.5,
-                    height: Height * 0.17,
-                    borderRadius: 12,
-                  }}
-                  source={{
-                    uri: orders.Order2_img,
-                  }}
-                />
+            {orders.order2 ? (
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.indexText}>2</Text>
+                <View style={{flexShrink: 1}}>
+                  <Text style={{marginTop: Width * 0.04, flexShrink: 1}}>
+                    {('' + orders.order2).substring(2)}
+                  </Text>
+                  <Image
+                    style={{
+                      width: Width * 0.5,
+                      height: Height * 0.17,
+                      borderRadius: 12,
+                    }}
+                    source={{
+                      uri: orders.order2_img,
+                    }}
+                  />
+                </View>
               </View>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <Image
-                source={require('../../android/app/assets/icons/3.png')}
-                style={styles.texticon}
-              />
+            ) : null}
+            {orders.order3 ? (
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.indexText}>3</Text>
 
-              <View style={{flexShrink: 1}}>
-                <Text style={{marginTop: Width * 0.04, flexShrink: 1}}>
-                  {('' + orders.Order3).substring(2)}
-                </Text>
-                <Image
-                  style={{
-                    width: Width * 0.5,
-                    height: Height * 0.17,
-                    borderRadius: 12,
-                  }}
-                  source={{
-                    uri: orders.Order3_img,
-                  }}
-                />
+                <View style={{flexShrink: 1}}>
+                  <Text style={{marginTop: Width * 0.04, flexShrink: 1}}>
+                    {('' + orders.order3).substring(2)}
+                  </Text>
+                  <Image
+                    style={{
+                      width: Width * 0.5,
+                      height: Height * 0.17,
+                      borderRadius: 12,
+                    }}
+                    source={{
+                      uri: orders.order3_img,
+                    }}
+                  />
+                </View>
               </View>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <Image
-                source={require('../../android/app/assets/icons/4.png')}
-                style={styles.texticon}
-              />
-              <View style={{flexShrink: 1}}>
-                <Text style={{marginTop: Width * 0.04, flexShrink: 1}}>
-                  {('' + orders.Order4).substring(2)}
-                </Text>
-                <Image
-                  style={{
-                    width: Width * 0.5,
-                    height: Height * 0.17,
-                    borderRadius: 12,
-                  }}
-                  source={{
-                    uri: orders.Order4_img,
-                  }}
-                />
+            ) : null}
+
+            {orders.order4 ? (
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.indexText}>4</Text>
+                <View style={{flexShrink: 1}}>
+                  <Text style={{marginTop: Width * 0.04, flexShrink: 1}}>
+                    {('' + orders.order4).substring(2)}
+                  </Text>
+                  <Image
+                    style={{
+                      width: Width * 0.5,
+                      height: Height * 0.17,
+                      borderRadius: 12,
+                    }}
+                    source={{
+                      uri: orders.order4_img,
+                    }}
+                  />
+                </View>
               </View>
-            </View>
+            ) : null}
+            {orders.order5 ? (
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.indexText}>5</Text>
+                <View style={{flexShrink: 1}}>
+                  <Text style={{marginTop: Width * 0.04, flexShrink: 1}}>
+                    {('' + orders.order5).substring(2)}
+                  </Text>
+                  <Image
+                    style={{
+                      width: Width * 0.5,
+                      height: Height * 0.17,
+                      borderRadius: 12,
+                    }}
+                    source={{
+                      uri: orders.order5_img,
+                    }}
+                  />
+                </View>
+              </View>
+            ) : null}
+            {orders.order6 ? (
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.indexText}>6</Text>
+                <View style={{flexShrink: 1}}>
+                  <Text style={{marginTop: Width * 0.04, flexShrink: 1}}>
+                    {('' + orders.order6).substring(2)}
+                  </Text>
+                  <Image
+                    style={{
+                      width: Width * 0.5,
+                      height: Height * 0.17,
+                      borderRadius: 12,
+                    }}
+                    source={{
+                      uri: orders.order6_img,
+                    }}
+                  />
+                </View>
+              </View>
+            ) : null}
           </View>
         </ScrollView>
       </View>
@@ -273,6 +310,15 @@ const styles = StyleSheet.create({
     width: Width * 0.03,
     margin: Width * 0.04,
     resizeMode: 'stretch',
+  },
+  indexText: {
+    paddingHorizontal: '3.5%',
+    fontFamily: 'Roboto-Bold',
+    fontStyle: 'italic',
+    fontWeight: '900',
+    color: '#FFAAB3',
+    fontSize: 23,
+    marginTop: Height * 0.012,
   },
 });
 

@@ -39,6 +39,7 @@ function Refrigerator({navigation}) {
       setSelectedList(response.data.result);
       setDelete(true);
     } catch (error) {
+      console.log('here');
       console.error(error);
     }
   }
@@ -50,6 +51,7 @@ function Refrigerator({navigation}) {
       // console.log(response.data.result);
       setSelectedList(response.data.result);
     } catch (error) {
+      console.log('here');
       console.error(error);
     }
   }

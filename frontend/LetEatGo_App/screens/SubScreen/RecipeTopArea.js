@@ -27,7 +27,7 @@ function RecipeTopArea({navigation, food_name}) {
   const [videoId, setVideoId] = useState('j7s9VRsrm9o');
 
   const params = {
-    key: 'AIzaSyC5Ss_A2H0Z9kWdY21AcQawsWCJRvFPA3k',
+    key: 'AIzaSyD-zqZLGtu83XrzhC33Dhic2teJaU6-Po0',
     q: food_name,
     type: 'video',
     maxResults: 1,
@@ -49,6 +49,7 @@ function RecipeTopArea({navigation, food_name}) {
         }
       })
       .catch(err => {
+        console.log('hello');
         console.log(err);
       });
   }, [params.q]);
