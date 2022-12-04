@@ -7,6 +7,7 @@ import {
 
 // import RNPickerSelect from 'react-native-picker-select';
 import LinearGradient from 'react-native-linear-gradient';
+import {Picker} from '@react-native-picker/picker';
 
 import {
   StyleSheet,
@@ -19,9 +20,13 @@ import {
   Modal,
   ScrollView,
   Platform,
+  Dimensions,
 } from 'react-native';
 import axios from 'axios';
 import {post} from '../../../../backend/routes/user';
+
+const Height = Dimensions.get('window').height;
+const Width = Dimensions.get('window').width;
 
 function Register({navigation}) {
   const [userId, setUserId] = useState('');
@@ -123,40 +128,97 @@ function Register({navigation}) {
   return (
     <LinearGradient colors={['#FFCDD2', '#FFAAB3']} style={styles.container}>
       <View style={styles.topArea}>
-        <View style={styles.titleArea}>
-          <Image
-            source={require('../../android/app/assets/imgs/Register_logo.png')}
-            style={{width: wp(30), resizeMode: 'contain'}}
-          />
-        </View>
-        <View style={styles.textArea}>
-          <Text style={styles.Text}>회원가입하여 나만의 레시피 공간</Text>
-          <Text style={styles.Text}>입맛춤을 사용해보세요 🍖</Text>
-        </View>
+        <Text
+          style={{
+            fontSize: 30,
+            color: 'white',
+            fontFamily: 'GangwonEduAllBold',
+          }}>
+          회원가입
+        </Text>
       </View>
       <View style={styles.formArea}>
-        <TextInput
-          placeholder="아이디(5자 이상, 영문, 숫자 포함)"
-          style={styles.formAreaTop}
-          onChangeText={userId => setUserId(userId)}
-          autoCapitalize="none"
-        />
-        <TextInput
-          placeholder="비밀번호(8자 이상)"
-          secureTextEntry={true}
-          style={styles.formAreaMiddle}
-          onChangeText={userPassword => setUserPassword(userPassword)}
-          autoCapitalize="none"
-        />
-        <TextInput
-          placeholder="비밀번호 확인"
-          secureTextEntry={true}
-          style={styles.formAreaBottom}
-          onChangeText={userPasswordCheck =>
-            setUserPasswordCheck(userPasswordCheck)
-          }
-          autoCapitalize="none"
-        />
+        <View>
+          <Text style={styles.titleText}>ID</Text>
+          <TextInput
+            placeholder="아이디(5자 이상, 영문, 숫자 포함)"
+            style={styles.formAreaTop}
+            onChangeText={userId => setUserId(userId)}
+            autoCapitalize="none"
+          />
+        </View>
+        <View>
+          <Text style={styles.titleText}>Password</Text>
+          <TextInput
+            placeholder="비밀번호(8자 이상)"
+            secureTextEntry={true}
+            style={styles.formAreaMiddle}
+            onChangeText={userPassword => setUserPassword(userPassword)}
+            autoCapitalize="none"
+          />
+        </View>
+        <View>
+          <Text style={styles.titleText}>Password Check</Text>
+          <TextInput
+            placeholder="비밀번호 확인"
+            secureTextEntry={true}
+            style={styles.formAreaBottom}
+            onChangeText={userPasswordCheck =>
+              setUserPasswordCheck(userPasswordCheck)
+            }
+            autoCapitalize="none"
+          />
+        </View>
+        <View>
+          <Text style={styles.titleText}>Nickname</Text>
+          <TextInput
+            placeholder="닉네임"
+            style={styles.formAreaTop}
+            onChangeText={nickname => setNickname(nickname)}
+            autoCapitalize="none"
+          />
+        </View>
+
+        <View>
+          <Text style={styles.titleText}>Gender</Text>
+          {/* <TextInput
+            placeholder="성별"
+            style={styles.formAreaMiddle}
+            // onChangeText={sex => setSex(sex)}
+            autoCapitalize="none"
+          /> */}
+          <View style={styles.formAreaMiddle}>
+            <Picker
+              selectedValue={sex}
+              onValueChange={(itemValue, itemIndex) => setSex(itemValue)}>
+              <Picker.Item
+                fontFamily="GangwonEduAllBold"
+                label="남"
+                value={false}
+              />
+              <Picker.Item
+                fontFamily="GangwonEduAllBold"
+                label="여"
+                value={true}
+              />
+            </Picker>
+          </View>
+        </View>
+
+        <View style={styles.btnArea}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => postData(userId, userPassword, nickname, sex)}>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: wp(4),
+                fontFamily: 'GangwonEduAllBold',
+              }}>
+              회원가입
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View
         style={{
@@ -170,37 +232,6 @@ function Register({navigation}) {
             비밀번호가 일치하지 않습니다 .
           </Text>
         ) : null}
-      </View>
-
-      <View style={styles.formArea2}>
-        <TextInput
-          placeholder="닉네임"
-          style={styles.formAreaTop}
-          onChangeText={nickname => setNickname(nickname)}
-          autoCapitalize="none"
-        />
-
-        <TextInput
-          placeholder="성별"
-          style={styles.formAreaMiddle}
-          // onChangeText={sex => setSex(sex)}
-          autoCapitalize="none"
-        />
-        {/* <TextInput
-          placeholder="연락처 ex)01012345678"
-          style={styles.formAreaBottom}
-          onChangeText={contact => setContact(contact)}
-          autoCapitalize="none"
-        /> */}
-      </View>
-      <View style={{flex: 0.2}}>
-        <View style={styles.btnArea}>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => postData(userId, userPassword, nickname, sex)}>
-            <Text style={{color: 'white', fontSize: wp(4)}}>회원가입</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     </LinearGradient>
   );
@@ -217,7 +248,7 @@ const styles = StyleSheet.create({
     paddingTop: wp(10),
   },
   topArea: {
-    flex: 0.3,
+    flex: 0.1,
     paddingTop: wp(5),
   },
   titleArea: {
@@ -232,37 +263,35 @@ const styles = StyleSheet.create({
     fontSize: wp(4),
   },
   formArea: {
-    flex: 0.24,
+    flex: 0.9,
     padding: 0,
   },
-  formArea2: {
-    flex: 0.24,
-  },
   formAreaTop: {
-    borderWidth: 2,
-    borderColor: 'black',
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomWidth: 1,
-    paddingLeft: 10,
+    borderRadius: 7,
+    width: '100%',
+    height: Height * 0.075,
     backgroundColor: 'white',
+    marginBottom: Height * 0.015,
+    paddingHorizontal: Width * 0.03,
+    fontFamily: 'GangwonEduAllBold',
   },
   formAreaMiddle: {
-    borderWidth: 2,
-    borderColor: 'black',
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    paddingLeft: 10,
+    borderRadius: 7,
+    width: '100%',
+    height: Height * 0.075,
     backgroundColor: 'white',
+    marginBottom: Height * 0.015,
+    paddingHorizontal: Width * 0.03,
+    fontFamily: 'GangwonEduAllBold',
   },
   formAreaBottom: {
-    borderWidth: 2,
-    borderColor: 'black',
-    borderBottomLeftRadius: 7,
-    borderBottomRightRadius: 7,
-    borderTopWidth: 1,
-    paddingLeft: 10,
+    borderRadius: 7,
+    width: '100%',
+    height: Height * 0.075,
     backgroundColor: 'white',
+    marginBottom: Height * 0.015,
+    paddingHorizontal: Width * 0.03,
+    fontFamily: 'GangwonEduAllBold',
   },
   btnArea: {
     height: hp(8),
@@ -281,6 +310,12 @@ const styles = StyleSheet.create({
   textValidation: {
     fontSize: wp('4%'),
     color: 'red',
+  },
+
+  titleText: {
+    color: 'white',
+    fontFamily: 'GangwonEduAllBold',
+    fontSize: 18,
   },
 });
 

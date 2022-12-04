@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -11,6 +18,9 @@ import axios from 'axios';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import {useTheme} from '@react-navigation/native';
+
+const Height = Dimensions.get('window').height;
+const Width = Dimensions.get('window').width;
 
 function Login({navigation}) {
   const [userId, setUserId] = useState('');
@@ -54,10 +64,22 @@ function Login({navigation}) {
   return (
     <LinearGradient colors={['#FFCDD2', '#FFAAB3']} style={styles.container}>
       <View style={styles.topArea}>
-        <Image
-          source={require('../../android/app/assets/imgs/Login_logo.png')}
-          style={{width: wp(25), resizeMode: 'contain'}}
-        />
+        <Text style={styles.introText}>안녕하세요 :)</Text>
+        <Text style={styles.introText}>
+          보유 식재료 기반 레시피 추천 플랫폼
+        </Text>
+        <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
+          <Text
+            style={{
+              marginTop: Height * 0.01,
+              fontSize: 30,
+              fontFamily: 'Cafe24-Ohsquareair',
+              color: 'white',
+            }}>
+            입맛춤
+          </Text>
+          <Text style={styles.introText}> 입니다.</Text>
+        </View>
       </View>
 
       <View style={styles.formArea}>
@@ -81,14 +103,18 @@ function Login({navigation}) {
             style={styles.btn}
             // onPress={() => postData(userId, userPassword)}
             onPress={() => navigation.navigate('Main')}>
-            <Text style={{color: 'white'}}>로그인</Text>
+            <Text style={{color: '#4f4d4d', fontFamily: 'GangwonEduAllBold'}}>
+              로그인
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.btnArea}>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => navigation.navigate('Register')}>
-            <Text style={{color: 'white'}}>회원가입</Text>
+            <Text style={{color: '#4f4d4d', fontFamily: 'GangwonEduAllBold'}}>
+              회원가입
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -134,34 +160,32 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   textFormTop: {
-    borderWidth: 2,
-    borderBottomWidth: 1,
     borderColor: 'black',
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
+    borderRadius: 7,
     width: '100%',
-    height: hp(9),
+    height: Height * 0.095,
     paddingLeft: 10,
     paddingRight: 10,
     backgroundColor: 'white',
+    marginBottom: Height * 0.01,
+    fontFamily: 'GangwonEduAllBold',
   },
   textFormBottom: {
-    borderWidth: 2,
-    borderTopWidth: 1,
     borderColor: 'black',
-    borderBottomLeftRadius: 7,
-    borderBottomRightRadius: 7,
+    borderRadius: 7,
     width: '100%',
-    height: hp(9),
+    height: Height * 0.095,
     paddingLeft: 10,
     paddingRight: 10,
     backgroundColor: 'white',
+    marginBottom: Height * 0.01,
+    fontFamily: 'GangwonEduAllBold',
   },
   btnArea: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: hp(8),
-    paddingBottom: hp(0.5),
+    height: Height * 0.095,
+    marginBottom: Height * 0.01,
   },
   btn: {
     flex: 1,
@@ -169,7 +193,13 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#ffe0e3',
+  },
+  introText: {
+    fontSize: 22,
+    fontFamily: 'GangwonEduAllBold',
+    marginTop: Height * 0.002,
+    color: 'white',
   },
 });
 

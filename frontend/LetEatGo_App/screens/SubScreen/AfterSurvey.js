@@ -32,7 +32,7 @@ function AfterSurvey({navigation}) {
         </Text>
         <Text
           style={{
-            fontFamily: 'Happiness-Sans-Regular',
+            fontFamily: 'Cafe24-Ohsquareair',
             marginTop: '5%',
             fontSize: 15,
             fontWeight: '500',
@@ -41,7 +41,7 @@ function AfterSurvey({navigation}) {
         </Text>
         <Text
           style={{
-            fontFamily: 'Happiness-Sans-Regular',
+            fontFamily: 'Cafe24-Ohsquareair',
             marginTop: '5%',
             fontSize: 14,
             fontWeight: '400',
@@ -50,7 +50,7 @@ function AfterSurvey({navigation}) {
         </Text>
         <Text
           style={{
-            fontFamily: 'Happiness-Sans-Regular',
+            fontFamily: 'Cafe24-Ohsquareair',
             fontSize: 14,
             fontWeight: '400',
             marginBottom: '6%',

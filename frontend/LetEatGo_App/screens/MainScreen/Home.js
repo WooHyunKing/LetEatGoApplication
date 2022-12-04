@@ -127,7 +127,7 @@ function Home({navigation, route}) {
           style={{
             fontSize: 18,
             fontWeight: '400',
-            fontFamily: 'Happiness-Sans-Regular',
+            fontFamily: 'GangwonEduAllBold',
             marginVertical: Height * 0.01,
             marginLeft: Width * 0.02,
           }}>
@@ -137,7 +137,7 @@ function Home({navigation, route}) {
           style={{
             fontSize: 17,
             fontWeight: '400',
-            fontFamily: 'Happiness-Sans-Regular',
+            fontFamily: 'GangwonEduAllBold',
             marginVertical: Height * 0.01,
             marginLeft: Width * 0.02,
           }}>
@@ -232,9 +232,16 @@ function Home({navigation, route}) {
             </View>
           ) : (
             <View style={{alignItems: 'center'}}>
-              <Text style={{fontSize: 25}}>나의 먹비티아이는 ?</Text>
+              <Text style={{fontSize: 25, fontFamily: 'Cafe24-Ohsquareair'}}>
+                나의 먹비티아이는 ?
+              </Text>
               <Text
-                style={{fontSize: 30, color: '#FFAAB3', fontWeight: 'bold'}}>
+                style={{
+                  fontSize: 30,
+                  color: '#FFAAB3',
+                  // fontWeight: 'bold',
+                  fontFamily: 'Cafe24-Ohsquareair',
+                }}>
                 "{first}
                 {second}
                 {third}
@@ -289,7 +296,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '900',
     color: 'white',
-    fontFamily: 'Happiness-Sans-Bold',
+    fontFamily: 'Cafe24-Ohsquareair',
   },
   box: {
     height: Height * 0.22,
@@ -309,15 +316,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   BeforeText: {
-    fontWeight: '900',
-    fontSize: 20,
-    fontFamily: 'Cafe24Ssurround',
+    fontSize: 24,
+
+    fontFamily: 'Cafe24-Ohsquareair',
     paddingBottom: '1%',
   },
   ButtonText: {
     fontWeight: '700',
     fontSize: 18,
-    fontFamily: 'Cafe24Ssurround',
+    fontFamily: 'Cafe24-Ohsquareair',
     color: 'white',
     backgroundColor: '#FFAAB3',
     paddingHorizontal: '3%',
