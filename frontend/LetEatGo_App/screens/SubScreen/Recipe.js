@@ -49,15 +49,22 @@ function Recipe({navigation, route}) {
 
   async function getData(userid, FoodId) {
     try {
+      function getUniques(array) {
+        return [...new Set(array)];
+      }
+
       const response = await axios.get(
         `http://10.0.2.2:80/recipe?foodid=${FoodId}&userid=${userId}`,
       );
       console.log('here');
-      console.log(response.data.recipe.general.foodname);
+      console.log(response.data.recipe.general.material);
       setDetail(response.data.recipe.detail);
       setOrders(response.data.recipe.general.order);
       setFoodName(response.data.recipe.general.foodname);
-      setMaterials1(Object.values(response.data.recipe.general.material));
+      setMaterials1(
+        getUniques(Object.values(response.data.recipe.general.material)),
+      );
+      console.log(materials1);
     } catch (e) {
       console.log(e);
     }

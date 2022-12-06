@@ -12,6 +12,9 @@ import Topbar from '../Bar/Topbar';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import axios from 'axios';
+import foodid from '../../recoils/foodid';
+import {useRecoilState} from 'recoil';
+import userkey from '../../recoils/userKey';
 
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
@@ -25,16 +28,86 @@ function RecipeTopArea({navigation, food_name}) {
   const [playing, setPlaying] = useState(true);
   const [videoName, setVideoName] = useState('');
   const [videoId, setVideoId] = useState('j7s9VRsrm9o');
+  const [USERID, setUserId] = useRecoilState(userkey);
+  const FoodId = useRecoilState(foodid);
 
   const params = {
     key: 'AIzaSyD-zqZLGtu83XrzhC33Dhic2teJaU6-Po0',
-    q: food_name,
+    q: food_name + '레시피',
     type: 'video',
     maxResults: 1,
     part: 'snippet',
   };
 
   axios.defaults.baseURL = 'https://www.googleapis.com/youtube/v3';
+
+  async function getLike() {
+    try {
+      const response = await axios.get(
+        `http://10.0.2.2:80/user/like?userid=${USERID}`,
+      );
+
+      response.data.result.map(key => {
+        console.log(key.foodid);
+        if (key.foodid === FoodId) {
+          setLike(true);
+          return;
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function getMade() {
+    try {
+      const response = await axios.get(
+        `http://10.0.2.2:80/user/made?userid=${USERID}`,
+      );
+
+      response.data.result.map(key => {
+        console.log(key.foodid);
+        if (key.foodid === FoodId) {
+          setMade(true);
+          return;
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    getMade();
+    getLike();
+  }, []);
+
+  async function putLike(Like) {
+    console.log(Like);
+    const userid = USERID;
+    try {
+      const response = await axios.put('http://10.0.2.2:80/user/like/update', {
+        favorite: Like,
+        foodid: FoodId,
+        userid: userid,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function putMade(Made) {
+    console.log(Made);
+    try {
+      const response = await axios.put('http://10.0.2.2:80/user/made/update', {
+        made: Made,
+        foodid: FoodId,
+        userid: USERID,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   const findLink = useCallback(async () => {
     await axios
@@ -112,17 +185,10 @@ function RecipeTopArea({navigation, food_name}) {
             <View style={{flex: 0.5, flexDirection: 'row'}}>
               <TouchableOpacity
                 style={styles.bottomButton}
-                onPress={
-                  like === false
-                    ? () => {
-                        setLike(true);
-                        setLikeCount(likeCount + 1);
-                      }
-                    : () => {
-                        setLike(false);
-                        setLikeCount(likeCount - 1);
-                      }
-                }>
+                onPress={() => {
+                  setLike(!like);
+                  putLike(!like);
+                }}>
                 <Image
                   source={
                     like === true
@@ -130,21 +196,13 @@ function RecipeTopArea({navigation, food_name}) {
                       : require('../../android/app/assets/icons/EmptyHeart.png')
                   }
                 />
-                <Text style={styles.bottomButtonText}>{likeCount}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.bottomButton}
-                onPress={
-                  made === false
-                    ? () => {
-                        setMade(true);
-                        setMadeCount(madeCount + 1);
-                      }
-                    : () => {
-                        setMade(false);
-                        setMadeCount(madeCount - 1);
-                      }
-                }>
+                onPress={() => {
+                  setMade(!made);
+                  putMade(!made);
+                }}>
                 <Image
                   source={
                     made === true
@@ -152,7 +210,6 @@ function RecipeTopArea({navigation, food_name}) {
                       : require('../../android/app/assets/icons/Check.png')
                   }
                 />
-                <Text style={styles.bottomButtonText}>{madeCount}</Text>
               </TouchableOpacity>
             </View>
             <View
@@ -177,10 +234,6 @@ function RecipeTopArea({navigation, food_name}) {
               </TouchableOpacity>
             </View>
           </View>
-          {/* <Text>
-            조회수{' '}
-            {view.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')}회
-          </Text> */}
         </View>
       </View>
     </View>

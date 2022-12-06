@@ -95,10 +95,11 @@ function IngreCategory(Props) {
 
             // setSelectedList(newList);
             newMatrialList = [];
-            matrialList = List.map(key =>
+            matrialList = List.map((key, index) =>
               newMatrialList.push({
                 name: key.foodname,
                 category: Props.categoryId,
+                key: index,
               }),
             );
             // newMatrialList = {name: matrialList, category: 0};
