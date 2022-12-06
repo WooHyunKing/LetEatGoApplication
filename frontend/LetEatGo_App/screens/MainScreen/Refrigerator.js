@@ -89,7 +89,7 @@ function Refrigerator({navigation}) {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <Topbar />
+      <Topbar navigation={navigation} />
       <Text
         style={{
           paddingLeft: 20,

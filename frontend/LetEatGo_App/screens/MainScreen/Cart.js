@@ -101,7 +101,7 @@ function Cart({navigation}) {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <Topbar />
+      <Topbar navigation={navigation} />
       <Text
         style={{
           paddingLeft: Width * 0.05,
@@ -229,12 +229,13 @@ function Cart({navigation}) {
           }}></Image>
       </View>
       <ScrollView>
-        {Category.map(key => (
+        {Category.map((key, index) => (
           <CartCategory
             category={key.name}
             array={key.array}
             selectedList={selectedList}
             setSelectedList={setSelectedList}
+            key={index}
           />
         ))}
       </ScrollView>

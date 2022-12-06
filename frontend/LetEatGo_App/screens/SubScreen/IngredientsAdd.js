@@ -76,13 +76,14 @@ function IngreCategory(Props) {
             justifyContent: 'center',
             flexWrap: 'wrap',
           }}>
-          {array.map(key => (
+          {array.map((key, index) => (
             <ItemList
               Key={key}
               Array={array}
               Submit={submit}
               setSubmit={setSubmit}
               List={List}
+              key={index}
             />
           ))}
         </View>
