@@ -30,13 +30,27 @@ function Cart({navigation}) {
   const [Delete, setDelete] = useState(false);
   const [USERID, setUserId] = useRecoilState(userkey);
   const [POST, setPOST] = useRecoilState(postRefrig);
+  const [cartpost, setCartpost] = useState(false);
+
+  async function postcart(id, selectedList) {
+    try {
+      const response = await axios.post('http://10.0.2.2:80/user/cart', {
+        userid: USERID,
+        material: selectedList,
+      });
+      console.log(selectedList);
+      setCartpost(true);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   async function deleteList(userid, index) {
     try {
       const response = await axios.delete(
         `http://10.0.2.2:80/user/cart?index=${index}userid=${userid}}`,
       );
-
+      console.log('delete');
       console.log(response.data.result);
       setSelectedList(response.data.result);
       setDelete(true);
@@ -68,14 +82,23 @@ function Cart({navigation}) {
       console.error(error);
     }
   }
+
   useEffect(() => {
     if (Delete) {
       getList();
     }
   }, [Delete]);
+
+  useEffect(() => {
+    if (cartpost) {
+      getList();
+    }
+  }, [cartpost]);
+
   useEffect(() => {
     getList();
   }, []);
+
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Topbar />
@@ -121,8 +144,9 @@ function Cart({navigation}) {
           alignItems: 'center',
         }}>
         {selectedList ? (
-          selectedList.map(key => (
+          selectedList.map((key, index) => (
             <View
+              key={index}
               style={{
                 marginBottom: 10,
               }}>
@@ -186,7 +210,13 @@ function Cart({navigation}) {
         </Text>
         <TextInput
           autoCorrect={false}
-          // onSubmitEditing={addHistory}
+          onSubmitEditing={() => {
+            const list = [];
+            list.push(text);
+            postcart(USERID, list);
+            setCartpost(false);
+            setText('');
+          }}
           onChangeText={onChangeText}
           style={styles.refrigeSearch}
           value={text}></TextInput>
@@ -205,7 +235,6 @@ function Cart({navigation}) {
             array={key.array}
             selectedList={selectedList}
             setSelectedList={setSelectedList}
-            key={key}
           />
         ))}
       </ScrollView>

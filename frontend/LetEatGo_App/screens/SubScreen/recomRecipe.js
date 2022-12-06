@@ -29,22 +29,17 @@ function RecomRecipe(Props) {
     <View style={{...styles.HomeBox, height: Height * 0.33}}>
       <View style={{alignItems: 'center'}}>
         <Text style={styles.InBoxtext}>{Props.text}</Text>
-        <Slick
-          loadMinimalLoader={<ActivityIndicator />}
-          autoplay
-          dotStyle={{
-            backgroundColor: '#F0F0F0',
-          }}
-          activeDotStyle={{
-            backgroundColor: '#FFAAB3',
-          }}
-          paginationStyle={{bottom: 3}}>
+        <ScrollView
+          pagingEnabled
+          horizontal
+          showsHorizontalScrollIndicator={false}>
           {Props.data === undefined ? (
             <ActivityIndicator />
           ) : (
             Props.data.map((key, index) => (
               <TouchableOpacity
                 activeOpacity={0.7}
+                key={index}
                 onPress={() => {
                   setFoodId(Props.data[index].foodid);
                   setRecipename(Props.data[index].name);
@@ -53,13 +48,13 @@ function RecomRecipe(Props) {
                 <View style={{alignItems: 'center'}}>
                   <Image
                     Key={index}
-                    style={styles.image}
+                    style={styles.image2}
                     source={{uri: Props.data[index].image}}
                   />
 
                   <Text
                     style={{
-                      fontSize: 16,
+                      fontSize: 15,
                       fontFamily: 'Happiness-Sans-Regular',
                     }}>
                     {Props.data[index].name}
@@ -68,7 +63,12 @@ function RecomRecipe(Props) {
               </TouchableOpacity>
             ))
           )}
-        </Slick>
+        </ScrollView>
+        <View style={{...styles.TextBox, marginBottom: 8}}>
+          <TouchableOpacity onPress={() => Props.navigation.navigate('Survey')}>
+            <Text style={{...styles.ButtonText}}>추가검사 해보기</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     justifyContent: 'center',
     alignItems: 'center',
+    // marginLeft: 10,
   },
   InBoxtext: {
     fontFamily: 'Happiness-Sans-Bold',
@@ -103,6 +104,26 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     marginBottom: Height * 0.015,
     borderRadius: 10,
+  },
+  image2: {
+    height: Height * 0.13,
+    width: Height * 0.13,
+    marginHorizontal: Width * 0.015,
+    resizeMode: 'cover',
+    marginBottom: Height * 0.015,
+    borderRadius: 10,
+  },
+  TextBox: {
+    backgroundColor: '#FFAAB3',
+    paddingHorizontal: '3%',
+    paddingVertical: '1.5%',
+    borderRadius: 7,
+  },
+  ButtonText: {
+    fontWeight: '700',
+    fontSize: 18,
+    fontFamily: 'Happiness-Sans-Regular',
+    color: 'white',
   },
 });
 export default RecomRecipe;

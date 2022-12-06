@@ -18,6 +18,8 @@ import IngreCategory from '../SubScreen/IngredientsAdd';
 import FindIcon from '../SubScreen/findIcon';
 import userkey from '../../recoils/userKey';
 import Topbar from '../Bar/Topbar';
+import userid from '../../recoils/userId';
+import {getActionFromState} from '@react-navigation/native';
 
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
@@ -28,11 +30,12 @@ function Refrigerator({navigation}) {
   const [selectedList, setSelectedList] = useState([]);
   const [USERID, setUserId] = useRecoilState(userkey);
   const [Delete, setDelete] = useState(false);
+  const [Post, setPost] = useState(false);
 
   async function deleteIngred(userid, index) {
     try {
       const response = await axios.delete(
-        `http://10.0.2.2:80/user/ingredient?index=${index}userid=97`,
+        `http://10.0.2.2:80/user/ingredient?index=${index}userid=${userid}`,
       );
 
       // console.log(response.data.result);
@@ -43,10 +46,10 @@ function Refrigerator({navigation}) {
       console.error(error);
     }
   }
-  async function getIngred() {
+  async function getIngred(userid) {
     try {
       const response = await axios.get(
-        `http://10.0.2.2:80/user/ingredient?userid=97`,
+        `http://10.0.2.2:80/user/ingredient?userid=${userid}`,
       );
       // console.log(response.data.result);
       setSelectedList(response.data.result);
@@ -55,14 +58,35 @@ function Refrigerator({navigation}) {
       console.error(error);
     }
   }
+
+  async function postIngre(id, selectedList) {
+    try {
+      const response = await axios.post('http://10.0.2.2:80/user/ingredient', {
+        userid: id,
+        material: selectedList,
+      });
+      setPost(true);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
     if (Delete) {
-      getIngred();
+      getIngred(USERID);
     }
   }, [Delete]);
+
   useEffect(() => {
-    getIngred();
+    if (Post) {
+      getIngred(USERID);
+    }
+  }, [Post]);
+
+  useEffect(() => {
+    getIngred(USERID);
   }, []);
+
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Topbar />
@@ -133,7 +157,13 @@ function Refrigerator({navigation}) {
         </Text>
         <TextInput
           autoCorrect={false}
-          // onSubmitEditing={addHistory}
+          onSubmitEditing={() => {
+            const postList = [];
+            postList.push({name: text, category: -1});
+            postIngre(USERID, postList);
+            setPost(false);
+            setText('');
+          }}
           onChangeText={onChangeText}
           style={styles.refrigeSearch}
           value={text}></TextInput>

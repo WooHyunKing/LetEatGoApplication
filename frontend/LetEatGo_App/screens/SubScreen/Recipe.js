@@ -16,11 +16,18 @@ import WebView from 'react-native-webview';
 import IngredientComponent from './IngredientComponent';
 import Topbar from '../Bar/Topbar';
 import RecipeTopArea from './RecipeTopArea';
+import foodid from '../../recoils/foodid';
+import recipename from '../../recoils/recipename';
+import userkey from '../../recoils/userKey';
+import FindIcon from './findIcon';
+import {useRecoilState} from 'recoil';
 
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
 function Recipe({navigation, route}) {
+  const FoodId = useRecoilState(foodid);
+  const [userId, setUserId] = useRecoilState(userkey);
   const [error, setError] = useState('');
   const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
@@ -31,15 +38,19 @@ function Recipe({navigation, route}) {
   const [detail, setDetail] = useState('');
   const [showDetail, setShowDetail] = useState(false);
   const [playing, setPlaying] = useState(true);
-  const [foodName, setFoodName] = useState('닭도리탕');
+  const [foodName, setFoodName] = useRecoilState(recipename);
   const [videoName, setVideoName] = useState('');
   const [videoId, setVideoId] = useState('j7s9VRsrm9o');
   const [materials1, setMaterials1] = useState([]);
 
-  async function getData(food_id) {
+  useEffect(() => {
+    getData(userId, FoodId);
+  }, []);
+
+  async function getData(userid, FoodId) {
     try {
       const response = await axios.get(
-        `http://10.0.2.2:80/recipe?foodid=${food_id}&userid=97`,
+        `http://10.0.2.2:80/recipe?foodid=${FoodId}&userid=${userId}`,
       );
       console.log('here');
       console.log(response.data.recipe.general.foodname);
@@ -52,13 +63,29 @@ function Recipe({navigation, route}) {
     }
   }
 
+  function addCart(item) {
+    const ingredient = [];
+
+    ingredient.push(item);
+    console.log('ingredient add');
+    console.log(ingredient);
+    postcart(userId, ingredient);
+  }
+  async function postcart(id, selectedList) {
+    try {
+      const response = await axios.post('http://10.0.2.2:80/user/cart', {
+        userid: id,
+        material: selectedList,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   const materialList = materials1.map(material => (
-    <IngredientComponent food_name={material} />
+    <IngredientComponent food_name={material} key={material} />
   ));
 
-  useEffect(() => {
-    getData(route.params.food_id);
-  }, []);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Topbar navigation={navigation} />

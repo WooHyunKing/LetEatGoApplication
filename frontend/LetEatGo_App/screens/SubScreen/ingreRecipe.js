@@ -35,9 +35,9 @@ function IngreRecipe(Props) {
           dotStyle={{
             backgroundColor: '#F0F0F0',
           }}
-          // activeDotStyle={{
-          //   backgroundColor: '#FFAAB3',
-          // }}
+          activeDotStyle={{
+            backgroundColor: '#FFAAB3',
+          }}
           paginationStyle={{bottom: 3}}>
           {Props.data === undefined ? (
             <ActivityIndicator />
@@ -45,6 +45,7 @@ function IngreRecipe(Props) {
             Props.data.map((key, index) => (
               <TouchableOpacity
                 activeOpacity={0.7}
+                key={index}
                 onPress={() => {
                   setFoodId(Props.data[index].foodid);
                   setRecipename(Props.data[index].Name);

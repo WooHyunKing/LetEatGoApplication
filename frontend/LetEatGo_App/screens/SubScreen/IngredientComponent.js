@@ -1,6 +1,20 @@
 import React, {useState} from 'react';
-import {View, Text, Button, Image, StyleSheet, Dimensions} from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  Image,
+  StyleSheet,
+  Dimensions,
+  Alert,
+} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useRecoilState} from 'recoil';
+import userkey from '../../recoils/userKey';
+import recipename from '../../recoils/recipename';
+import foodid from '../../recoils/foodid';
+import axios from 'axios';
+
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
@@ -680,13 +694,48 @@ const icons = [
 ];
 
 function IngredientComponent({food_name}) {
+  const [userId, setUserId] = useRecoilState(userkey);
+  const FoodId = useRecoilState(foodid);
+  const [foodName, setFoodName] = useRecoilState(recipename);
+
+  function addCart(item) {
+    const ingredient = [];
+
+    ingredient.push(item);
+    console.log('ingredient add');
+    console.log(ingredient);
+    postcart(userId, ingredient);
+  }
+
+  async function postcart(id, selectedList) {
+    try {
+      const response = await axios.post('http://10.0.2.2:80/user/cart', {
+        userid: id,
+        material: selectedList,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
   if (
     food_name !== '' &&
     icons.find(element => food_name.includes(element.foodname)) === undefined
   ) {
     return (
       <View>
-        <TouchableOpacity style={styles.iconButton}>
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={() => {
+            Alert.alert(`장바구니에 ${food_name}을 추가하시겠습니까?`, '', [
+              {
+                text: '예',
+                onPress: () => {
+                  addCart(food_name);
+                },
+              },
+              {text: '아니오'},
+            ]);
+          }}>
           <View style={{flexDirection: 'row'}}>
             <Image
               style={{...styles.icon}}
@@ -705,7 +754,19 @@ function IngredientComponent({food_name}) {
   const iconlist = icons.map(icon =>
     food_name.includes(icon.foodname) ? (
       <View key={icon.foodname}>
-        <TouchableOpacity style={styles.iconButton}>
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={() => {
+            Alert.alert(`장바구니에 ${food_name}을 추가하시겠습니까?`, '', [
+              {
+                text: '예',
+                onPress: () => {
+                  addCart(food_name);
+                },
+              },
+              {text: '아니오'},
+            ]);
+          }}>
           <View style={{flexDirection: 'row'}}>
             <Image style={styles.icon} source={icon.src} />
             <Image

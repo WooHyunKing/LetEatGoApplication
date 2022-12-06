@@ -41,7 +41,7 @@ function Login({navigation}) {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://10.0.2.2:80/signin', {
+      const response = await axios.post('http://10.0.2.2:80/user/signin', {
         id,
         password,
       });
@@ -101,8 +101,9 @@ function Login({navigation}) {
         <View style={styles.btnArea}>
           <TouchableOpacity
             style={styles.btn}
-            // onPress={() => postData(userId, userPassword)}
-            onPress={() => navigation.navigate('Main')}>
+            onPress={() => postData(userId, userPassword)}
+            // onPress={() => navigation.navigate('Main')}
+          >
             <Text style={{color: '#4f4d4d', fontFamily: 'GangwonEduAllBold'}}>
               로그인
             </Text>

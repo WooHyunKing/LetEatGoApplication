@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import {
   eCount,
@@ -38,17 +39,20 @@ import IngreRecipe from '../SubScreen/ingreRecipe';
 import userkey from '../../recoils/userKey';
 import Survey2 from '../../recoils/survey';
 import usernickname from '../../recoils/userNickname';
+import userid from '../../recoils/userId';
 
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
 function Home({navigation, route}) {
-  const [survey, setSurvey] = useState(false);
-  const [survey2, setSurvey2] = useRecoilState(Survey2);
+  const [userId, setUserId] = useRecoilState(userid);
   const [userResult, setuserResult] = useState();
   const [ingreResult, setIngreResult] = useState();
   const [KEY, setKey] = useRecoilState(userkey);
   const [userNickname, setUserNickName] = useRecoilState(usernickname);
+
+  const [survey, setSurvey] = useState(false);
+  const [survey2, setSurvey2] = useRecoilState(Survey2);
 
   const [foodId, setFoodId] = useState(0);
   const [finishMbti, setFinishMbti] = useState(false);
@@ -76,15 +80,17 @@ function Home({navigation, route}) {
       const response = await axios.get(
         'http://10.0.2.2:80/',
         {
-          params: {userid: 97},
+          params: {userid: KEY},
         },
         {withCredentials: true},
       );
       if (response.data) {
+        console.log(response.data);
         setuserResult(response.data.data[0]);
         setIngreResult(response.data.data[1]);
       }
     } catch (e) {
+      console.log('hi');
       console.error(e);
       console.log(JSON.stringify(e));
       return e;
@@ -92,12 +98,9 @@ function Home({navigation, route}) {
   };
 
   useEffect(() => {
-    setSurvey2(false);
     getUserR();
-  }, []);
-  useEffect(() => {
-    getUserR();
-  }, [survey2]);
+  }, [isFocused]);
+
   useEffect(() => {
     AsyncStorage.getItem('one').then(value => {
       value !== null ? setFinishMbti(true) : null;
@@ -122,14 +125,14 @@ function Home({navigation, route}) {
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Topbar navigation={navigation} />
-      <View>
+      <View style={{marginLeft: Width * 0.035}}>
         <Text
           style={{
             fontSize: 18,
             fontWeight: '400',
             fontFamily: 'GangwonEduAllBold',
             marginVertical: Height * 0.01,
-            marginLeft: Width * 0.02,
+            // marginLeft: Width * 0.02,
           }}>
           안녕하세요? {userNickname}님 🥘
         </Text>
@@ -139,87 +142,48 @@ function Home({navigation, route}) {
             fontWeight: '400',
             fontFamily: 'GangwonEduAllBold',
             marginVertical: Height * 0.01,
-            marginLeft: Width * 0.02,
+            // marginLeft: Width * 0.02,
           }}>
           {userNickname}님에게 꼭 맞는 레시피를 추천해드릴게요 :)
         </Text>
       </View>
 
-      <ScrollView>
-        {survey ? (
+      <ScrollView contentContainerStyle={{alignItems: 'center'}}>
+        {userResult === undefined ? (
+          <ActivityIndicator
+            size="large"
+            style={{marginTop: '50%'}}
+            color="pink"
+          />
+        ) : userResult.length === 0 ? (
+          <BeforeRecommend
+            location={'Survey'}
+            title={'내 취향에 맞는 레시피'}
+            button={'찾아보기'}
+            navigation={navigation}
+          />
+        ) : (
           <RecomRecipe
             text={'나의 입맛에 쏙 맞게 추천된 레시피에요!'}
             data={userResult}
+            navigation={navigation}
+          />
+        )}
+
+        {ingreResult === undefined ? null : ingreResult.length === 0 ? (
+          <BeforeRecommend
+            location={'Refrigerator'}
+            title={'나의 냉장고로 만들 수 있는 음식은?'}
+            button={'찾아보기'}
+            navigation={navigation}
           />
         ) : (
-          <View style={styles.box}>
-            <Text style={styles.BeforeText}>내 취향에 맞는 레시피</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Survey')}>
-              <Text style={styles.ButtonText}>찾아보기</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        {survey2 ? (
           <IngreRecipe
             text={'내가 지금 만들 수 있는 레시피에요!'}
             data={ingreResult}
+            navigation={navigation}
           />
-        ) : (
-          <View style={styles.box}>
-            <Text style={styles.BeforeText}>
-              나의 냉장고로 만들 수 있는 음식은?
-            </Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Refrigerator')}>
-              <Text style={styles.ButtonText}>찾아보기</Text>
-            </TouchableOpacity>
-          </View>
         )}
-
-        {/* <View style={styles.box}>
-          <Text style={styles.top5_text}>Top5 레시피</Text>
-          <ScrollView
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Recipe', {food_id: 777})}>
-              <Image
-                style={styles.image}
-                source={require('../../android/app/assets/imgs/food1.jpeg')}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Recipe', {food_id: 888})}>
-              <Image
-                style={styles.image}
-                source={require('../../android/app/assets/imgs/food2.jpeg')}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => navigation.navigate('Recipe')}>
-              <Image
-                style={styles.image}
-                source={require('../../android/app/assets/imgs/food3.jpeg')}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => navigation.navigate('Recipe')}>
-              <Image
-                style={styles.image}
-                source={require('../../android/app/assets/imgs/food4.jpeg')}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => navigation.navigate('Recipe')}>
-              <Image
-                style={styles.image}
-                source={require('../../android/app/assets/imgs/food5.jpeg')}
-              />
-            </TouchableOpacity>
-          </ScrollView>
-        </View> */}
 
         <View style={{...styles.box, marginBottom: '5%'}}>
           {!finishMbti ? (
@@ -299,19 +263,32 @@ const styles = StyleSheet.create({
     fontFamily: 'Cafe24-Ohsquareair',
   },
   box: {
-    height: Height * 0.22,
+    // height: Height * 0.22,
+    // flex: 1,
+    // // paddingHorizontal: Width * 0.013,
+    // marginTop: Height * 0.012,
+    // marginBottom: Height * 0.012,
+    // backgroundColor: 'white',
+    // // marginHorizontal: Width * 0.018,
+    // borderWidth: 1.8,
+    // borderBottomRightRadius: 23,
+    // borderColor: '#FFCDD2',
+    // borderStyle: 'solid',
+
+    // elevation: 2,
+    // justifyContent: 'center',
+    // alignItems: 'center',
     flex: 1,
-    paddingHorizontal: Width * 0.013,
+    height: Height * 0.22,
+    width: Width * 0.95,
     marginTop: Height * 0.012,
     marginBottom: Height * 0.012,
     backgroundColor: 'white',
-    marginHorizontal: Width * 0.018,
     borderWidth: 1.8,
     borderBottomRightRadius: 23,
     borderColor: '#FFCDD2',
     borderStyle: 'solid',
-
-    elevation: 2,
+    elevation: 3,
     justifyContent: 'center',
     alignItems: 'center',
   },

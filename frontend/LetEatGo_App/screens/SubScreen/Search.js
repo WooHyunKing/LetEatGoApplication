@@ -21,6 +21,7 @@ import foodid from '../../recoils/foodid';
 import recipename from '../../recoils/recipename';
 import searchresult from '../../recoils/searchWord';
 import searchtext from '../../recoils/keyword';
+import userid from '../../recoils/userId';
 
 const STORAGE_KEY = '@userId'; // 나중에 userId 얻어와서 저장
 
@@ -250,7 +251,7 @@ function Search({navigation}) {
                 onPress={() => {
                   sendWord(history[key].text);
                   setText(history[key].text);
-                  // navigation.navigate('SearchResult');
+                  navigation.navigate('SearchResult');
                 }}>
                 <SearchHistory
                   Key={key}

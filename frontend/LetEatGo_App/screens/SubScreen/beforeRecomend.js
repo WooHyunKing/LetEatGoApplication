@@ -17,9 +17,7 @@ function BeforeRecommend(Props) {
       </View>
       <TouchableOpacity
         activeOpacity={0.65}
-        onPress={() => (
-          Props.setSurvey(true), Props.navigation.navigate(location)
-        )}>
+        onPress={() => Props.navigation.navigate(location)}>
         <View style={styles.TextBox}>
           <Text style={styles.ButtonText}>{Props.button}</Text>
         </View>
@@ -30,22 +28,25 @@ function BeforeRecommend(Props) {
 
 const styles = StyleSheet.create({
   BeforeText: {
-    fontWeight: '500',
-    fontSize: 20,
-    fontFamily: 'Happiness-Sans-Regular',
+    fontSize: 24,
+
+    fontFamily: 'Cafe24-Ohsquareair',
     paddingBottom: '1%',
   },
   HomeBox: {
+    height: Height * 0.22,
     flex: 1,
-    width: Width * 0.95,
+    paddingHorizontal: Width * 0.013,
     marginTop: Height * 0.012,
     marginBottom: Height * 0.012,
     backgroundColor: 'white',
+    marginHorizontal: Width * 0.018,
     borderWidth: 1.8,
     borderBottomRightRadius: 23,
     borderColor: '#FFCDD2',
     borderStyle: 'solid',
-    elevation: 3,
+
+    elevation: 2,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -58,8 +59,12 @@ const styles = StyleSheet.create({
   ButtonText: {
     fontWeight: '700',
     fontSize: 18,
-    fontFamily: 'Happiness-Sans-Regular',
+    fontFamily: 'Cafe24-Ohsquareair',
     color: 'white',
+    backgroundColor: '#FFAAB3',
+    paddingHorizontal: '3%',
+    // paddingVertical: '1.5%',
+    borderRadius: 7,
   },
 });
 export default BeforeRecommend;

@@ -33,15 +33,10 @@ function Register({navigation}) {
   const [userPassword, setUserPassword] = useState('');
   const [userPasswordCheck, setUserPasswordCheck] = useState('');
   const [nickname, setNickname] = useState('');
-  const [sex, setSex] = useState(false);
+  const [sex, setSex] = useState(0);
   const [contact, setContact] = useState(0);
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
-
-  const placeholder = {
-    label: '성별을 선택해주세요',
-    value: null,
-  };
 
   async function postData(id, password, nickname, sex) {
     setErrortext('');
@@ -57,18 +52,11 @@ function Register({navigation}) {
       alert('닉네임를 입력해주세요 .');
       return;
     }
-    // if (!sex) {
-    //   alert('성별을 입력해주세요 .');
-    //   return;
-    // }
-    // if (!contact) {
-    //   alert('연락처를 입력해주세요 .');
-    //   return;
-    // }
+
     setLoading(true);
 
     try {
-      const response = await axios.post('http://10.0.2.2:80/signup', {
+      const response = await axios.post('http://10.0.2.2:80/user/signup', {
         id,
         password,
         nickname,
@@ -115,14 +103,6 @@ function Register({navigation}) {
       alert('닉네임을 입력해주세요 .');
       return;
     }
-    // if (!sex) {
-    //   alert('성별을 입력해주세요 .');
-    //   return;
-    // }
-    // if (!contact) {
-    //   alert('연락처를 입력해주세요 .');
-    //   return;
-    // }
   }
 
   return (
@@ -158,7 +138,26 @@ function Register({navigation}) {
           />
         </View>
         <View>
-          <Text style={styles.titleText}>Password Check</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
+            }}>
+            <Text style={styles.titleText}>Password Check</Text>
+            <View
+              style={{
+                flex: 1,
+                justifyContent: 'flex-end',
+                marginBottom: Height * 0.005,
+              }}>
+              {userPassword !== userPasswordCheck ? (
+                <Text style={styles.textValidation}>
+                  비밀번호가 일치하지 않습니다 .
+                </Text>
+              ) : null}
+            </View>
+          </View>
+
           <TextInput
             placeholder="비밀번호 확인"
             secureTextEntry={true}
@@ -194,12 +193,12 @@ function Register({navigation}) {
               <Picker.Item
                 fontFamily="GangwonEduAllBold"
                 label="남"
-                value={false}
+                value={0}
               />
               <Picker.Item
                 fontFamily="GangwonEduAllBold"
                 label="여"
-                value={true}
+                value={1}
               />
             </Picker>
           </View>
@@ -219,19 +218,6 @@ function Register({navigation}) {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
-      <View
-        style={{
-          flex: 0.03,
-          justifyContent: 'flex-start',
-          // backgroundColor: "blue",
-          marginBottom: wp('2%'),
-        }}>
-        {userPassword !== userPasswordCheck ? (
-          <Text style={styles.textValidation}>
-            비밀번호가 일치하지 않습니다 .
-          </Text>
-        ) : null}
       </View>
     </LinearGradient>
   );
@@ -308,8 +294,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   textValidation: {
-    fontSize: wp('4%'),
+    fontSize: wp('3%'),
     color: 'red',
+    fontFamily: 'GangwonEduAllBold',
+    marginLeft: Width * 0.02,
+    // backgroundColor: 'blue',
   },
 
   titleText: {
