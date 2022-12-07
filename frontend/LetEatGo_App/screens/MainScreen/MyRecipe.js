@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import Topbar from '../Bar/Topbar';
 import axios from 'axios';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 import userkey from '../../recoils/userKey';
 import userid from '../../recoils/userId';
@@ -145,8 +146,27 @@ function MyRecipe({navigation}) {
   const [likelist, setLikelist] = useState([]);
   const [checklist, setChecklist] = useState([]);
   const [KEY, setKEY] = useRecoilState(userkey);
+  const [imgUrl, setImgUrl] = useState('');
 
   const isFocused = useIsFocused();
+
+  const onSelectImage = () => {
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        maxWidth: 512,
+        maxHeight: 512,
+        includeBase64: Platform.OS === 'android',
+      },
+      res => {
+        console.log(res.assets[0].uri);
+        // if (res.didCancel) return;
+        setImgUrl(res.assets[0].uri);
+        console.log('img come');
+        console.log(imgUrl);
+      },
+    );
+  };
 
   function doubleCheck(foodid, made) {
     check = false;
@@ -195,10 +215,23 @@ function MyRecipe({navigation}) {
       <View style={{flex: 1, paddingHorizontal: Width * 0.03}}>
         <View style={{flex: 0.3}}>
           <View style={{...styles.box, flexDirection: 'row'}}>
-            <Image
-              source={require('../../android/app/assets/icons/User_default.png')}
-              style={{marginLeft: Width * 0.03}}
-            />
+            <TouchableOpacity onPress={onSelectImage}>
+              <Image
+                // source={require('../../android/app/assets/icons/User_default.png')}
+                source={
+                  imgUrl == ''
+                    ? require('../../android/app/assets/icons/User_default.png')
+                    : {uri: imgUrl}
+                }
+                style={{
+                  marginLeft: Width * 0.03,
+                  width: Width * 0.3,
+                  height: Width * 0.3,
+                  borderRadius: 100,
+                }}
+              />
+            </TouchableOpacity>
+
             <View style={{marginLeft: Width * 0.02}}>
               <View
                 style={{

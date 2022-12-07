@@ -102,8 +102,9 @@ function Refrigerator({navigation}) {
 
       <View style={{flexDirection: 'row', flexWrap: 'wrap', marginLeft: 17}}>
         {selectedList ? (
-          selectedList.map(key => (
+          selectedList.map((key, index) => (
             <View
+              key={index}
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
