@@ -22,6 +22,7 @@ import recipename from '../../recoils/recipename';
 import usernickname from '../../recoils/userNickname';
 import click from '../../recoils/mypagePut';
 import AsyncStorage from '@react-native-community/async-storage';
+import userImage from '../../recoils/userImage';
 
 import {useIsFocused} from '@react-navigation/native';
 import {useRecoilState} from 'recoil';
@@ -160,10 +161,14 @@ function MyRecipe({navigation}) {
       },
       res => {
         console.log(res.assets[0].uri);
-        // if (res.didCancel) return;
-        setImgUrl(res.assets[0].uri);
-        console.log('img come');
-        console.log(imgUrl);
+        if (res.didCancel) return;
+        // setImgUrl(res.assets[0].uri);
+        AsyncStorage.setItem('userImg', res.assets[0].uri);
+        AsyncStorage.getItem('userImg').then(value =>
+          value === null ? setImgUrl('') : setImgUrl(value),
+        );
+        // console.log('img come');
+        // console.log(imgUrl);
       },
     );
   };
@@ -204,10 +209,23 @@ function MyRecipe({navigation}) {
     }
   }
 
+  // const getUrl = useCallback(() => {
+  //   AsyncStorage.getItem('userImg').then(value =>
+  //     value === null ? setImgUrl('') : setImgUrl(value),
+  //   );
+  // }, [imgUrl]);
+
   useEffect(() => {
     getLike(KEY);
     getCheck(KEY);
+    AsyncStorage.getItem('userImg').then(value =>
+      value === null ? setImgUrl('') : setImgUrl(value),
+    );
   }, [isFocused]);
+
+  // useEffect(() => {
+  //   getUrl();
+  // }, [getUrl]);
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
@@ -215,22 +233,44 @@ function MyRecipe({navigation}) {
       <View style={{flex: 1, paddingHorizontal: Width * 0.03}}>
         <View style={{flex: 0.3}}>
           <View style={{...styles.box, flexDirection: 'row'}}>
-            <TouchableOpacity onPress={onSelectImage}>
-              <Image
-                // source={require('../../android/app/assets/icons/User_default.png')}
-                source={
-                  imgUrl == ''
-                    ? require('../../android/app/assets/icons/User_default.png')
-                    : {uri: imgUrl}
-                }
+            <View style={{alignItems: 'center'}}>
+              <TouchableOpacity
+                style={{marginBottom: Height * 0.01}}
+                onPress={onSelectImage}>
+                <Image
+                  // source={require('../../android/app/assets/icons/User_default.png')}
+                  source={
+                    imgUrl == ''
+                      ? require('../../android/app/assets/icons/User_default.png')
+                      : {uri: imgUrl}
+                  }
+                  style={{
+                    marginLeft: Width * 0.03,
+                    width: Width * 0.3,
+                    height: Width * 0.3,
+                    borderRadius: 100,
+                  }}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
                 style={{
                   marginLeft: Width * 0.03,
-                  width: Width * 0.3,
-                  height: Width * 0.3,
-                  borderRadius: 100,
+                  // borderWidth: 1,
+                  borderRadius: 2,
+                  backgroundColor: '#F0F0F0',
+                  width: Width * 0.15,
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
-              />
-            </TouchableOpacity>
+                onPress={() => {
+                  AsyncStorage.removeItem('userImg');
+                  AsyncStorage.getItem('userImg').then(value =>
+                    value === null ? setImgUrl('') : setImgUrl(value),
+                  );
+                }}>
+                <Text style={{fontSize: 12, color: '#474646'}}>초기화</Text>
+              </TouchableOpacity>
+            </View>
 
             <View style={{marginLeft: Width * 0.02}}>
               <View
