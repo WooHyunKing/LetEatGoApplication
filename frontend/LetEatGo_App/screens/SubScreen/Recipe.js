@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Dimensions,
   Share,
+  Alert,
 } from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import YoutubePlayer from 'react-native-youtube-iframe';
@@ -110,6 +111,7 @@ function Recipe({navigation, route}) {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
+                alignItems: 'center',
                 marginBottom: Height * 0.01,
               }}>
               <Text style={{color: '#FFCDD2'}}>식재료</Text>
@@ -126,8 +128,52 @@ function Recipe({navigation, route}) {
                 <Text style={{fontSize: 12, color: 'white'}}>자세히 보기</Text>
               </TouchableOpacity>
             </View>
-
             <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                // justifyContent: 'space-between',
+                flexWrap: 'wrap',
+                marginTop: Height * 0.01,
+              }}>
+              {materials1.map((key, index) => (
+                <TouchableOpacity
+                  activeOpacity={0.5}
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginVertical: Width * 0.02,
+                  }}
+                  onPress={() => {
+                    Alert.alert(`장바구니에 ${key}를 추가하시겠습니까?`, '', [
+                      {
+                        text: '네',
+                        onPress: () => {
+                          addCart(key);
+                        },
+                      },
+                      {
+                        text: '아니오',
+                      },
+                    ]);
+                  }}>
+                  <Image
+                    source={require('../../android/app/assets/icons/smallAddButton.png')}
+                    style={{marginLeft: 50}}></Image>
+                  <FindIcon key={index} category={-1} foodname={key} />
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      // marginLeft: 18,
+                      fontFamily: 'Happiness-Sans-Regular',
+                    }}>
+                    {key}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+
+            {/* <View
               style={{
                 flexDirection: 'row',
                 // marginBottom: Height * 0.02,
@@ -135,15 +181,18 @@ function Recipe({navigation, route}) {
                 flexWrap: 'wrap',
               }}>
               {materialList}
-            </View>
+            </View> */}
           </View>
 
-          <Text>{showDetail ? detail : null}</Text>
+          <Text style={{paddingHorizontal: Width * 0.01}}>
+            {showDetail ? detail : null}
+          </Text>
 
           <View
             style={{
               flex: 0.1,
               marginBottom: Height * 0.05,
+              marginTop: Height * 0.02,
             }}>
             <Text style={{color: '#FFCDD2'}}>레시피</Text>
             {orders.order1 ? (

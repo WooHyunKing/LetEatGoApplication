@@ -177,13 +177,14 @@ function Refrigerator({navigation}) {
           }}></Image>
       </View>
       <ScrollView>
-        {Category.map(key => (
+        {Category.map((key, index) => (
           <IngreCategory
             category={key.name}
             array={key.array}
             categoryId={key.id}
             selectedList={selectedList}
             setSelectedList={setSelectedList}
+            key={index}
           />
         ))}
       </ScrollView>
