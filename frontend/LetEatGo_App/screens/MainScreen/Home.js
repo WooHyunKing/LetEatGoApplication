@@ -85,7 +85,7 @@ function Home({navigation, route}) {
         {withCredentials: true},
       );
       if (response.data) {
-        console.log(response.data);
+        console.log(response.data.data[0]);
         setuserResult(response.data.data[0]);
         setIngreResult(response.data.data[1]);
       }
@@ -184,14 +184,87 @@ function Home({navigation, route}) {
             navigation={navigation}
           />
         )}
+        {userResult === undefined ? null : !finishMbti ? (
+          <BeforeRecommend
+            location={'MbtiSurvey'}
+            title={'나의 식습관 지표 MBTI'}
+            button={'알아보기'}
+            navigation={navigation}
+          />
+        ) : (
+          <View
+            style={{
+              ...styles.HomeBox,
+              height: Height * 0.2,
+            }}>
+            <Text style={styles.BeforeText}>나의 먹비티아이는 ?</Text>
+            <View
+            // style={{
+            //   borderRadius: 7,
+            //   borderColor: 'pink',
+            //   backgroundColor: 'pink',
+            // }}
+            >
+              <Text
+                style={{
+                  ...styles.BeforeText,
+                  fontSize: 30,
+                  fontWeight: '900',
+                  marginVertical: 2,
+                  color: 'pink',
+                  paddingHorizontal: 10,
+                }}>
+                "{first}
+                {second}
+                {third}
+                {fourth}-{fifth}"
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row', marginVertical: 7}}>
+              <TouchableOpacity
+                activeOpacity={0.65}
+                onPress={() => {
+                  setETemp(0);
+                  setITemp(0);
+                  setSTemp(0);
+                  setWTemp(0);
+                  setUTemp(0);
+                  setFTemp(0);
+                  setRTemp(0);
+                  setVTemp(0);
+                  setATemp(0);
+                  setPTemp(0);
+                  navigation.navigate('MbtiSurvey');
+                }}>
+                <View style={{...styles.TextBox, alignItems: 'center'}}>
+                  <Text style={{...styles.ButtonText, paddingVertical: 5}}>
+                    재검사하기
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.65}
+                onPress={() => navigation.navigate('MbtiResult')}
+                style={{marginHorizontal: Width * 0.01}}>
+                <View style={{...styles.TextBox, alignItems: 'center'}}>
+                  <Text style={{...styles.ButtonText, paddingVertical: 5}}>
+                    검사결과 보기
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
 
-        <View style={{...styles.box, marginBottom: '5%'}}>
+        {/* <View style={{...styles.box, marginBottom: '5%'}}>
           {!finishMbti ? (
             <View>
               <Text style={styles.BeforeText}>나의 식습관 지표 MBTI</Text>
               <TouchableOpacity
                 onPress={() => navigation.navigate('MbtiServey')}>
-                <Text style={styles.ButtonText}>알아보기</Text>
+                <Text style={{...styles.ButtonText, width: Width * 0.23}}>
+                  알아보기
+                </Text>
               </TouchableOpacity>
             </View>
           ) : (
@@ -237,7 +310,7 @@ function Home({navigation, route}) {
               </View>
             </View>
           )}
-        </View>
+        </View> */}
       </ScrollView>
     </View>
   );
@@ -307,6 +380,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: '3%',
     paddingVertical: '1.5%',
     borderRadius: 7,
+    marginLeft: Width * 0.007,
   },
 
   TextBox: {
@@ -335,6 +409,28 @@ const styles = StyleSheet.create({
     marginTop: Height * 0.017,
     marginBottom: Height * 0.017,
     // paddingLeft: "35%",
+  },
+  HomeBox: {
+    flex: 1,
+    width: Width * 0.95,
+    marginTop: Height * 0.012,
+    marginBottom: Height * 0.012,
+    backgroundColor: 'white',
+    borderWidth: 1.8,
+    borderBottomRightRadius: 23,
+    borderColor: '#FFCDD2',
+    borderStyle: 'solid',
+    shadowColor: '#FFAAB3',
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 2,
+
+    elevation: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     // marginLeft: 10,
   },
   InBoxtext: {
-    fontFamily: 'Happiness-Sans-Bold',
+    fontFamily: 'GangwonEduAllBold',
     fontWeight: '900',
     fontSize: 18,
     marginTop: Height * 0.017,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   ButtonText: {
     fontWeight: '700',
     fontSize: 18,
-    fontFamily: 'Happiness-Sans-Regular',
+    fontFamily: 'GangwonEduAllBold',
     color: 'white',
   },
 });

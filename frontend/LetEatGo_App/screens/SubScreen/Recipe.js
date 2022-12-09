@@ -138,6 +138,7 @@ function Recipe({navigation, route}) {
               }}>
               {materials1.map((key, index) => (
                 <TouchableOpacity
+                  key={index}
                   activeOpacity={0.5}
                   style={{
                     justifyContent: 'center',

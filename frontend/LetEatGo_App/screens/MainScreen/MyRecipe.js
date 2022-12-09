@@ -209,12 +209,6 @@ function MyRecipe({navigation}) {
     }
   }
 
-  // const getUrl = useCallback(() => {
-  //   AsyncStorage.getItem('userImg').then(value =>
-  //     value === null ? setImgUrl('') : setImgUrl(value),
-  //   );
-  // }, [imgUrl]);
-
   useEffect(() => {
     getLike(KEY);
     getCheck(KEY);
@@ -222,10 +216,6 @@ function MyRecipe({navigation}) {
       value === null ? setImgUrl('') : setImgUrl(value),
     );
   }, [isFocused]);
-
-  // useEffect(() => {
-  //   getUrl();
-  // }, [getUrl]);
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
@@ -248,7 +238,7 @@ function MyRecipe({navigation}) {
                     marginLeft: Width * 0.03,
                     width: Width * 0.3,
                     height: Width * 0.3,
-                    borderRadius: 100,
+                    borderRadius: 30,
                   }}
                 />
               </TouchableOpacity>
@@ -257,10 +247,13 @@ function MyRecipe({navigation}) {
                   marginLeft: Width * 0.03,
                   // borderWidth: 1,
                   borderRadius: 2,
-                  backgroundColor: '#F0F0F0',
+                  backgroundColor: 'white',
+
+                  height: Height * 0.025,
                   width: Width * 0.15,
                   justifyContent: 'center',
                   alignItems: 'center',
+                  elevation: 1.5,
                 }}
                 onPress={() => {
                   AsyncStorage.removeItem('userImg');
@@ -268,39 +261,61 @@ function MyRecipe({navigation}) {
                     value === null ? setImgUrl('') : setImgUrl(value),
                   );
                 }}>
-                <Text style={{fontSize: 12, color: '#474646'}}>초기화</Text>
+                <Text style={{fontSize: 12, color: 'black'}}>초기화</Text>
               </TouchableOpacity>
             </View>
 
-            <View style={{marginLeft: Width * 0.02}}>
+            <View style={{marginLeft: Width * 0.07}}>
               <View
-                style={{
-                  flexDirection: 'row',
-                  marginBottom: Height * 0.015,
-                }}>
-                <Text>{nickname}</Text>
-                <TouchableOpacity
-                  style={styles.logoutButton}
-                  onPress={() => {
-                    Alert.alert('로그아웃 하시겠습니까?', '', [
-                      {
-                        text: '네',
-                        onPress: () => {
-                          AsyncStorage.removeItem('user_id');
-                          AsyncStorage.removeItem('USERNICKNAME');
-                          AsyncStorage.removeItem('KEY');
-                          navigation.replace('Auth');
-                        },
-                      },
-                      {
-                        text: '아니오',
-                      },
-                    ]);
+                style={
+                  {
+                    // flexDirection: 'row',
+                    // marginBottom: Height * 0.01,
+                  }
+                }>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'flex-end',
+                    marginBottom: Height * 0.02,
                   }}>
-                  <Text style={styles.logoutText}>로그아웃</Text>
-                </TouchableOpacity>
+                  <Text style={{fontSize: 25, fontFamily: 'GangwonEduAllBold'}}>
+                    {nickname}
+                  </Text>
+                  <Text
+                    style={{fontSize: 18, fontFamily: 'GangwonEduAllLight'}}>
+                    {' '}
+                    님 환영합니다.
+                  </Text>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    style={styles.logoutButton}
+                    onPress={() => {
+                      Alert.alert('로그아웃 하시겠습니까?', '', [
+                        {
+                          text: '네',
+                          onPress: () => {
+                            AsyncStorage.removeItem('user_id');
+                            AsyncStorage.removeItem('USERNICKNAME');
+                            AsyncStorage.removeItem('KEY');
+                            navigation.replace('Auth');
+                          },
+                        },
+                        {
+                          text: '아니오',
+                        },
+                      ]);
+                    }}>
+                    <Text style={styles.logoutText}>로그아웃</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.logoutButton}
+                    onPress={() => navigation.navigate('Withdraw')}>
+                    <Text style={styles.logoutText}>회원 탈퇴</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-              <Text>{userId}</Text>
             </View>
           </View>
         </View>
@@ -435,11 +450,17 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   logoutText: {
-    fontSize: 12,
-    color: '#FFCDD2',
-    marginLeft: Width * 0.01,
-    marginTop: Height * 0.003,
-    textDecorationLine: 'underline',
+    fontSize: 14,
+    color: 'white',
+  },
+  logoutButton: {
+    borderRadius: 5,
+    width: Width * 0.18,
+    height: Height * 0.035,
+    backgroundColor: '#FFCDD2',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: Width * 0.015,
   },
   icon: {
     marginLeft: Width * 0.015,

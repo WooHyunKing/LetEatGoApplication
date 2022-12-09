@@ -31,7 +31,7 @@ function SelectCount(Props) {
     return (
       <TouchableOpacity
         onPress={() => {
-          // Props.postFood();
+          Props.postFood();
 
           Props.setLike([]);
           Props.setDislike([]);

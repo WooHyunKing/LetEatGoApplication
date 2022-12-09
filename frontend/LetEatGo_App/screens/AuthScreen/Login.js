@@ -18,12 +18,19 @@ import axios from 'axios';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import {useTheme} from '@react-navigation/native';
+import userid from '../../recoils/userId';
+import usernickname from '../../recoils/userNickname';
+import userkey from '../../recoils/userKey';
+import {useRecoilState} from 'recoil';
 
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
 function Login({navigation}) {
   const [userId, setUserId] = useState('');
+  const [useridR, setUseridR] = useRecoilState(userid);
+  const [userNickname, setUserNickname] = useRecoilState(usernickname);
+  const [userKey, setUserKey] = useRecoilState(userkey);
   const [userPassword, setUserPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
@@ -48,7 +55,11 @@ function Login({navigation}) {
 
       console.log(response.data);
       if (response.data.msg === 'login success') {
+        console.log(response.data.result.nickname);
         AsyncStorage.setItem('user_id', userId);
+        setUseridR(userId);
+        setUserNickname(response.data.result.nickname);
+        setUserKey(response.data.result.userid);
         setLoading(false);
         navigation.replace('Main');
       } else {

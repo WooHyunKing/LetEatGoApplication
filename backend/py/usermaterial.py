@@ -1,9 +1,6 @@
 import sys
-import konlpy
 from konlpy.tag import Okt
 import json
-import pandas as pd
-from collections import Counter
 
 def material(arg):
     recipe_path = "./py/newjoin.json"

@@ -26,6 +26,7 @@ import Survey from './screens/SubScreen/Survey';
 import MbtiSurvey from './screens/SubScreen/MbtiSurvey';
 import AfterSurvey from './screens/SubScreen/AfterSurvey';
 import SearchResult from './screens/SubScreen/SearchResult';
+import Withdraw from './screens/SubScreen/Withdraw';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -87,7 +88,7 @@ const HomeStackScreen = ({navigation, route}) => {
         options={{headerShown: false}}
       />
       <HomeStack.Screen
-        name="MbtiServey"
+        name="MbtiSurvey"
         component={MbtiSurvey}
         options={{headerShown: false}}
       />
@@ -104,6 +105,11 @@ const HomeStackScreen = ({navigation, route}) => {
       <HomeStack.Screen
         name="SearchResult"
         component={SearchResult}
+        options={{headerShown: false}}
+      />
+      <HomeStack.Screen
+        name="Withdraw"
+        component={Withdraw}
         options={{headerShown: false}}
       />
     </HomeStack.Navigator>

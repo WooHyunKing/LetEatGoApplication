@@ -51,7 +51,7 @@ function IngreRecipe(Props) {
                   setRecipename(Props.data[index].Name);
                   Props.navigation.navigate('Recipe');
                 }}>
-                <View style={{alignItems: 'center'}}>
+                <View style={{alignItems: 'center', marginRight: Width * 0.03}}>
                   <Image
                     Key={index}
                     style={styles.image}

@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     paddingBottom: '1%',
   },
   HomeBox: {
+    width: '95%',
     height: Height * 0.22,
     flex: 1,
     paddingHorizontal: Width * 0.013,

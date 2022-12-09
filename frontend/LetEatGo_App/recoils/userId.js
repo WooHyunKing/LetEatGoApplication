@@ -1,7 +1,7 @@
 import {atom} from 'recoil';
 const userid = atom({
   key: 'userid',
-  default: 4000,
+  default: 'woo0826',
 });
 
 export default userid;
