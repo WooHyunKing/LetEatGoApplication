@@ -54,8 +54,8 @@ function RecomRecipe(Props) {
 
                   <Text
                     style={{
-                      fontSize: 14.5,
-                      fontFamily: 'Happiness-Sans-Regular',
+                      fontSize: 16,
+                      fontFamily: 'GangwonEduAllLight',
                       maxWidth: Height * 0.145,
                     }}>
                     {Props.data[index].name}
@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
   },
   InBoxtext: {
     fontFamily: 'GangwonEduAllBold',
-    fontWeight: '900',
-    fontSize: 18,
+    // fontWeight: '900',
+    fontSize: 20,
     marginTop: Height * 0.017,
     marginBottom: Height * 0.02,
   },
@@ -122,9 +122,9 @@ const styles = StyleSheet.create({
     borderRadius: 7,
   },
   ButtonText: {
-    fontWeight: '700',
+    // fontWeight: '700',
     fontSize: 18,
-    fontFamily: 'GangwonEduAllBold',
+    fontFamily: 'GangwonEduAllLight',
     color: 'white',
   },
 });

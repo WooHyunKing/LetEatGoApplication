@@ -63,10 +63,10 @@ const styles = StyleSheet.create({
     alignContent: 'center',
   },
   text: {
-    fontSize: 18,
-    fontWeight: '900',
+    fontSize: 20,
+    // fontWeight: '900',
     color: 'white',
-    fontFamily: 'Happiness-Sans-Bold',
+    fontFamily: 'GangwonEduAllBold',
     // paddingRight: Width * 0.226,
   },
 

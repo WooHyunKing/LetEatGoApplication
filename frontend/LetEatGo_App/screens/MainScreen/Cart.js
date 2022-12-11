@@ -106,8 +106,9 @@ function Cart({navigation}) {
         style={{
           paddingLeft: Width * 0.05,
           paddingVertical: Height * 0.03,
-          fontSize: 25,
-          fontWeight: '800',
+          fontSize: 30,
+          // fontWeight: '800',
+          fontFamily: 'GangwonEduAllBold',
         }}>
         나의 장바구니 🛒
       </Text>
@@ -115,8 +116,9 @@ function Cart({navigation}) {
         <Text
           style={{
             paddingLeft: Width * 0.04,
-            fontSize: 15,
+            fontSize: 18,
             fontWeight: '400',
+            fontFamily: 'GangwonEduAllLight',
           }}>
           구매 후
         </Text>
@@ -129,8 +131,9 @@ function Cart({navigation}) {
           }}></Image>
         <Text
           style={{
-            fontSize: 15,
-            fontWeight: '400',
+            fontSize: 18,
+            // fontWeight: '400',
+            fontFamily: 'GangwonEduAllLight',
           }}>
           버튼을 눌러 냉장고로 식재료를 옮겨보세요!
         </Text>
@@ -155,8 +158,7 @@ function Cart({navigation}) {
                   style={{
                     fontSize: 17,
                     // marginLeft: 18,
-
-                    fontFamily: 'Happiness-Sans-Regular',
+                    fontFamily: 'GangwonEduAllBold',
                   }}>
                   {key.materials}
                 </Text>
@@ -203,8 +205,9 @@ function Cart({navigation}) {
           style={{
             paddingLeft: 20,
             paddingVertical: 17,
-            fontSize: 16,
-            fontWeight: '800',
+            fontSize: 20,
+            // fontWeight: '800',
+            fontFamily: 'GangwonEduAllBold',
           }}>
           장바구니 추가하기
         </Text>
@@ -261,13 +264,13 @@ const styles = StyleSheet.create({
   refrigeSearch: {
     backgroundColor: 'white',
     width: Width * 0.92,
-    height: Height * 0.045,
+    height: Height * 0.052,
     marginLeft: '3%',
     borderRadius: 18,
-    fontSize: 12,
-    fontFamily: 'Happiness-Sans-Regular',
+    fontSize: 15,
+    fontFamily: 'GangwonEduAllBold',
     elevation: 3,
-    paddingLeft: Width * 0.03,
+    paddingLeft: Width * 0.04,
   },
 });
 

@@ -95,7 +95,12 @@ function RecipeComponent(Props) {
           />
         </TouchableOpacity>
 
-        <Text style={{fontSize: 18, marginLeft: Width * 0.03}}>
+        <Text
+          style={{
+            fontFamily: 'GangwonEduAllBold',
+            fontSize: 18,
+            marginLeft: Width * 0.03,
+          }}>
           {Props.Name}
         </Text>
       </View>
@@ -337,7 +342,9 @@ function MyRecipe({navigation}) {
                       getLike(KEY);
                     }
               }>
-              <Text>관심 있는 레시피</Text>
+              <Text style={{fontSize: 17, fontFamily: 'GangwonEduAllBold'}}>
+                관심 있는 레시피
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
@@ -352,7 +359,9 @@ function MyRecipe({navigation}) {
                     }
                   : null
               }>
-              <Text>만들어 본 레시피</Text>
+              <Text style={{fontSize: 17, fontFamily: 'GangwonEduAllBold'}}>
+                만들어 본 레시피
+              </Text>
             </TouchableOpacity>
           </View>
           <ScrollView style={{flex: 0.9}}>
@@ -450,6 +459,7 @@ const styles = StyleSheet.create({
   logoutText: {
     fontSize: 14,
     color: 'white',
+    fontFamily: 'GangwonEduAllBold',
   },
   logoutButton: {
     borderRadius: 5,

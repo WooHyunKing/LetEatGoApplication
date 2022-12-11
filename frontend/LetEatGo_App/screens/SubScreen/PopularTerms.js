@@ -15,9 +15,9 @@ function PopularTerms(Props) {
       <Text
         style={{
           paddingHorizontal: '7%',
-          fontFamily: 'Roboto-Bold',
-          fontStyle: 'italic',
-          fontWeight: '900',
+          fontFamily: 'GangwonEduAllBold',
+          // fontStyle: 'italic',
+          // fontWeight: '900',
           color: '#FFAAB3',
           fontSize: 28,
         }}>
@@ -33,7 +33,7 @@ function PopularTerms(Props) {
         }}>
         <Text
           style={{
-            fontFamily: 'Happiness-Sans-Regular',
+            fontFamily: 'GangwonEduAllBold',
             fontSize: 20,
           }}>
           {Props.keyWord}

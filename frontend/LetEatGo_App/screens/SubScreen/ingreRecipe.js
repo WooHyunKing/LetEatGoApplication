@@ -60,8 +60,8 @@ function IngreRecipe(Props) {
 
                   <Text
                     style={{
-                      fontSize: 16,
-                      fontFamily: 'Happiness-Sans-Regular',
+                      fontSize: 18,
+                      fontFamily: 'GangwonEduAllLight',
                     }}>
                     {Props.data[index].Name}
                   </Text>
@@ -91,9 +91,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   InBoxtext: {
-    fontFamily: 'Happiness-Sans-Bold',
-    fontWeight: '900',
-    fontSize: 18,
+    fontFamily: 'GangwonEduAllBold',
+    // fontWeight: '900',
+    fontSize: 20,
     marginTop: Height * 0.017,
     marginBottom: Height * 0.02,
   },

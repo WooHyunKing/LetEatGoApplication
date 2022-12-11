@@ -213,7 +213,8 @@ function Search({navigation}) {
             style={{
               paddingLeft: Width * 0.05,
               marginTop: Height * 0.02,
-              fontSize: 16,
+              fontSize: 20,
+              fontFamily: 'GangwonEduAllBold',
             }}>
             최근 검색어
           </Text>
@@ -228,7 +229,9 @@ function Search({navigation}) {
               style={{
                 textDecorationLine: 'underline',
                 color: '#FFAAB3',
-                fontWeight: '600',
+                // fontWeight: '600',
+                fontFamily: 'GangwonEduAllBold',
+                fontSize: 15,
               }}>
               전체 삭제
             </Text>
@@ -274,20 +277,20 @@ function Search({navigation}) {
           }}>
           <Text
             style={{
-              fontSize: 21,
-              fontWeight: '700',
+              fontSize: 28,
+              // fontWeight: '700',
               paddingHorizontal: '7%',
-              fontFamily: 'Happiness-Sans-Regular',
+              fontFamily: 'GangwonEduAllBold',
             }}>
             Top5 Recipe 🥇
           </Text>
           <Text
             style={{
               color: '#FFAAB3',
-              fontSize: 15,
+              fontSize: 17,
               paddingTop: '5%',
               paddingLeft: '30%',
-              fontFamily: 'Happiness-Sans-Regular',
+              fontFamily: 'GangwonEduAllBold',
             }}>
             앱 내에서 가장 인기가 좋은 레시피에요!
           </Text>

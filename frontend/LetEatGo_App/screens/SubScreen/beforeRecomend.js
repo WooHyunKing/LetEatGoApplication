@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
   BeforeText: {
     fontSize: 24,
 
-    fontFamily: 'Cafe24-Ohsquareair',
-    paddingBottom: '1%',
+    fontFamily: 'GangwonEduAllBold',
+    paddingBottom: '2%',
   },
   HomeBox: {
     width: '95%',
@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
     borderRadius: 7,
   },
   ButtonText: {
-    fontWeight: '700',
+    // fontWeight: '700',
     fontSize: 18,
-    fontFamily: 'Cafe24-Ohsquareair',
+    fontFamily: 'GangwonEduAllLight',
     color: 'white',
     backgroundColor: '#FFAAB3',
     paddingHorizontal: '3%',

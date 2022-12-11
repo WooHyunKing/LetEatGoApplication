@@ -94,8 +94,9 @@ function Refrigerator({navigation}) {
         style={{
           paddingLeft: 20,
           paddingVertical: 17,
-          fontSize: 25,
-          fontWeight: '800',
+          fontSize: 30,
+          // fontWeight: '800',
+          fontFamily: 'GangwonEduAllBold',
         }}>
         나의 냉장고 🧊
       </Text>
@@ -151,8 +152,9 @@ function Refrigerator({navigation}) {
           style={{
             paddingLeft: 20,
             paddingVertical: 17,
-            fontSize: 16,
-            fontWeight: '800',
+            fontSize: 20,
+            // fontWeight: '800',
+            fontFamily: 'GangwonEduAllBold',
           }}>
           재료 추가하기
         </Text>
@@ -196,13 +198,13 @@ const styles = StyleSheet.create({
   refrigeSearch: {
     backgroundColor: 'white',
     width: Width * 0.92,
-    height: Height * 0.045,
+    height: Height * 0.052,
     marginLeft: '3.5%',
     borderRadius: 18,
-    fontSize: 12,
-    fontFamily: 'Happiness-Sans-Regular',
+    fontSize: 15,
+    fontFamily: 'GangwonEduAllBold',
     elevation: 3,
-    paddingLeft: Width * 0.03,
+    paddingLeft: Width * 0.04,
   },
 });
 export default Refrigerator;
