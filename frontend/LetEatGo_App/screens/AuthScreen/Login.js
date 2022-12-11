@@ -123,7 +123,7 @@ function Login({navigation}) {
         <View style={styles.btnArea}>
           <TouchableOpacity
             style={styles.btn}
-            onPress={() => navigation.navigate('Register')}>
+            onPress={() => navigation.navigate('Privacy')}>
             <Text style={{color: '#4f4d4d', fontFamily: 'GangwonEduAllBold'}}>
               회원가입
             </Text>

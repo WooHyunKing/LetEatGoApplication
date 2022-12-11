@@ -63,7 +63,7 @@ function SearchResult({navigation}) {
 
   return (
     <View>
-      <Topbar />
+      <Topbar navigation={navigation} />
       <Text
         style={{
           paddingLeft: '5%',
@@ -84,7 +84,7 @@ function SearchResult({navigation}) {
                   setFoodId(key.foodid);
                   setRecipename(key.Name);
                   navigation.navigate('Recipe');
-                  setResult([]);
+                  // setResult([]);
                   setText('');
                 }}>
                 <Image

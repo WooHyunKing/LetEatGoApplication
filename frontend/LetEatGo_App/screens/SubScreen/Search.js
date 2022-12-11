@@ -23,8 +23,6 @@ import searchresult from '../../recoils/searchWord';
 import searchtext from '../../recoils/keyword';
 import userid from '../../recoils/userId';
 
-const STORAGE_KEY = '@userId'; // 나중에 userId 얻어와서 저장
-
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
@@ -50,6 +48,8 @@ function Search({navigation}) {
   const [RecipeName, setRecipename] = useRecoilState(recipename);
   const [top5, setTop5] = useState();
   const [searchResult, setResult] = useRecoilState(searchresult);
+  const [userId, setUserId] = useRecoilState(userid);
+  const STORAGE_KEY = `searchRecord${userId}`;
 
   useEffect(() => {
     loadHistory();
@@ -297,6 +297,7 @@ function Search({navigation}) {
             rank={1}
             keyWord={top5[0].name}
             FoodId={top5[0].foodid}
+            navigation={navigation}
           />
         )}
         {top5 === undefined ? null : (
@@ -304,6 +305,7 @@ function Search({navigation}) {
             rank={2}
             keyWord={top5[1].name}
             FoodId={top5[1].foodid}
+            navigation={navigation}
           />
         )}
         {top5 === undefined ? null : (
@@ -311,6 +313,7 @@ function Search({navigation}) {
             rank={3}
             keyWord={top5[2].name}
             FoodId={top5[2].foodid}
+            navigation={navigation}
           />
         )}
         {top5 === undefined ? null : (
@@ -318,6 +321,7 @@ function Search({navigation}) {
             rank={4}
             keyWord={top5[3].name}
             FoodId={top5[3].foodid}
+            navigation={navigation}
           />
         )}
         {top5 === undefined ? (
@@ -327,6 +331,7 @@ function Search({navigation}) {
             rank={5}
             keyWord={top5[4].name}
             FoodId={top5[4].foodid}
+            navigation={navigation}
           />
         )}
       </ScrollView>

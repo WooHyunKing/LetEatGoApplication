@@ -97,7 +97,6 @@ function Withdraw({navigation}) {
                 text: '네',
                 onPress: () => {
                   AsyncStorage.removeItem('user_id');
-                  AsyncStorage.removeItem('USERNICKNAME');
                   AsyncStorage.removeItem('KEY');
                   AsyncStorage.removeItem('one');
                   AsyncStorage.removeItem('two');

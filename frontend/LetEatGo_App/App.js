@@ -27,6 +27,7 @@ import MbtiSurvey from './screens/SubScreen/MbtiSurvey';
 import AfterSurvey from './screens/SubScreen/AfterSurvey';
 import SearchResult from './screens/SubScreen/SearchResult';
 import Withdraw from './screens/SubScreen/Withdraw';
+import Privacy from './screens/AuthScreen/Privacy';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -128,6 +129,11 @@ const Auth = () => {
       <Stack.Screen
         name="Register"
         component={Register}
+        options={{title: '', headerTransparent: true}}
+      />
+      <Stack.Screen
+        name="Privacy"
+        component={Privacy}
         options={{title: '', headerTransparent: true}}
       />
     </Stack.Navigator>

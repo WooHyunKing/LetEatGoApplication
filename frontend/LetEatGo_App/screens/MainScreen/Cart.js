@@ -264,9 +264,10 @@ const styles = StyleSheet.create({
     height: Height * 0.045,
     marginLeft: '3%',
     borderRadius: 18,
-    fontSize: 15.5,
+    fontSize: 12,
     fontFamily: 'Happiness-Sans-Regular',
     elevation: 3,
+    paddingLeft: Width * 0.03,
   },
 });
 

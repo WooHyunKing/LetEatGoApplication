@@ -38,7 +38,7 @@ function Register({navigation}) {
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
 
-  async function postData(id, password, nickname, sex) {
+  async function postData(id, password, passwordCheck, nickname, sex) {
     setErrortext('');
     if (!id) {
       alert('아이디를 입력해주세요 .');
@@ -48,8 +48,31 @@ function Register({navigation}) {
       alert('비밀번호를 입력해주세요 .');
       return;
     }
+    if (!passwordCheck) {
+      alert('비밀번호 확인을 입력해주세요 .');
+      return;
+    }
     if (!nickname) {
       alert('닉네임를 입력해주세요 .');
+      return;
+    }
+
+    if (id.length < 5) {
+      alert('아이디는 5자 이상 이어야 합니다 .');
+      return;
+    }
+
+    if (password.length < 8) {
+      alert('비밀번호는 8자 이상 이어야 합니다 .');
+      return;
+    }
+
+    if (nickname.length > 8) {
+      alert('닉네임은 8자 이하 이어야 합니다 .');
+    }
+
+    if (password !== passwordCheck) {
+      alert('비밀번호 확인이 비밀번호와 일치하지 않습니다 .');
       return;
     }
 
@@ -79,32 +102,6 @@ function Register({navigation}) {
     }
   }
 
-  async function handleSubmitButton(
-    userId,
-    userPassword,
-    userPasswordCheck,
-    nickname,
-    sex,
-  ) {
-    setErrortext('');
-    if (!userId) {
-      alert('아이디를 입력해주세요 .');
-      return;
-    }
-    if (!userPassword) {
-      alert('비밀번호를 입력해주세요 .');
-      return;
-    }
-    if (!userPasswordCheck) {
-      alert('비밀번호 확인을 입력해주세요 .');
-      return;
-    }
-    if (!nickname) {
-      alert('닉네임을 입력해주세요 .');
-      return;
-    }
-  }
-
   return (
     <LinearGradient colors={['#FFCDD2', '#FFAAB3']} style={styles.container}>
       <View style={styles.topArea}>
@@ -121,7 +118,7 @@ function Register({navigation}) {
         <View>
           <Text style={styles.titleText}>ID</Text>
           <TextInput
-            placeholder="아이디(5자 이상, 영문, 숫자 포함)"
+            placeholder="아이디 (5자 이상)"
             style={styles.formAreaTop}
             onChangeText={userId => setUserId(userId)}
             autoCapitalize="none"
@@ -130,7 +127,7 @@ function Register({navigation}) {
         <View>
           <Text style={styles.titleText}>Password</Text>
           <TextInput
-            placeholder="비밀번호(8자 이상)"
+            placeholder="비밀번호 (8자 이상)"
             secureTextEntry={true}
             style={styles.formAreaMiddle}
             onChangeText={userPassword => setUserPassword(userPassword)}
@@ -171,7 +168,7 @@ function Register({navigation}) {
         <View>
           <Text style={styles.titleText}>Nickname</Text>
           <TextInput
-            placeholder="닉네임"
+            placeholder="닉네임 (8자 이하)"
             style={styles.formAreaTop}
             onChangeText={nickname => setNickname(nickname)}
             autoCapitalize="none"
@@ -180,12 +177,7 @@ function Register({navigation}) {
 
         <View>
           <Text style={styles.titleText}>Gender</Text>
-          {/* <TextInput
-            placeholder="성별"
-            style={styles.formAreaMiddle}
-            // onChangeText={sex => setSex(sex)}
-            autoCapitalize="none"
-          /> */}
+
           <View style={styles.formAreaMiddle}>
             <Picker
               selectedValue={sex}
@@ -207,7 +199,9 @@ function Register({navigation}) {
         <View style={styles.btnArea}>
           <TouchableOpacity
             style={styles.btn}
-            onPress={() => postData(userId, userPassword, nickname, sex)}>
+            onPress={() =>
+              postData(userId, userPassword, userPasswordCheck, nickname, sex)
+            }>
             <Text
               style={{
                 color: 'white',

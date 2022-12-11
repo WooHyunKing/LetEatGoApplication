@@ -238,7 +238,7 @@ function MyRecipe({navigation}) {
                     marginLeft: Width * 0.03,
                     width: Width * 0.3,
                     height: Width * 0.3,
-                    borderRadius: 30,
+                    borderRadius: 100,
                   }}
                 />
               </TouchableOpacity>
@@ -296,9 +296,7 @@ function MyRecipe({navigation}) {
                         {
                           text: '네',
                           onPress: () => {
-                            AsyncStorage.removeItem('user_id');
-                            AsyncStorage.removeItem('USERNICKNAME');
-                            AsyncStorage.removeItem('KEY');
+                            AsyncStorage.clear();
                             navigation.replace('Auth');
                           },
                         },
@@ -339,7 +337,7 @@ function MyRecipe({navigation}) {
                       getLike(KEY);
                     }
               }>
-              <Text>만들어 본 레시피</Text>
+              <Text>관심 있는 레시피</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
@@ -354,35 +352,12 @@ function MyRecipe({navigation}) {
                     }
                   : null
               }>
-              <Text>관심 있는 레시피</Text>
+              <Text>만들어 본 레시피</Text>
             </TouchableOpacity>
           </View>
           <ScrollView style={{flex: 0.9}}>
             {active
-              ? checklist.map((key, index) =>
-                  doubleCheck(key.foodid, likelist) === true ? (
-                    <RecipeComponent
-                      key={index}
-                      src={key.Image}
-                      Name={key.Name}
-                      foodid={key.foodid}
-                      like={true}
-                      check={true}
-                      navigation={navigation}
-                    />
-                  ) : (
-                    <RecipeComponent
-                      key={index}
-                      src={key.Image}
-                      Name={key.Name}
-                      foodid={key.foodid}
-                      like={false}
-                      check={true}
-                      navigation={navigation}
-                    />
-                  ),
-                )
-              : likelist.map((key, index) =>
+              ? likelist.map((key, index) =>
                   doubleCheck(key.foodid, checklist) === true ? (
                     <RecipeComponent
                       key={index + 2000}
@@ -401,6 +376,29 @@ function MyRecipe({navigation}) {
                       foodid={key.foodid}
                       like={true}
                       check={false}
+                      navigation={navigation}
+                    />
+                  ),
+                )
+              : checklist.map((key, index) =>
+                  doubleCheck(key.foodid, likelist) === true ? (
+                    <RecipeComponent
+                      key={index}
+                      src={key.Image}
+                      Name={key.Name}
+                      foodid={key.foodid}
+                      like={true}
+                      check={true}
+                      navigation={navigation}
+                    />
+                  ) : (
+                    <RecipeComponent
+                      key={index}
+                      src={key.Image}
+                      Name={key.Name}
+                      foodid={key.foodid}
+                      like={false}
+                      check={true}
                       navigation={navigation}
                     />
                   ),
@@ -460,7 +458,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFCDD2',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: Width * 0.015,
+    marginRight: Width * 0.02,
   },
   icon: {
     marginLeft: Width * 0.015,

@@ -54,8 +54,9 @@ function RecomRecipe(Props) {
 
                   <Text
                     style={{
-                      fontSize: 15,
+                      fontSize: 14.5,
                       fontFamily: 'Happiness-Sans-Regular',
+                      maxWidth: Height * 0.145,
                     }}>
                     {Props.data[index].name}
                   </Text>
@@ -89,6 +90,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     // marginLeft: 10,
+    paddingHorizontal: Width * 0.02,
   },
   InBoxtext: {
     fontFamily: 'GangwonEduAllBold',
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
   },
   image2: {
     height: Height * 0.13,
-    width: Height * 0.13,
+    width: Height * 0.14,
     marginHorizontal: Width * 0.015,
     resizeMode: 'cover',
     marginBottom: Height * 0.015,

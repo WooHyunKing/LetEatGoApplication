@@ -158,7 +158,7 @@ function RecipeTopArea({navigation, food_name}) {
   }, [findLink]);
 
   return (
-    <View style={{flex: 0.55, padding: 5}}>
+    <View style={{flex: 0.55, paddingHorizontal: 5}}>
       <View
         style={{
           flex: 0.7,

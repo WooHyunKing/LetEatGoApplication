@@ -29,7 +29,7 @@ function PopularTerms(Props) {
         onPress={() => {
           setFoodId(Props.FoodId);
           setRecipename(Props.keyWord);
-          navigation.navigate('Recipe');
+          Props.navigation.navigate('Recipe');
         }}>
         <Text
           style={{

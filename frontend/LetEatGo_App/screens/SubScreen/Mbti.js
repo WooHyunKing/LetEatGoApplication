@@ -230,14 +230,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: Width * 0.8,
     marginBottom: Height * 0.02,
+    alignItems: 'center',
   },
   mbtiActive: {
     color: 'black',
     fontSize: 25,
+    fontWeight: 'bold',
   },
   mbtiPassive: {
     color: 'white',
-    fontSize: 25,
+    fontSize: 16,
   },
 });
 

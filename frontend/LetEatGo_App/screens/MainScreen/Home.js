@@ -148,7 +148,10 @@ function Home({navigation, route}) {
         </Text>
       </View>
 
-      <ScrollView contentContainerStyle={{alignItems: 'center'}}>
+      <ScrollView
+        contentContainerStyle={{
+          alignItems: 'center',
+        }}>
         {userResult === undefined ? (
           <ActivityIndicator
             size="large"
