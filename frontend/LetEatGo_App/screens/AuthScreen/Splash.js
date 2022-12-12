@@ -5,17 +5,34 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
+import userid from '../../recoils/userId';
+import usernickname from '../../recoils/userNickname';
+import userkey from '../../recoils/userKey';
+import {useRecoilState} from 'recoil';
+
 import AsyncStorage from '@react-native-community/async-storage';
 
 const Splash = ({navigation}) => {
   const [animating, setAnimating] = useState(true);
+  const [KEY, setKEY] = useRecoilState(userkey);
+  const [userId, setUserId] = useRecoilState(userid);
+  const [userNickname, setUserNickName] = useRecoilState(usernickname);
+  const STORAGE_KEY = `nickname`;
 
   useEffect(() => {
     setTimeout(() => {
       setAnimating(false);
-      AsyncStorage.getItem('user_id').then(value =>
-        navigation.replace(value === null ? 'Auth' : 'Main'),
-      );
+
+      AsyncStorage.getItem('KEY').then(value => {
+        setKEY(parseInt(value));
+        console.log(value);
+      });
+
+      AsyncStorage.getItem(STORAGE_KEY).then(value => setUserNickName(value));
+      AsyncStorage.getItem('user_id').then(value => {
+        navigation.replace(value === null ? 'Auth' : 'Main');
+        setUserId(value);
+      });
     }, 3000);
   }, []);
 

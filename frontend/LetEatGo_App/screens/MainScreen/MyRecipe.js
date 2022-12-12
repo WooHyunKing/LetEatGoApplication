@@ -217,10 +217,16 @@ function MyRecipe({navigation}) {
   useEffect(() => {
     getLike(KEY);
     getCheck(KEY);
+
     AsyncStorage.getItem('userImg').then(value =>
       value === null ? setImgUrl('') : setImgUrl(value),
     );
   }, [isFocused]);
+
+  useEffect(() => {
+    getLike(KEY);
+    getCheck(KEY);
+  }, []);
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
@@ -301,7 +307,9 @@ function MyRecipe({navigation}) {
                         {
                           text: '네',
                           onPress: () => {
-                            AsyncStorage.clear();
+                            AsyncStorage.removeItem('KEY');
+                            AsyncStorage.removeItem('USERNICKNAME');
+                            AsyncStorage.removeItem('user_id');
                             navigation.replace('Auth');
                           },
                         },

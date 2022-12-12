@@ -27,13 +27,15 @@ const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
 function Login({navigation}) {
-  const [userId, setUserId] = useState('');
-  const [useridR, setUseridR] = useRecoilState(userid);
-  const [userNickname, setUserNickname] = useRecoilState(usernickname);
-  const [userKey, setUserKey] = useRecoilState(userkey);
+  const [userId, setUserId] = useRecoilState(userid);
   const [userPassword, setUserPassword] = useState('');
+  const [userNickname, setUserNickname] = useRecoilState(usernickname);
+  const [key, setKey] = useRecoilState(userkey);
+
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
+
+  const STORAGE_KEY = `nickname`;
 
   async function postData(id, password) {
     setErrortext('');
@@ -53,22 +55,25 @@ function Login({navigation}) {
         password,
       });
 
+      setUserNickname(response.data.result.nickname);
+
       console.log(response.data);
       if (response.data.msg === 'login success') {
-        console.log(response.data.result.nickname);
         AsyncStorage.setItem('user_id', userId);
-        setUseridR(userId);
-        setUserNickname(response.data.result.nickname);
-        setUserKey(response.data.result.userid);
-        setLoading(false);
+        console.log(String(response.data.result.userid));
+        AsyncStorage.setItem('KEY', String(response.data.result.userid));
+        console.log('key');
+        setKey(response.data.result.userid);
+
+        AsyncStorage.setItem(STORAGE_KEY, response.data.result.nickname);
+
         navigation.replace('Main');
       } else {
         alert('아이디와 비밀번호를 다시 확인해주세요 .');
-        setLoading(false);
       }
     } catch (e) {
-      setLoading(false);
       console.log(e);
+      alert('아이디와 비밀번호를 다시 확인해주세요 .');
     }
   }
 

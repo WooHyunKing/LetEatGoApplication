@@ -61,25 +61,8 @@ function Withdraw({navigation}) {
             fontFamily: 'GangwonEduAllLight',
             marginBottom: Height * 0.025,
           }}>
-          탈퇴 시 유의사항을 확인해주세요.
+          탈퇴 시 삭제되는 계정 및 유저 정보는 복구가 불가능합니다.
         </Text>
-        <View>
-          <Text style={{fontSize: 20, fontFamily: 'GangwonEduAllLight'}}>
-            1. 이것은 탈퇴 시 숙지사항 입니다.
-          </Text>
-          <Text style={{fontSize: 20, fontFamily: 'GangwonEduAllLight'}}>
-            2. 이것은 탈퇴 시 숙지사항 입니다.
-          </Text>
-          <Text style={{fontSize: 20, fontFamily: 'GangwonEduAllLight'}}>
-            3. 이것은 탈퇴 시 숙지사항 입니다.
-          </Text>
-          <Text style={{fontSize: 20, fontFamily: 'GangwonEduAllLight'}}>
-            4. 이것은 탈퇴 시 숙지사항 입니다.
-          </Text>
-          <Text style={{fontSize: 20, fontFamily: 'GangwonEduAllLight'}}>
-            5. 이것은 탈퇴 시 숙지사항 입니다.
-          </Text>
-        </View>
 
         <TouchableOpacity
           style={{
@@ -96,14 +79,7 @@ function Withdraw({navigation}) {
               {
                 text: '네',
                 onPress: () => {
-                  AsyncStorage.removeItem('user_id');
-                  AsyncStorage.removeItem('KEY');
-                  AsyncStorage.removeItem('one');
-                  AsyncStorage.removeItem('two');
-                  AsyncStorage.removeItem('three');
-                  AsyncStorage.removeItem('four');
-                  AsyncStorage.removeItem('five');
-                  AsyncStorage.removeItem('userImg');
+                  AsyncStorage.clear();
                   deleteUser();
                   navigation.replace('Auth');
                 },
