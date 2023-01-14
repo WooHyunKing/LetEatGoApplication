@@ -3,7 +3,7 @@ from konlpy.tag import Okt
 import json
 
 def material(arg):
-    recipe_path = "./py/newjoin.json"
+    recipe_path = "./newjoin.json"
 
     with open(recipe_path, 'r') as file:
         data = json.load(file)
