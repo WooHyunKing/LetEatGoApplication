@@ -95,7 +95,9 @@ function Search({navigation}) {
   };
   const getTop5 = async () => {
     try {
-      const response = await axios.get('http://10.0.2.2:80/recommend/best');
+      const response = await axios.get(
+        'http://3.34.153.73:8081/recommend/best',
+      );
       console.log('top5');
 
       setTop5(response.data.result);
@@ -112,7 +114,7 @@ function Search({navigation}) {
     // console.log(key);
     try {
       const response = await axios.get(
-        'http://10.0.2.2:80/search/keyword',
+        'http://3.34.153.73:8081/search/keyword',
         {
           params: {key: key},
         },

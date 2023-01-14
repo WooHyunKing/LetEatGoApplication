@@ -50,7 +50,7 @@ function Login({navigation}) {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://10.0.2.2:80/user/signin', {
+      const response = await axios.post('http://3.34.153.73:8081/user/signin', {
         id,
         password,
       });

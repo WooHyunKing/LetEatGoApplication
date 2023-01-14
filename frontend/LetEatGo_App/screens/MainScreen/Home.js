@@ -78,7 +78,7 @@ function Home({navigation, route}) {
   const getUserR = async key => {
     try {
       const response = await axios.get(
-        'http://10.0.2.2:80/',
+        'http://3.34.153.73:8081/',
         {
           params: {userid: KEY},
         },
@@ -98,26 +98,27 @@ function Home({navigation, route}) {
   };
 
   useEffect(() => {
+    console.log(KEY);
     getUserR();
   }, [isFocused]);
 
   useEffect(() => {
-    AsyncStorage.getItem('one').then(value => {
+    AsyncStorage.getItem(`${userId}one`).then(value => {
       value !== null ? setFinishMbti(true) : null;
     });
-    AsyncStorage.getItem('one').then(value => {
+    AsyncStorage.getItem(`${userId}one`).then(value => {
       setFirst(value);
     });
-    AsyncStorage.getItem('two').then(value => {
+    AsyncStorage.getItem(`${userId}two`).then(value => {
       setSecond(value);
     });
-    AsyncStorage.getItem('three').then(value => {
+    AsyncStorage.getItem(`${userId}three`).then(value => {
       setThird(value);
     });
-    AsyncStorage.getItem('four').then(value => {
+    AsyncStorage.getItem(`${userId}four`).then(value => {
       setFourth(value);
     });
-    AsyncStorage.getItem('five').then(value => {
+    AsyncStorage.getItem(`${userId}five`).then(value => {
       setFifth(value);
     });
   }, [isFocused]);

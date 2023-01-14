@@ -42,7 +42,7 @@ function SearchResult({navigation}) {
   const sendWord = async key => {
     try {
       const response = await axios.get(
-        'http://10.0.2.2:80/search/keyword',
+        'http://3.34.153.73:8081/search/keyword',
         {
           params: {key: key},
         },

@@ -35,7 +35,7 @@ function Refrigerator({navigation}) {
   async function deleteIngred(userid, index) {
     try {
       const response = await axios.delete(
-        `http://10.0.2.2:80/user/ingredient?index=${index}userid=${userid}`,
+        `http://3.34.153.73:8081/user/ingredient?index=${index}userid=${userid}`,
       );
 
       // console.log(response.data.result);
@@ -49,7 +49,7 @@ function Refrigerator({navigation}) {
   async function getIngred(userid) {
     try {
       const response = await axios.get(
-        `http://10.0.2.2:80/user/ingredient?userid=${userid}`,
+        `http://3.34.153.73:8081/user/ingredient?userid=${userid}`,
       );
       // console.log(response.data.result);
       setSelectedList(response.data.result);
@@ -61,10 +61,13 @@ function Refrigerator({navigation}) {
 
   async function postIngre(id, selectedList) {
     try {
-      const response = await axios.post('http://10.0.2.2:80/user/ingredient', {
-        userid: id,
-        material: selectedList,
-      });
+      const response = await axios.post(
+        'http://3.34.153.73:8081/user/ingredient',
+        {
+          userid: id,
+          material: selectedList,
+        },
+      );
       setPost(true);
     } catch (e) {
       console.log(e);

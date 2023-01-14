@@ -27,6 +27,7 @@ import {
 } from '../../recoils/mbtiCount';
 import AsyncStorage from '@react-native-community/async-storage';
 import {CommonActions} from '@react-navigation/native';
+import userid from '../../recoils/userId';
 
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
@@ -115,6 +116,7 @@ const Question = [
 ];
 
 function MbtiSurvey({navigation}) {
+  const [userId, setUserId] = useRecoilState(userid);
   const [eTemp, setETemp] = useRecoilState(eCount);
   const [iTemp, setITemp] = useRecoilState(iCount);
   const [sTemp, setSTemp] = useRecoilState(sCount);
@@ -149,11 +151,11 @@ function MbtiSurvey({navigation}) {
         <TouchableOpacity
           style={styles.submitButton}
           onPress={() => {
-            AsyncStorage.setItem('one', eTemp >= iTemp ? 'E' : 'I');
-            AsyncStorage.setItem('two', sTemp >= wTemp ? 'S' : 'W');
-            AsyncStorage.setItem('three', uTemp >= fTemp ? 'U' : 'F');
-            AsyncStorage.setItem('four', rTemp >= vTemp ? 'R' : 'V');
-            AsyncStorage.setItem('five', aTemp >= pTemp ? 'A' : 'P');
+            AsyncStorage.setItem(`${userId}one`, eTemp >= iTemp ? 'E' : 'I');
+            AsyncStorage.setItem(`${userId}two`, sTemp >= wTemp ? 'S' : 'W');
+            AsyncStorage.setItem(`${userId}three`, uTemp >= fTemp ? 'U' : 'F');
+            AsyncStorage.setItem(`${userId}four`, rTemp >= vTemp ? 'R' : 'V');
+            AsyncStorage.setItem(`${userId}five`, aTemp >= pTemp ? 'A' : 'P');
             navigation.navigate('MbtiResult');
           }}>
           <Text style={{color: '#706d6d'}}>제출</Text>

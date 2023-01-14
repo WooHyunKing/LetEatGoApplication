@@ -55,7 +55,7 @@ function Recipe({navigation, route}) {
       }
 
       const response = await axios.get(
-        `http://10.0.2.2:80/recipe?foodid=${FoodId}&userid=${userId}`,
+        `http://3.34.153.73:8081/recipe?foodid=${FoodId}&userid=${userId}`,
       );
       console.log('here');
       console.log(response.data.recipe.general.material);
@@ -81,7 +81,7 @@ function Recipe({navigation, route}) {
   }
   async function postcart(id, selectedList) {
     try {
-      const response = await axios.post('http://10.0.2.2:80/user/cart', {
+      const response = await axios.post('http://3.34.153.73:8081/user/cart', {
         userid: id,
         material: selectedList,
       });

@@ -41,11 +41,14 @@ function RecipeComponent(Props) {
     console.log(Like);
 
     try {
-      const response = await axios.put('http://10.0.2.2:80/user/like/update', {
-        favorite: Like,
-        foodid: foodid,
-        userid: KEY,
-      });
+      const response = await axios.put(
+        'http://3.34.153.73:8081/user/like/update',
+        {
+          favorite: Like,
+          foodid: foodid,
+          userid: KEY,
+        },
+      );
     } catch (e) {
       console.log(e);
     }
@@ -53,11 +56,14 @@ function RecipeComponent(Props) {
   async function putMade(Made, foodid) {
     console.log(Made);
     try {
-      const response = await axios.put('http://10.0.2.2:80/user/made/update', {
-        made: Made,
-        foodid: foodid,
-        userid: KEY,
-      });
+      const response = await axios.put(
+        'http://3.34.153.73:8081/user/made/update',
+        {
+          made: Made,
+          foodid: foodid,
+          userid: KEY,
+        },
+      );
     } catch (e) {
       console.log(e);
     }
@@ -191,7 +197,7 @@ function MyRecipe({navigation}) {
   async function getLike(user_id) {
     try {
       const response = await axios.get(
-        `http://10.0.2.2:80/user/like?userid=${user_id}`,
+        `http://3.34.153.73:8081/user/like?userid=${user_id}`,
       );
       console.log('here');
       console.log(response.data.result);
@@ -204,7 +210,7 @@ function MyRecipe({navigation}) {
   async function getCheck(user_id) {
     try {
       const response = await axios.get(
-        `http://10.0.2.2:80/user/made?userid=${user_id}`,
+        `http://3.34.153.73:8081/user/made?userid=${user_id}`,
       );
       console.log('hi');
       console.log(response.data.result);

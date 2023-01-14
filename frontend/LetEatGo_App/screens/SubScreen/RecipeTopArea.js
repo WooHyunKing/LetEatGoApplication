@@ -44,7 +44,7 @@ function RecipeTopArea({navigation, food_name}) {
   async function getLike() {
     try {
       const response = await axios.get(
-        `http://10.0.2.2:80/user/like?userid=${USERID}`,
+        `http://3.34.153.73:8081/user/like?userid=${USERID}`,
       );
 
       response.data.result.map(key => {
@@ -62,7 +62,7 @@ function RecipeTopArea({navigation, food_name}) {
   async function getMade() {
     try {
       const response = await axios.get(
-        `http://10.0.2.2:80/user/made?userid=${USERID}`,
+        `http://3.34.153.73:8081/user/made?userid=${USERID}`,
       );
 
       response.data.result.map(key => {
@@ -86,11 +86,14 @@ function RecipeTopArea({navigation, food_name}) {
     console.log(Like);
     const userid = USERID;
     try {
-      const response = await axios.put('http://10.0.2.2:80/user/like/update', {
-        favorite: Like,
-        foodid: FoodId,
-        userid: userid,
-      });
+      const response = await axios.put(
+        'http://3.34.153.73:8081/user/like/update',
+        {
+          favorite: Like,
+          foodid: FoodId,
+          userid: userid,
+        },
+      );
     } catch (e) {
       console.log(e);
     }
@@ -99,11 +102,14 @@ function RecipeTopArea({navigation, food_name}) {
   async function putMade(Made) {
     console.log(Made);
     try {
-      const response = await axios.put('http://10.0.2.2:80/user/made/update', {
-        made: Made,
-        foodid: FoodId,
-        userid: USERID,
-      });
+      const response = await axios.put(
+        'http://3.34.153.73:8081/user/made/update',
+        {
+          made: Made,
+          foodid: FoodId,
+          userid: USERID,
+        },
+      );
     } catch (e) {
       console.log(e);
     }

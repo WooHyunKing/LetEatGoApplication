@@ -10,6 +10,7 @@ import {
 import {ScrollView} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import Topbar from '../Bar/Topbar';
+import userid from '../../recoils/userId';
 
 import {atom, useRecoilState} from 'recoil';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -18,6 +19,7 @@ const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
 function Mbti({navigation, route}) {
+  const [userId, setUserId] = useRecoilState(userid);
   const [first, setFirst] = useState('');
   const [second, setSecond] = useState('');
   const [third, setThird] = useState('');
@@ -25,19 +27,19 @@ function Mbti({navigation, route}) {
   const [fifth, setFifth] = useState('');
 
   useEffect(() => {
-    AsyncStorage.getItem('one').then(value => {
+    AsyncStorage.getItem(`${userId}one`).then(value => {
       setFirst(value);
     });
-    AsyncStorage.getItem('two').then(value => {
+    AsyncStorage.getItem(`${userId}two`).then(value => {
       setSecond(value);
     });
-    AsyncStorage.getItem('three').then(value => {
+    AsyncStorage.getItem(`${userId}three`).then(value => {
       setThird(value);
     });
-    AsyncStorage.getItem('four').then(value => {
+    AsyncStorage.getItem(`${userId}four`).then(value => {
       setFourth(value);
     });
-    AsyncStorage.getItem('five').then(value => {
+    AsyncStorage.getItem(`${userId}five`).then(value => {
       setFifth(value);
     });
   }, []);

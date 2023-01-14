@@ -151,7 +151,7 @@ function Survey({navigation}) {
 
   async function getFood() {
     try {
-      const response = await axios.get('http://10.0.2.2:80/survey');
+      const response = await axios.get('http://3.34.153.73:8081/survey');
 
       setFood(response.data.food);
       if (response.data.food) {
@@ -177,7 +177,10 @@ function Survey({navigation}) {
     console.log(body);
 
     try {
-      const response = await axios.post('http://10.0.2.2:80/survey/save', body);
+      const response = await axios.post(
+        'http://3.34.153.73:8081/survey/save',
+        body,
+      );
 
       // console.log(response.data);
     } catch (e) {

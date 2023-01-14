@@ -34,7 +34,7 @@ function Cart({navigation}) {
 
   async function postcart(id, selectedList) {
     try {
-      const response = await axios.post('http://10.0.2.2:80/user/cart', {
+      const response = await axios.post('http://3.34.153.73:8081/user/cart', {
         userid: USERID,
         material: selectedList,
       });
@@ -48,7 +48,7 @@ function Cart({navigation}) {
   async function deleteList(userid, index) {
     try {
       const response = await axios.delete(
-        `http://10.0.2.2:80/user/cart?index=${index}userid=${userid}}`,
+        `http://3.34.153.73:8081/user/cart?index=${index}userid=${userid}}`,
       );
       console.log('delete');
       console.log(response.data.result);
@@ -60,10 +60,13 @@ function Cart({navigation}) {
   }
   async function postIngre(id, selectedList) {
     try {
-      const response = await axios.post('http://10.0.2.2:80/user/ingredient', {
-        userid: id,
-        material: selectedList,
-      });
+      const response = await axios.post(
+        'http://3.34.153.73:8081/user/ingredient',
+        {
+          userid: id,
+          material: selectedList,
+        },
+      );
       setPOST(true);
     } catch (e) {
       console.log(e);
@@ -73,7 +76,7 @@ function Cart({navigation}) {
   async function getList() {
     try {
       const response = await axios.get(
-        `http://10.0.2.2:80/user/cart?userid=${USERID}`,
+        `http://3.34.153.73:8081/user/cart?userid=${USERID}`,
       );
 
       console.log(response.data.result);

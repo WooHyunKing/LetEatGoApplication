@@ -79,7 +79,7 @@ function Register({navigation}) {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://10.0.2.2:80/user/signup', {
+      const response = await axios.post('http://3.34.153.73:8081/user/signup', {
         id,
         password,
         nickname,

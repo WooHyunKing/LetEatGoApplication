@@ -28,7 +28,7 @@ function CartCategory(Props) {
 
   async function postcart(id, selectedList) {
     try {
-      const response = await axios.post('http://10.0.2.2:80/user/cart', {
+      const response = await axios.post('http://3.34.153.73:8081/user/cart', {
         userid: USERID,
         material: selectedList,
       });
@@ -42,7 +42,7 @@ function CartCategory(Props) {
   async function getList() {
     try {
       const response = await axios.get(
-        `http://10.0.2.2:80/user/cart?userid=${USERID}`,
+        `http://3.34.153.73:8081/user/cart?userid=${USERID}`,
       );
 
       setSelectedList(response.data.result);

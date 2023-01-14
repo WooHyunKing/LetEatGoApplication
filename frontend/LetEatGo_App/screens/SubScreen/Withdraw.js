@@ -27,7 +27,7 @@ function Withdraw({navigation}) {
   async function deleteUser() {
     try {
       const response = await axios.delete(
-        `http://10.0.2.2:80/user/withdraw?userid=${index}`,
+        `http://3.34.153.73:8081/user/withdraw?userid=${index}`,
       );
       console.log(response.config);
     } catch (e) {
